@@ -19,20 +19,17 @@ const pages = [
   { label: 'Book Consultation', href: '/book' },
 ]
 
-
 export default function Footer() {
   return (
     <footer className="relative bg-dark-2 border-t border-white/5">
-      {/* Gradient top line */}
       <div className="gradient-line" />
 
-      {/* Glow orbs */}
       <div className="absolute bottom-0 left-1/4 w-96 h-96 orb orb-purple opacity-20 pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-64 h-64 orb orb-blue opacity-15 pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* Brand column */}
+          {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-flex items-center gap-3 mb-6 group">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center glow-primary group-hover:scale-110 transition-transform">
@@ -40,7 +37,7 @@ export default function Footer() {
               </div>
               <span className="font-display font-bold text-xl gradient-text-animate">Shah Solutions</span>
             </Link>
-            <p className="text-slate-400 text-sm leading-relaxed mb-6">
+            <p className="text-slate-400 text-sm leading-relaxed">
               Engineering tomorrow&apos;s digital world. Premium IT services crafted with precision
               for businesses that demand excellence.
             </p>
@@ -66,7 +63,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Pages */}
+          {/* Quick Links */}
           <div>
             <h3 className="font-display font-semibold text-white mb-6 text-sm uppercase tracking-widest">
               Quick Links
@@ -93,18 +90,13 @@ export default function Footer() {
             </h3>
             <ul className="space-y-4">
               <li>
-                <a
-                  href="mailto:amaherwani@gmail.com"
-                  className="flex items-start gap-3 group"
-                >
+                <a href="mailto:amaherwani@gmail.com" className="flex items-start gap-3 group">
                   <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
                     <Mail size={14} className="text-primary" />
                   </div>
                   <div>
                     <p className="text-xs text-slate-500 mb-0.5">Email</p>
-                    <p className="text-slate-300 text-sm group-hover:text-white transition-colors">
-                      amaherwani@gmail.com
-                    </p>
+                    <p className="text-slate-300 text-sm group-hover:text-white transition-colors">amaherwani@gmail.com</p>
                   </div>
                 </a>
               </li>
@@ -115,9 +107,7 @@ export default function Footer() {
                   </div>
                   <div>
                     <p className="text-xs text-slate-500 mb-0.5">Phone</p>
-                    <p className="text-slate-300 text-sm group-hover:text-white transition-colors">
-                      0303 2818320
-                    </p>
+                    <p className="text-slate-300 text-sm group-hover:text-white transition-colors">0303 2818320</p>
                   </div>
                 </a>
               </li>
