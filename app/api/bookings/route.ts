@@ -73,6 +73,9 @@ export async function POST(req: NextRequest) {
 
   const formattedDate = formatDate(date)
   const formattedTime = formatSlot(timeSlot)
+
+  // Initialised here (not at module level) so the build-time static analysis
+  // pass doesn't throw when RESEND_API_KEY is absent.
   const resend = new Resend(process.env.RESEND_API_KEY)
 
   await Promise.allSettled([
