@@ -9,10 +9,12 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
   },
   headers: async () => {
+    const isDev = process.env.NODE_ENV === 'development'
+
     const csp = [
       "default-src 'self'",
-      // Next.js requires unsafe-inline for hydration scripts; JSON-LD inline script also needs it
-      "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com",
+      // dev: React needs eval() for callstack reconstruction; prod: strict
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://challenges.cloudflare.com`,
       // Tailwind inline styles + Google Fonts
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
@@ -26,7 +28,8 @@ const nextConfig = {
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",
-      "upgrade-insecure-requests",
+      // only force HTTPS in production — localhost is HTTP
+      ...(!isDev ? ["upgrade-insecure-requests"] : []),
     ].join('; ')
 
     return [
