@@ -278,7 +278,7 @@ export default function HomePage() {
       </section>
 
       {/* ── SERVICES ──────────────────────────────────────────────────────── */}
-      <section id="services" className="py-24 relative">
+      <section id="services" className="py-24 relative overflow-hidden">
         <div className="orb orb-purple absolute top-0 right-0 w-96 h-96 opacity-20" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -344,7 +344,7 @@ export default function HomePage() {
       </section>
 
       {/* ── WHY CHOOSE US ─────────────────────────────────────────────────── */}
-      <section className="py-24 relative">
+      <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-dark-2/40" />
         <div className="orb orb-blue absolute bottom-0 left-0 w-[500px] h-[500px] opacity-20" />
 

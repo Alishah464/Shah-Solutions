@@ -133,7 +133,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-dark text-white antialiased noise-overlay">
         <ClientProviders />
         <Navbar />
-        <main className="relative z-10">{children}</main>
+        <main className="relative z-10 overflow-x-hidden">{children}</main>
         <Footer />
       </body>
     </html>

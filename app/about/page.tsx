@@ -144,7 +144,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── VALUES ────────────────────────────────────────────────────────── */}
-      <section className="py-20 relative">
+      <section className="py-20 relative overflow-hidden">
         <div className="orb orb-cyan absolute top-0 left-1/2 w-[400px] h-[400px] opacity-15" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-16">
