@@ -3,8 +3,6 @@ import { getSql } from '@/lib/db'
 import { isWeekday, isPastDate, ALL_SLOTS, formatDate, formatSlot } from '@/lib/timeSlots'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 const rateLimitMap = new Map<string, { count: number; reset: number }>()
 
 function checkRateLimit(ip: string): boolean {
@@ -75,6 +73,7 @@ export async function POST(req: NextRequest) {
 
   const formattedDate = formatDate(date)
   const formattedTime = formatSlot(timeSlot)
+  const resend = new Resend(process.env.RESEND_API_KEY)
 
   await Promise.allSettled([
     resend.emails.send({
