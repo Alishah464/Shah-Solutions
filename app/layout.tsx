@@ -48,7 +48,7 @@ export const metadata: Metadata = {
       'Expert IT services: SEO, GEO, Web Development, App Development & Digital Marketing. Transforming businesses worldwide.',
     images: [
       {
-        url: '/og-image.svg',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
         alt: 'Shah Solutions — Premium IT Services',
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     title: 'Shah Solutions — Premium IT Services',
     description:
       'Expert IT services: SEO, GEO, Web Development, App Development & Digital Marketing.',
-    images: ['/og-image.svg'],
+    images: ['/opengraph-image'],
     creator: '@shahsolutions',
   },
   robots: {
