@@ -16,6 +16,7 @@ const pages = [
   { label: 'Services', href: '/services' },
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'Contact', href: '/contact' },
+  { label: 'Book Consultation', href: '/book' },
 ]
 
 const socials = [

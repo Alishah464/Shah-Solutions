@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
 
   await Promise.allSettled([
     resend.emails.send({
-      from: 'Shah Solutions <noreply@shahsolutions.com>',
+      from: 'Shah Solutions <onboarding@resend.dev>',
       to: email,
       subject: `Consultation Confirmed — ${formattedDate} at ${formattedTime}`,
       html: `
@@ -99,7 +99,7 @@ export async function POST(req: NextRequest) {
       `,
     }),
     resend.emails.send({
-      from: 'Shah Solutions Bookings <noreply@shahsolutions.com>',
+      from: 'Shah Solutions Bookings <onboarding@resend.dev>',
       to: process.env.CONTACT_TO_EMAIL!,
       subject: `New Consultation: ${name} — ${formattedDate} ${formattedTime}`,
       html: `
