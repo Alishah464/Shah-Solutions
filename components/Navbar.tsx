@@ -102,7 +102,10 @@ export default function Navbar() {
               </nav>
 
               {/* CTA */}
-              <div className="hidden md:flex items-center gap-4">
+              <div className="hidden md:flex items-center gap-3">
+                <Link href="/book" className="text-sm font-medium px-4 py-2.5 border border-purple-500/50 text-purple-300 hover:text-white hover:border-purple-400 rounded-lg transition-colors duration-200">
+                  Book Consultation
+                </Link>
                 <Link href="/contact" className="btn-primary text-sm py-2.5 px-6">
                   <span>Get Started</span>
                   <ChevronRight size={16} />
@@ -162,6 +165,15 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
               ))}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: links.length * 0.07 + 0.15 }}
+              >
+                <Link href="/book" className="text-2xl font-display font-bold text-purple-400 hover:text-purple-300 transition-colors">
+                  Book Consultation
+                </Link>
+              </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
