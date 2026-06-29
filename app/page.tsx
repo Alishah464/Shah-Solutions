@@ -252,15 +252,6 @@ export default function HomePage() {
           </motion.div>
         </motion.div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <span className="text-slate-500 text-xs uppercase tracking-widest">Scroll</span>
-          <div className="w-px h-12 bg-gradient-to-b from-primary/60 to-transparent" />
-        </motion.div>
       </section>
 
       {/* ── STATS ─────────────────────────────────────────────────────────── */}
