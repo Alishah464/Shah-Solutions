@@ -229,6 +229,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="bg-dark text-white antialiased noise-overlay">
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MFF362PW" height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe></noscript>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-8EQ10MNNGP" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">{`
           window.dataLayer = window.dataLayer || [];
