@@ -1,10 +1,12 @@
 import type { Metadata, Viewport } from 'next'
+import dynamic from 'next/dynamic'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import CustomCursor from '@/components/CustomCursor'
-import ProtectionScript from '@/components/ProtectionScript'
-import ParticleBackground from '@/components/ParticleBackground'
+
+const CustomCursor = dynamic(() => import('@/components/CustomCursor'), { ssr: false })
+const ProtectionScript = dynamic(() => import('@/components/ProtectionScript'), { ssr: false })
+const ParticleBackground = dynamic(() => import('@/components/ParticleBackground'), { ssr: false })
 
 export const metadata: Metadata = {
   title: {
