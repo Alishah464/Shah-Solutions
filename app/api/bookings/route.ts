@@ -100,7 +100,7 @@ export async function POST(req: NextRequest) {
     }),
     resend.emails.send({
       from: 'Shah Solutions Bookings <onboarding@resend.dev>',
-      to: process.env.CONTACT_TO_EMAIL!,
+      to: process.env.CONTACT_TO_EMAIL ?? 'amaherwani@gmail.com',
       subject: `New Consultation: ${name} — ${formattedDate} ${formattedTime}`,
       html: `
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto">

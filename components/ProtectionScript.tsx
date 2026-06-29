@@ -27,6 +27,8 @@ export default function ProtectionScript() {
 
     const handleDragStart = (e: DragEvent) => e.preventDefault()
 
+    // Capture the actual page title set by Next.js metadata before we touch it
+    const originalTitle = document.title
     let warningShown = false
     const devtoolsCheck = setInterval(() => {
       const threshold = 160
@@ -35,9 +37,9 @@ export default function ProtectionScript() {
       if ((widthDiff || heightDiff) && !warningShown) {
         warningShown = true
         document.title = '⚠️ Unauthorized Access'
-      } else if (!widthDiff && !heightDiff) {
+      } else if (!widthDiff && !heightDiff && warningShown) {
         warningShown = false
-        document.title = 'Shah Solutions — IT Services'
+        document.title = originalTitle
       }
     }, 1000)
 

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Resend } from 'resend'
 
 /* ── In-memory rate limiter ────────────────────────────────────────────────
    5 requests per IP per 60 seconds. Resets per function instance — good
@@ -112,24 +113,17 @@ export async function POST(req: NextRequest) {
       </html>
     `
 
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: 'Shah Solutions <onboarding@resend.dev>',
-        to: [toEmail],
-        replyTo: email,
-        subject: `New Inquiry: ${service} — ${name}`,
-        html,
-      }),
+    const resend = new Resend(apiKey)
+    const { error: sendError } = await resend.emails.send({
+      from: 'Shah Solutions <onboarding@resend.dev>',
+      to: [toEmail],
+      reply_to: email,
+      subject: `New Inquiry: ${service} — ${name}`,
+      html,
     })
 
-    if (!response.ok) {
-      const err = await response.text()
-      console.error('Resend error:', err)
+    if (sendError) {
+      console.error('Resend error:', sendError)
       return NextResponse.json({ error: 'Email failed' }, { status: 500 })
     }
 
