@@ -148,7 +148,7 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         {/* Background elements */}
         <div className="absolute inset-0 grid-bg opacity-40" />
         <div className="orb orb-purple absolute top-1/4 -left-32 w-[600px] h-[600px] animate-float" />
