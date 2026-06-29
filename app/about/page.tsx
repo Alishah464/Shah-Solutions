@@ -90,7 +90,7 @@ export default function AboutPage() {
               <Sparkles size={12} />
               Our Story
             </div>
-            <h1 className="font-display font-black text-5xl sm:text-6xl lg:text-7xl text-white mt-4 mb-6 leading-tight">
+            <h1 className="font-display font-black text-4xl sm:text-6xl lg:text-7xl text-white mt-4 mb-6 leading-tight">
               We Are{' '}
               <span className="gradient-text-animate">Shah Solutions</span>
             </h1>
@@ -114,7 +114,7 @@ export default function AboutPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8">
             <ScrollReveal direction="left">
-              <div className="glass-card p-10 h-full gradient-border">
+              <div className="glass-card p-6 sm:p-10 h-full gradient-border">
                 <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-6">
                   <Target size={24} className="text-white" />
                 </div>
@@ -127,7 +127,7 @@ export default function AboutPage() {
               </div>
             </ScrollReveal>
             <ScrollReveal direction="right">
-              <div className="glass-card p-10 h-full" style={{ border: '1px solid rgba(37,99,235,0.25)' }}>
+              <div className="glass-card p-6 sm:p-10 h-full" style={{ border: '1px solid rgba(37,99,235,0.25)' }}>
                 <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-secondary to-accent flex items-center justify-center mb-6">
                   <Eye size={24} className="text-white" />
                 </div>
@@ -225,17 +225,17 @@ export default function AboutPage() {
           </ScrollReveal>
 
           <div className="relative">
-            <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-secondary to-accent" />
-            <div className="space-y-8">
+            <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-secondary to-accent" />
+            <div className="space-y-6 sm:space-y-8">
               {milestones.map((m, i) => (
                 <ScrollReveal key={m.year} delay={i * 0.1} direction="left">
-                  <div className="flex gap-8 items-start pl-0">
+                  <div className="flex gap-4 sm:gap-8 items-start pl-0">
                     <div className="relative flex-shrink-0">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-display font-bold text-white text-sm z-10 relative glow-primary">
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-display font-bold text-white text-xs sm:text-sm z-10 relative glow-primary">
                         {m.year}
                       </div>
                     </div>
-                    <div className="glass-card p-5 flex-1 glass-card-hover">
+                    <div className="glass-card p-4 sm:p-5 flex-1 glass-card-hover">
                       <p className="text-slate-300 text-sm leading-relaxed">{m.event}</p>
                     </div>
                   </div>

@@ -140,14 +140,14 @@ export default function BookPage() {
         </motion.div>
 
         {/* Steps */}
-        <div className="flex items-center justify-center gap-4 mb-10">
+        <div className="flex items-center justify-center gap-2 sm:gap-4 mb-10">
           {[{ n: 1, label: 'Date & Time' }, { n: 2, label: 'Your Details' }].map(({ n, label }) => (
-            <div key={n} className="flex items-center gap-2">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${step >= n ? 'bg-purple-600 text-white' : 'bg-gray-800 text-gray-500'}`}>
+            <div key={n} className="flex items-center gap-1.5 sm:gap-2">
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors flex-shrink-0 ${step >= n ? 'bg-purple-600 text-white' : 'bg-gray-800 text-gray-500'}`}>
                 {n}
               </div>
-              <span className={`text-sm ${step >= n ? 'text-white' : 'text-gray-600'}`}>{label}</span>
-              {n < 2 && <div className={`w-12 h-px ${step > n ? 'bg-purple-600' : 'bg-gray-700'}`} />}
+              <span className={`text-xs sm:text-sm whitespace-nowrap ${step >= n ? 'text-white' : 'text-gray-600'}`}>{label}</span>
+              {n < 2 && <div className={`w-8 sm:w-12 h-px mx-1 ${step > n ? 'bg-purple-600' : 'bg-gray-700'}`} />}
             </div>
           ))}
         </div>
@@ -224,7 +224,7 @@ export default function BookPage() {
                     <p>Loading slots…</p>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {ALL_SLOTS.map(slot => {
                       const isBooked = bookedSlots.includes(slot)
                       const isAvailable = availableSlots.includes(slot)
@@ -266,7 +266,7 @@ export default function BookPage() {
               className="max-w-xl mx-auto"
             >
               {/* Booking summary */}
-              <div className="bg-purple-600/10 border border-purple-600/30 rounded-xl p-4 mb-6 flex items-center gap-4">
+              <div className="bg-purple-600/10 border border-purple-600/30 rounded-xl p-4 mb-6 flex flex-wrap items-center gap-3">
                 <div>
                   <p className="text-white font-semibold">{formatDate(selectedDate)}</p>
                   <p className="text-purple-300 text-sm">{formatSlot(selectedSlot)} PKT · 30 minutes</p>

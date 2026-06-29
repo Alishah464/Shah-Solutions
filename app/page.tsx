@@ -185,7 +185,7 @@ export default function HomePage() {
 
           {/* Main heading */}
           <motion.h1
-            className="font-display font-black text-5xl sm:text-6xl lg:text-8xl leading-[1.05] mb-6"
+            className="font-display font-black text-4xl sm:text-6xl lg:text-8xl leading-[1.05] mb-6"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
@@ -199,19 +199,19 @@ export default function HomePage() {
 
           {/* Typed subtitle */}
           <motion.div
-            className="text-xl sm:text-2xl text-slate-300 mb-4 h-10 flex items-center justify-center gap-2"
+            className="text-lg sm:text-2xl text-slate-300 mb-4 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
             <span>We specialize in</span>
-            <span className="gradient-text font-bold min-w-[240px] text-left typing-cursor">
+            <span className="gradient-text font-bold min-h-[1.4em] min-w-0 sm:min-w-[220px] text-center sm:text-left typing-cursor">
               {typedText}
             </span>
           </motion.div>
 
           <motion.p
-            className="text-slate-400 text-lg max-w-2xl mx-auto mb-12 leading-relaxed"
+            className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-10 sm:mb-12 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}

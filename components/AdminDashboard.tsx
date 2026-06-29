@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import { Calendar, Clock, User, Mail, Phone, Briefcase, CheckCircle, XCircle, AlertCircle, LogOut, RefreshCw } from 'lucide-react'
+import { Calendar, Clock, Mail, Phone, Briefcase, CheckCircle, XCircle, AlertCircle, LogOut, RefreshCw } from 'lucide-react'
 import { formatDate, formatSlot } from '@/lib/timeSlots'
 import { useRouter } from 'next/navigation'
 
@@ -161,7 +161,7 @@ export default function AdminDashboard() {
                   transition={{ delay: i * 0.03 }}
                   className={`bg-[#12121a] border rounded-xl p-5 ${isPast ? 'border-gray-800/50 opacity-70' : 'border-gray-800'}`}
                 >
-                  <div className="flex flex-wrap items-start justify-between gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                     {/* Left: info */}
                     <div className="flex-1 min-w-0 space-y-2">
                       <div className="flex items-center gap-3 flex-wrap">

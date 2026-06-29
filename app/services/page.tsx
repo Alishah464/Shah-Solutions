@@ -166,7 +166,7 @@ export default function ServicesPage() {
               <Sparkles size={12} />
               What We Offer
             </div>
-            <h1 className="font-display font-black text-5xl sm:text-6xl lg:text-7xl text-white mt-4 mb-6 leading-tight">
+            <h1 className="font-display font-black text-4xl sm:text-6xl lg:text-7xl text-white mt-4 mb-6 leading-tight">
               Services That{' '}
               <span className="gradient-text-animate">Drive Results</span>
             </h1>
@@ -188,9 +188,9 @@ export default function ServicesPage() {
               <div
                 key={svc.id}
                 id={svc.id}
-                className={`grid lg:grid-cols-2 gap-14 items-center ${!isEven ? 'lg:flex-row-reverse' : ''}`}
+                className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center"
               >
-                <ScrollReveal direction={isEven ? 'left' : 'right'}>
+                <ScrollReveal direction={isEven ? 'left' : 'right'} className={!isEven ? 'lg:order-2' : ''}>
                   <div className="section-tag">
                     <Icon size={12} />
                     {svc.title}
@@ -210,14 +210,15 @@ export default function ServicesPage() {
                   </div>
 
                   <Link href="/contact" className="btn-primary inline-flex text-sm">
-                    <span>Get Started with {svc.title}</span>
+                    <span className="hidden sm:inline">Get Started with {svc.title}</span>
+                    <span className="sm:hidden">Get Started</span>
                     <ChevronRight size={16} />
                   </Link>
                 </ScrollReveal>
 
-                <ScrollReveal direction={isEven ? 'right' : 'left'} delay={0.1}>
+                <ScrollReveal direction={isEven ? 'right' : 'left'} delay={0.1} className={!isEven ? 'lg:order-1' : ''}>
                   <div
-                    className={`glass-card p-8 border ${svc.borderColor}`}
+                    className={`glass-card p-6 sm:p-8 border ${svc.borderColor}`}
                     style={{ boxShadow: `0 20px 60px ${svc.glowColor}` }}
                   >
                     <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${svc.color} flex items-center justify-center mb-8`}>

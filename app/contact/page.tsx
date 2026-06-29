@@ -143,7 +143,7 @@ export default function ContactPage() {
               <Sparkles size={12} />
               Get In Touch
             </div>
-            <h1 className="font-display font-black text-5xl sm:text-6xl lg:text-7xl text-white mt-4 mb-6 leading-tight">
+            <h1 className="font-display font-black text-4xl sm:text-6xl lg:text-7xl text-white mt-4 mb-6 leading-tight">
               Let&apos;s Build{' '}
               <span className="gradient-text-animate">Something Great</span>
             </h1>
@@ -193,7 +193,7 @@ export default function ContactPage() {
             {/* Form */}
             <div className="lg:col-span-2">
               <ScrollReveal>
-                <div className="glass-card p-8 gradient-border">
+                <div className="glass-card p-4 sm:p-8 gradient-border">
                   <div className="flex items-center gap-3 mb-8">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
                       <MessageSquare size={18} className="text-white" />
