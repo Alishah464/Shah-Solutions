@@ -61,13 +61,13 @@ export default function Navbar() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-20">
               {/* Logo */}
-              <Link href="/" className="flex items-center gap-3 group">
-                <div className="relative w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary glow-primary group-hover:scale-110 transition-transform duration-300">
+              <Link href="/" className="flex items-center gap-3 group min-w-0 flex-shrink">
+                <div className="relative w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary glow-primary group-hover:scale-110 transition-transform duration-300">
                   <Code2 size={20} className="text-white" />
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary to-secondary opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300" />
                 </div>
-                <div className="flex flex-col">
-                  <span className="font-display font-bold text-xl leading-none gradient-text-animate">
+                <div className="flex flex-col min-w-0">
+                  <span className="font-display font-bold text-lg sm:text-xl leading-none gradient-text-animate truncate">
                     Shah Solutions
                   </span>
                   <span className="text-[10px] text-slate-400 font-mono tracking-widest uppercase leading-none mt-0.5">
@@ -115,7 +115,7 @@ export default function Navbar() {
               {/* Mobile Toggle */}
               <button
                 onClick={() => setMobileOpen((v) => !v)}
-                className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-xl border border-white/10 text-white hover:border-primary/50 transition-colors duration-200"
+                className="md:hidden flex-shrink-0 relative w-10 h-10 flex items-center justify-center rounded-xl border border-white/10 text-white hover:border-primary/50 transition-colors duration-200"
                 aria-label="Toggle menu"
               >
                 <AnimatePresence mode="wait">
