@@ -13,7 +13,8 @@ export function isPastDate(dateStr: string): boolean {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
   const date = new Date(dateStr + 'T00:00:00')
-  return date < today
+  // Must book at least 1 day in advance — today itself is not bookable
+  return date <= today
 }
 
 export function formatSlot(slot: string): string {

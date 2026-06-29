@@ -73,7 +73,8 @@ export default function BookPage() {
     const dow = d.getDay()
     if (dow === 0 || dow === 6) return false
     const todayMidnight = new Date(); todayMidnight.setHours(0, 0, 0, 0)
-    return d >= todayMidnight
+    // Only tomorrow and beyond — must book at least 1 day in advance
+    return d > todayMidnight
   }
 
   async function handleSubmit() {
@@ -202,7 +203,7 @@ export default function BookPage() {
                     )
                   })}
                 </div>
-                <p className="text-xs text-gray-600 mt-4 text-center">Weekdays only · Mon–Fri · 12 PM–5 PM PKT</p>
+                <p className="text-xs text-gray-600 mt-4 text-center">Weekdays only · Mon–Fri · Book at least 1 day in advance</p>
               </div>
 
               {/* Time slots */}
