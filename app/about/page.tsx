@@ -36,7 +36,7 @@ const values = [
 
 const team = [
   {
-    name: 'A. Maherwani',
+    name: 'Alishah',
     role: 'Founder & CEO',
     expertise: 'Full-Stack Development, Business Strategy',
     gradient: 'from-primary to-secondary',
