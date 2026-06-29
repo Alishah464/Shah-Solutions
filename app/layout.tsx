@@ -81,6 +81,9 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.json',
   category: 'technology',
+  verification: {
+    google: 'k88qfXOQrT6FoieJEIDxeKfkWOxrbUsfGIRsSBo9esY',
+  },
 }
 
 export const viewport: Viewport = {
@@ -139,7 +142,7 @@ const siteSchemas = {
           availableLanguage: ['English', 'Urdu'],
         },
       ],
-      sameAs: [],
+      sameAs: ['https://www.google.com/search?q=Shah+Solutions&stick=H4sIAAAAAAAA_-NgU1I1qDCzSLK0MDNItkwyNTQwNE2zMqgwSjUxNEs1tDROTTZNMzBMXsTKF5yRmKEQnJ9TWpKZn1cMAOBPwDw6AAAA&hl=en-GB&mat=CduxyV9wG1FNElYBa0lj_32NIR2kUnSLFUI_X07PQWE9zLyVo20Wo-SpRgLSeUQGgHFZhmUTwjuKUwNqkSYvRcbgiJvcKYrxbEst6fMueiKNC-iWo8NAqrP7Yc0MmpUVVw&authuser=0'],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'IT Services Catalog',
