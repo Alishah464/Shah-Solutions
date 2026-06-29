@@ -73,6 +73,8 @@ const contactInfo = [
   },
 ]
 
+const BASE = 'https://shahsolutions.vercel.app'
+
 const faqs = [
   {
     q: 'How long does a website project take?',
@@ -91,6 +93,37 @@ const faqs = [
     a: 'Absolutely. We work with businesses of all sizes — from early-stage startups to established enterprises. Every client gets the same quality.',
   },
 ]
+
+const contactPageSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: BASE },
+        { '@type': 'ListItem', position: 2, name: 'Contact', item: `${BASE}/contact` },
+      ],
+    },
+    {
+      '@type': 'ContactPage',
+      '@id': `${BASE}/contact#webpage`,
+      url: `${BASE}/contact`,
+      name: 'Contact Shah Solutions — Get a Free Consultation',
+      description: 'Contact Shah Solutions for IT services. Get a free consultation for SEO, web development, app development, or digital marketing. We respond within 2 hours.',
+      isPartOf: { '@id': `${BASE}/#website` },
+      inLanguage: 'en-US',
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${BASE}/contact#faq`,
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+}
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
@@ -131,6 +164,8 @@ export default function ContactPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }} />
+
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="relative pt-40 pb-20 overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-30" />

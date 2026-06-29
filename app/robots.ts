@@ -1,6 +1,4 @@
-import { MetadataRoute } from 'next'
-
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://shahsolutions.vercel.app'
+import type { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,9 +6,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
+        disallow: ['/admin', '/api/'],
       },
     ],
-    sitemap: `${BASE}/sitemap.xml`,
-    host: BASE,
+    sitemap: 'https://shahsolutions.vercel.app/sitemap.xml',
+    host: 'https://shahsolutions.vercel.app',
   }
 }

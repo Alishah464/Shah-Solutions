@@ -3,6 +3,31 @@ import { Target, Eye, Heart, Rocket, Users, Award, Code2, Sparkles, CheckCircle2
 import Link from 'next/link'
 import ScrollReveal from '@/components/ScrollReveal'
 
+const BASE = 'https://shahsolutions.vercel.app'
+
+const aboutPageSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: BASE },
+        { '@type': 'ListItem', position: 2, name: 'About', item: `${BASE}/about` },
+      ],
+    },
+    {
+      '@type': 'AboutPage',
+      '@id': `${BASE}/about#webpage`,
+      url: `${BASE}/about`,
+      name: 'About Shah Solutions — Pakistan\'s Premier IT Agency',
+      description: 'Learn about Shah Solutions — our mission, team, values, and journey as a premium IT services company serving businesses worldwide from Pakistan.',
+      isPartOf: { '@id': `${BASE}/#website` },
+      about: { '@id': `${BASE}/#organization` },
+      inLanguage: 'en-US',
+    },
+  ],
+}
+
 export const metadata: Metadata = {
   title: 'About Shah Solutions — Pakistan\'s Premier IT Company',
   description:
@@ -78,6 +103,7 @@ const techStack = [
 export default function AboutPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }} />
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="relative pt-40 pb-24 overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-30" />

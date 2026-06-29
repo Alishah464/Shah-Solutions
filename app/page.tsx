@@ -8,9 +8,71 @@ import CountUp from 'react-countup'
 import {
   Search, Globe, Code2, Smartphone, TrendingUp, Cloud,
   ChevronRight, ArrowRight, Star, CheckCircle2, Zap,
-  Shield, Users, Award, Target, Layers, Sparkles,
+  Shield, Users, Award, Target, Layers, Sparkles, HelpCircle,
 } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
+
+const BASE = 'https://shahsolutions.vercel.app'
+
+const homeFaqs = [
+  {
+    q: 'What is Shah Solutions?',
+    a: 'Shah Solutions is a premium IT services company based in Pakistan, providing SEO optimization, GEO/AI search optimization, custom web development, mobile app development, digital marketing, and cloud solutions to businesses worldwide. We combine enterprise-grade engineering with competitive pricing.',
+  },
+  {
+    q: 'What is GEO (Generative Engine Optimization)?',
+    a: 'GEO (Generative Engine Optimization) is the practice of optimizing content to be cited, featured, and recommended by AI-powered search systems such as ChatGPT, Google AI Overviews, Perplexity, and Microsoft Copilot. Unlike traditional SEO which targets keyword rankings in blue-link results, GEO focuses on making your brand the authoritative answer that AI search engines reference and quote.',
+  },
+  {
+    q: 'What is the difference between SEO and GEO?',
+    a: 'SEO (Search Engine Optimization) focuses on ranking your website higher in traditional search engine results pages through keywords, backlinks, and technical optimization. GEO (Generative Engine Optimization) targets AI-powered search engines — ensuring your brand is cited as an authoritative source in AI-generated responses from systems like ChatGPT, Perplexity, and Google AI Overviews. Both are essential for complete digital visibility.',
+  },
+  {
+    q: 'How long does SEO take to show results?',
+    a: 'SEO results typically begin appearing within 3–6 months of implementation. Shah Solutions clients see significant ranking improvements within 90 days for target keywords in most niches. Full authority-level results — sustained page-1 rankings and substantial organic traffic growth — typically develop over 6–12 months of consistent optimization.',
+  },
+  {
+    q: 'What services does Shah Solutions offer?',
+    a: 'Shah Solutions offers six core IT services: (1) SEO Optimization — technical SEO, keyword strategy, and link building; (2) GEO/AI Search Optimization — positioning your brand in AI-generated answers; (3) Web Development — custom websites and apps with Next.js and React; (4) App Development — iOS, Android, and cross-platform Flutter apps; (5) Digital Marketing — PPC, social media, and email campaigns; (6) Cloud Solutions — AWS, Azure, and GCP infrastructure and DevOps.',
+  },
+  {
+    q: 'Does Shah Solutions work with international clients?',
+    a: 'Yes. Shah Solutions serves clients worldwide from its base in Pakistan. We work with businesses across North America, Europe, the Middle East, and Southeast Asia. All communication is in English and we accommodate multiple time zones. Our pricing is competitive internationally while maintaining enterprise-level quality.',
+  },
+  {
+    q: 'How can I book a consultation?',
+    a: 'You can book a free 30-minute consultation directly at shahsolutions.vercel.app/book. Consultations are available Monday through Friday, 12 PM to 4:30 PM Pakistan Standard Time. You can also contact us at amaherwani@gmail.com or call +92-303-2818320.',
+  },
+  {
+    q: 'What technologies does Shah Solutions use?',
+    a: 'For web development we use Next.js, React, TypeScript, and Tailwind CSS. For mobile apps we use Flutter and React Native. Our backend stack includes Node.js, PostgreSQL, and MongoDB. Cloud deployments run on Vercel, AWS, Azure, and Google Cloud Platform.',
+  },
+]
+
+const homePageSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${BASE}/#webpage`,
+      url: BASE,
+      name: 'Shah Solutions — Premium IT Services | SEO, GEO, Web & App Development',
+      description: 'Shah Solutions delivers expert IT services: SEO, GEO/AI search optimization, custom web development, app development, digital marketing, and cloud solutions.',
+      isPartOf: { '@id': `${BASE}/#website` },
+      about: { '@id': `${BASE}/#organization` },
+      inLanguage: 'en-US',
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${BASE}/#faq`,
+      mainEntity: homeFaqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+}
 
 /* ── Typed text hook ──────────────────────────────────────────────────────── */
 function useTyped(words: string[], speed = 100, pause = 2000) {
@@ -147,6 +209,8 @@ export default function HomePage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homePageSchema) }} />
+
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         {/* Background elements */}
@@ -428,6 +492,37 @@ export default function HomePage() {
                     </div>
                   </div>
                 </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ───────────────────────────────────────────────────────────── */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-dark-2/40" />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal className="text-center mb-12">
+            <div className="section-tag mx-auto inline-flex">
+              <HelpCircle size={12} />
+              Common Questions
+            </div>
+            <h2 className="font-display font-black text-3xl sm:text-4xl text-white mt-4">
+              Frequently Asked <span className="gradient-text">Questions</span>
+            </h2>
+          </ScrollReveal>
+          <div className="space-y-3">
+            {homeFaqs.map((faq, i) => (
+              <ScrollReveal key={faq.q} delay={i * 0.05}>
+                <details className="glass-card overflow-hidden group">
+                  <summary className="flex items-center justify-between p-5 sm:p-6 cursor-pointer list-none hover:bg-white/3 transition-colors">
+                    <span className="font-semibold text-white text-sm sm:text-base pr-4">{faq.q}</span>
+                    <span className="text-primary text-2xl flex-shrink-0 transition-transform duration-300 group-open:rotate-45">+</span>
+                  </summary>
+                  <div className="px-5 sm:px-6 pb-5 sm:pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
+                    {faq.a}
+                  </div>
+                </details>
               </ScrollReveal>
             ))}
           </div>

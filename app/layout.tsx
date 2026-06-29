@@ -88,35 +88,126 @@ export const viewport: Viewport = {
   colorScheme: 'dark',
 }
 
-const organizationSchema = {
+const BASE = 'https://shahsolutions.vercel.app'
+
+const siteSchemas = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Shah Solutions',
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://shahsolutions.vercel.app',
-  logo: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://shahsolutions.vercel.app'}/favicon.svg`,
-  contactPoint: {
-    '@type': 'ContactPoint',
-    telephone: '+92-303-2818320',
-    contactType: 'customer service',
-    email: 'amaherwani@gmail.com',
-    availableLanguage: ['English', 'Urdu'],
-  },
-  sameAs: [],
-  description:
-    'Shah Solutions is a premium IT services company offering SEO, GEO optimization, web development, app development, and digital marketing services worldwide.',
-  areaServed: 'Worldwide',
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'IT Services',
-    itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'SEO Optimization' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'GEO / AI Search Optimization' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web Development' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'App Development' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Digital Marketing' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cloud Solutions' } },
-    ],
-  },
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${BASE}/#organization`,
+      name: 'Shah Solutions',
+      url: BASE,
+      logo: {
+        '@type': 'ImageObject',
+        '@id': `${BASE}/#logo`,
+        url: `${BASE}/favicon.svg`,
+        contentUrl: `${BASE}/favicon.svg`,
+        width: 512,
+        height: 512,
+        caption: 'Shah Solutions',
+      },
+      image: `${BASE}/og-image.svg`,
+      description: 'Shah Solutions is a premium IT services company providing SEO optimization, GEO/AI search optimization, custom web development, mobile app development, digital marketing, and cloud solutions to businesses worldwide.',
+      telephone: '+92-303-2818320',
+      email: 'amaherwani@gmail.com',
+      foundingDate: '2019',
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'PK',
+        addressLocality: 'Pakistan',
+      },
+      areaServed: 'Worldwide',
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          telephone: '+92-303-2818320',
+          contactType: 'customer service',
+          email: 'amaherwani@gmail.com',
+          availableLanguage: ['English', 'Urdu'],
+          hoursAvailable: {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            opens: '09:00',
+            closes: '20:00',
+          },
+        },
+        {
+          '@type': 'ContactPoint',
+          contactType: 'sales',
+          email: 'amaherwani@gmail.com',
+          availableLanguage: ['English', 'Urdu'],
+        },
+      ],
+      sameAs: [],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'IT Services Catalog',
+        itemListElement: [
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'SEO Optimization', description: 'Technical SEO, keyword research, link building, and on-page optimization to rank higher on Google and Bing.' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'GEO / AI Search Optimization', description: 'Generative Engine Optimization — get cited in ChatGPT, Google AI Overviews, Perplexity, and AI-powered search.' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web Development', description: 'Custom websites and web applications using Next.js, React, and TypeScript.' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'App Development', description: 'Native iOS and Android apps and cross-platform Flutter/React Native applications.' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Digital Marketing', description: 'Full-funnel marketing: PPC ads, social media management, email campaigns, and conversion optimization.' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cloud Solutions', description: 'Cloud infrastructure setup and DevOps on AWS, Azure, and Google Cloud Platform.' } },
+        ],
+      },
+      knowsAbout: [
+        'Search Engine Optimization', 'Generative Engine Optimization', 'AI Search Optimization',
+        'Answer Engine Optimization', 'Google AI Overviews', 'Core Web Vitals', 'Technical SEO',
+        'Semantic Search', 'Entity Optimization', 'Structured Data', 'Schema.org',
+        'Web Development', 'Next.js', 'React', 'TypeScript',
+        'Mobile App Development', 'Flutter', 'React Native',
+        'Digital Marketing', 'PPC Advertising', 'Social Media Marketing',
+        'Cloud Computing', 'AWS', 'Azure', 'Google Cloud Platform',
+        'Zero-click Optimization', 'Multimodal Search',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${BASE}/#website`,
+      name: 'Shah Solutions',
+      url: BASE,
+      description: 'Premium IT services: SEO, GEO/AI Search Optimization, Web Development, App Development, Digital Marketing, and Cloud Solutions.',
+      publisher: { '@id': `${BASE}/#organization` },
+      inLanguage: 'en-US',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: { '@type': 'EntryPoint', urlTemplate: `${BASE}/services#{search_term_string}` },
+        'query-input': 'required name=search_term_string',
+      },
+    },
+    {
+      '@type': ['ProfessionalService', 'LocalBusiness'],
+      '@id': `${BASE}/#business`,
+      name: 'Shah Solutions',
+      description: 'Shah Solutions provides premium IT services including SEO optimization, GEO/AI search optimization, custom web development, mobile app development, digital marketing, and cloud solutions.',
+      url: BASE,
+      telephone: '+92-303-2818320',
+      email: 'amaherwani@gmail.com',
+      priceRange: '$$-$$$',
+      currenciesAccepted: 'USD, PKR',
+      paymentAccepted: 'Bank Transfer, PayPal, Wise',
+      address: { '@type': 'PostalAddress', addressCountry: 'PK', addressLocality: 'Pakistan' },
+      areaServed: [
+        { '@type': 'Country', name: 'Pakistan' },
+        { '@type': 'AdministrativeArea', name: 'Worldwide' },
+      ],
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+          opens: '09:00',
+          closes: '20:00',
+        },
+      ],
+      serviceType: [
+        'SEO Optimization', 'Generative Engine Optimization', 'AI Search Optimization',
+        'Web Development', 'Mobile App Development', 'Digital Marketing', 'Cloud Solutions', 'IT Consulting',
+      ],
+      parentOrganization: { '@id': `${BASE}/#organization` },
+    },
+  ],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -125,7 +216,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchemas) }}
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

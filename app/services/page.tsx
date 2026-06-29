@@ -10,6 +10,72 @@ import {
 import Link from 'next/link'
 import ScrollReveal from '@/components/ScrollReveal'
 
+const BASE = 'https://shahsolutions.vercel.app'
+
+const serviceFaqs = [
+  {
+    q: 'What does Shah Solutions SEO optimization service include?',
+    a: 'Our SEO service covers full technical SEO audits, keyword research and mapping, authority link building, on-page optimization, Core Web Vitals improvements, structured data implementation, and monthly reporting. We handle both on-page and off-page factors for comprehensive search visibility across Google and Bing.',
+  },
+  {
+    q: 'What is GEO (Generative Engine Optimization) and how does it differ from SEO?',
+    a: 'GEO (Generative Engine Optimization) optimizes your brand to be cited in AI-generated search responses from ChatGPT, Google AI Overviews, Perplexity, and Microsoft Copilot. While SEO targets rankings in traditional blue-link results, GEO focuses on E-E-A-T authority, entity signals, and structured data so AI systems reference your brand as a trusted source.',
+  },
+  {
+    q: 'How long does a web development project take at Shah Solutions?',
+    a: 'A standard business website takes 2–4 weeks. E-commerce platforms take 4–8 weeks. Custom web applications take 6–16 weeks depending on complexity. Timelines are agreed upfront in our project proposal, with weekly updates and live preview environments throughout.',
+  },
+  {
+    q: 'Do you build apps for both Android and iOS?',
+    a: 'Yes. We build native Android and iOS apps as well as cross-platform applications using Flutter and React Native. Cross-platform development reduces cost and time-to-market while maintaining near-native performance. We also handle App Store and Google Play submission and post-launch support.',
+  },
+  {
+    q: 'What cloud platforms does Shah Solutions support?',
+    a: 'Shah Solutions designs and manages infrastructure on Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP). We also deploy on Vercel, Cloudflare, and DigitalOcean. All cloud setups include CI/CD pipelines, monitoring, alerting, and cost optimization.',
+  },
+  {
+    q: 'Do you offer ongoing support after project delivery?',
+    a: 'Yes. All projects include 30 days of free post-launch support. We also offer monthly maintenance retainer plans covering updates, security patches, performance monitoring, and minor changes. SEO and digital marketing clients typically work with us on ongoing monthly contracts for sustained growth.',
+  },
+]
+
+const servicesPageSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: BASE },
+        { '@type': 'ListItem', position: 2, name: 'Services', item: `${BASE}/services` },
+      ],
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${BASE}/services#webpage`,
+      url: `${BASE}/services`,
+      name: 'IT Services — SEO, GEO, Web & App Development | Shah Solutions',
+      description: 'Explore Shah Solutions IT services: SEO optimization, GEO/AI search optimization, web development, app development, digital marketing, and cloud solutions.',
+      isPartOf: { '@id': `${BASE}/#website` },
+      breadcrumb: { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: BASE }, { '@type': 'ListItem', position: 2, name: 'Services', item: `${BASE}/services` }] },
+    },
+    { '@type': 'Service', name: 'SEO Optimization', serviceType: 'Search Engine Optimization', description: 'Data-driven SEO: technical audits, keyword research, authority link building, on-page optimization, Core Web Vitals, and structured data. Average 300% traffic increase in 90 days.', provider: { '@id': `${BASE}/#organization` }, areaServed: 'Worldwide', url: `${BASE}/services#seo` },
+    { '@type': 'Service', name: 'GEO / AI Search Optimization', serviceType: 'Generative Engine Optimization', description: 'Position your brand to be cited in ChatGPT, Google AI Overviews, Perplexity, and Copilot through E-E-A-T authority, entity signals, structured data, and AI citation strategy.', provider: { '@id': `${BASE}/#organization` }, areaServed: 'Worldwide', url: `${BASE}/services#geo` },
+    { '@type': 'Service', name: 'Web Development', serviceType: 'Web Development', description: 'Custom websites and web applications using Next.js, React, and TypeScript. Mobile-first, sub-2s load times, 99.9% uptime. E-commerce, CMS, and web app development.', provider: { '@id': `${BASE}/#organization` }, areaServed: 'Worldwide', url: `${BASE}/services#web` },
+    { '@type': 'Service', name: 'App Development', serviceType: 'Mobile App Development', description: 'Native iOS and Android apps and cross-platform Flutter/React Native applications. Full App Store submission support, real-time databases, and performance monitoring.', provider: { '@id': `${BASE}/#organization` }, areaServed: 'Worldwide', url: `${BASE}/services#app` },
+    { '@type': 'Service', name: 'Digital Marketing', serviceType: 'Digital Marketing', description: 'Full-funnel digital marketing: Google and Meta PPC ads, social media management, email marketing automation, conversion rate optimization, and A/B testing.', provider: { '@id': `${BASE}/#organization` }, areaServed: 'Worldwide', url: `${BASE}/services#marketing` },
+    { '@type': 'Service', name: 'Cloud Solutions', serviceType: 'Cloud Computing', description: 'Cloud infrastructure on AWS, Azure, and GCP. DevOps CI/CD pipelines, containerization, database management, security compliance, monitoring, and cost optimization.', provider: { '@id': `${BASE}/#organization` }, areaServed: 'Worldwide', url: `${BASE}/services#cloud` },
+    {
+      '@type': 'FAQPage',
+      '@id': `${BASE}/services#faq`,
+      mainEntity: serviceFaqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+}
+
 export const metadata: Metadata = {
   title: 'IT Services — SEO, GEO, Web & App Development',
   description:
@@ -154,6 +220,8 @@ const process = [
 export default function ServicesPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesPageSchema) }} />
+
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="relative pt-40 pb-24 overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-30" />
@@ -275,6 +343,37 @@ export default function ServicesPage() {
                     </div>
                   )}
                 </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ───────────────────────────────────────────────────────────── */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-dark-2/50" />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal className="text-center mb-12">
+            <div className="section-tag mx-auto inline-flex">
+              <ChevronRight size={12} />
+              Got Questions?
+            </div>
+            <h2 className="font-display font-black text-3xl sm:text-4xl text-white mt-4">
+              Services <span className="gradient-text">FAQ</span>
+            </h2>
+          </ScrollReveal>
+          <div className="space-y-3">
+            {serviceFaqs.map((faq, i) => (
+              <ScrollReveal key={faq.q} delay={i * 0.05}>
+                <details className="glass-card overflow-hidden group">
+                  <summary className="flex items-center justify-between p-5 sm:p-6 cursor-pointer list-none hover:bg-white/3 transition-colors">
+                    <span className="font-semibold text-white text-sm sm:text-base pr-4">{faq.q}</span>
+                    <span className="text-primary text-2xl flex-shrink-0 transition-transform duration-300 group-open:rotate-45">+</span>
+                  </summary>
+                  <div className="px-5 sm:px-6 pb-5 sm:pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
+                    {faq.a}
+                  </div>
+                </details>
               </ScrollReveal>
             ))}
           </div>
