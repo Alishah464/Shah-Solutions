@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
 import {
   Mail, Phone, Clock, Send, CheckCircle2, AlertCircle,
   Sparkles, MessageSquare, User, Briefcase, Globe,
@@ -96,23 +97,33 @@ export default function ContactPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [turnstileToken, setTurnstileToken] = useState('')
+  const turnstileRef = useRef<TurnstileInstance>(null)
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>()
 
   const onSubmit = async (data: FormData) => {
+    if (!turnstileToken) {
+      setError('Please complete the CAPTCHA before submitting.')
+      return
+    }
     setLoading(true)
     setError('')
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, turnstileToken }),
       })
-      if (!res.ok) throw new Error('Failed to send')
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.error ?? 'Failed to send')
       setSubmitted(true)
       reset()
-    } catch {
-      setError('Something went wrong. Please email us directly at amaherwani@gmail.com')
+      setTurnstileToken('')
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Something went wrong.'
+      setError(msg + ' You can also email us at amaherwani@gmail.com')
+      turnstileRef.current?.reset()
     } finally {
       setLoading(false)
     }
@@ -337,6 +348,18 @@ export default function ContactPage() {
                           )}
                         </div>
 
+                        {/* Cloudflare Turnstile CAPTCHA */}
+                        <div className="flex justify-center">
+                          <Turnstile
+                            ref={turnstileRef}
+                            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '1x00000000000000000000AA'}
+                            onSuccess={setTurnstileToken}
+                            onExpire={() => setTurnstileToken('')}
+                            onError={() => setTurnstileToken('')}
+                            options={{ theme: 'dark', size: 'normal' }}
+                          />
+                        </div>
+
                         {error && (
                           <div className="flex items-center gap-2 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
                             <AlertCircle size={16} />
@@ -346,7 +369,7 @@ export default function ContactPage() {
 
                         <button
                           type="submit"
-                          disabled={loading}
+                          disabled={loading || !turnstileToken}
                           className="btn-primary w-full justify-center py-4 text-base disabled:opacity-60 disabled:cursor-not-allowed"
                         >
                           {loading ? (
