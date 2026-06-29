@@ -1,12 +1,8 @@
 import type { Metadata, Viewport } from 'next'
-import dynamic from 'next/dynamic'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-
-const CustomCursor = dynamic(() => import('@/components/CustomCursor'), { ssr: false })
-const ProtectionScript = dynamic(() => import('@/components/ProtectionScript'), { ssr: false })
-const ParticleBackground = dynamic(() => import('@/components/ParticleBackground'), { ssr: false })
+import ClientProviders from '@/components/ClientProviders'
 
 export const metadata: Metadata = {
   title: {
@@ -135,9 +131,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="bg-dark text-white antialiased noise-overlay">
-        <ProtectionScript />
-        <CustomCursor />
-        <ParticleBackground />
+        <ClientProviders />
         <Navbar />
         <main className="relative z-10">{children}</main>
         <Footer />
