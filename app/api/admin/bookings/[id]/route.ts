@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { sql } from '@/lib/db'
+import { getSql } from '@/lib/db'
 import { getSession } from '@/lib/session'
 
 export async function PATCH(
@@ -18,7 +18,8 @@ export async function PATCH(
   }
 
   try {
-    await sql`
+    const db = getSql()
+    await db`
       UPDATE bookings SET status = ${status} WHERE id = ${id}
     `
     return NextResponse.json({ success: true })

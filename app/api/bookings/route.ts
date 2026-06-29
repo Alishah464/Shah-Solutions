@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { sql } from '@/lib/db'
+import { getSql } from '@/lib/db'
 import { isWeekday, isPastDate, ALL_SLOTS, formatDate, formatSlot } from '@/lib/timeSlots'
 import { Resend } from 'resend'
 
@@ -56,7 +56,8 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    await sql`
+    const db = getSql()
+    await db`
       INSERT INTO bookings (name, email, phone, service, message, date, time_slot)
       VALUES (${name}, ${email}, ${phone ?? ''}, ${service}, ${message ?? ''}, ${date}, ${timeSlot})
     `

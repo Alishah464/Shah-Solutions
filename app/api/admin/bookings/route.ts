@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { sql } from '@/lib/db'
+import { getSql } from '@/lib/db'
 import { getSession } from '@/lib/session'
 
 export async function GET() {
@@ -8,7 +8,8 @@ export async function GET() {
   }
 
   try {
-    const rows = await sql`
+    const db = getSql()
+    const rows = await db`
       SELECT id, name, email, phone, service, message,
              date::text, time_slot, status, created_at
       FROM bookings
