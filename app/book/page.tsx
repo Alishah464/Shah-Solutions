@@ -202,7 +202,7 @@ export default function BookPage() {
                     )
                   })}
                 </div>
-                <p className="text-xs text-gray-600 mt-4 text-center">Weekdays only · Mon–Fri · 9 AM–6 PM PKT</p>
+                <p className="text-xs text-gray-600 mt-4 text-center">Weekdays only · Mon–Fri · 12 PM–5 PM PKT</p>
               </div>
 
               {/* Time slots */}
