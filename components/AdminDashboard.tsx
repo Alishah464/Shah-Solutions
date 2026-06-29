@@ -79,7 +79,7 @@ export default function AdminDashboard() {
   const todayCount = bookings.filter(b => b.date === today).length
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] pt-6 pb-16 px-4">
+    <div className="min-h-screen bg-[#0a0a0f] pt-28 pb-16 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
