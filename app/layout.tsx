@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -225,6 +226,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="bg-dark text-white antialiased noise-overlay">
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-8EQ10MNNGP" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-8EQ10MNNGP');
+        `}</Script>
         <ClientProviders />
         <Navbar />
         <main className="relative z-10 overflow-x-hidden">{children}</main>
