@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Code2, Mail, Phone, MapPin, ArrowUpRight, Github, Linkedin, Twitter, Instagram } from 'lucide-react'
+import { Code2, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react'
 
 const services = [
   { label: 'SEO Optimization', href: '/services#seo' },
@@ -19,12 +19,6 @@ const pages = [
   { label: 'Book Consultation', href: '/book' },
 ]
 
-const socials = [
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Github, href: '#', label: 'GitHub' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
-]
 
 export default function Footer() {
   return (
@@ -50,18 +44,6 @@ export default function Footer() {
               Engineering tomorrow&apos;s digital world. Premium IT services crafted with precision
               for businesses that demand excellence.
             </p>
-            <div className="flex gap-3">
-              {socials.map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-primary/50 hover:bg-primary/10 transition-all duration-200"
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Services */}
