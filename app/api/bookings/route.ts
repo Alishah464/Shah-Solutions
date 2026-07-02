@@ -1,25 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSql } from '@/lib/db'
 import { isWeekday, isPastDate, ALL_SLOTS, formatDate, formatSlot } from '@/lib/timeSlots'
+import { escapeHtml } from '@/lib/utils'
+import { isRateLimited } from '@/lib/rateLimit'
 import { Resend } from 'resend'
-
-const rateLimitMap = new Map<string, { count: number; reset: number }>()
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now()
-  const entry = rateLimitMap.get(ip)
-  if (!entry || entry.reset < now) {
-    rateLimitMap.set(ip, { count: 1, reset: now + 60_000 })
-    return true
-  }
-  if (entry.count >= 3) return false
-  entry.count++
-  return true
-}
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown'
-  if (!checkRateLimit(ip)) {
+  if (await isRateLimited(`booking:${ip}`, 3, 60)) {
     return NextResponse.json({ error: 'Too many requests. Please wait a minute.' }, { status: 429 })
   }
 
@@ -86,12 +74,12 @@ export async function POST(req: NextRequest) {
       html: `
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
           <h2 style="color:#7c3aed">Your consultation is booked!</h2>
-          <p>Hi ${name},</p>
+          <p>Hi ${escapeHtml(name)},</p>
           <p>Your consultation with <strong>Shah Solutions</strong> has been scheduled.</p>
           <table style="border-collapse:collapse;width:100%;margin:20px 0">
-            <tr><td style="padding:8px;color:#666;width:120px">Date</td><td style="padding:8px;font-weight:600">${formattedDate}</td></tr>
-            <tr><td style="padding:8px;color:#666">Time</td><td style="padding:8px;font-weight:600">${formattedTime} PKT</td></tr>
-            <tr><td style="padding:8px;color:#666">Service</td><td style="padding:8px;font-weight:600">${service}</td></tr>
+            <tr><td style="padding:8px;color:#666;width:120px">Date</td><td style="padding:8px;font-weight:600">${escapeHtml(formattedDate)}</td></tr>
+            <tr><td style="padding:8px;color:#666">Time</td><td style="padding:8px;font-weight:600">${escapeHtml(formattedTime)} PKT</td></tr>
+            <tr><td style="padding:8px;color:#666">Service</td><td style="padding:8px;font-weight:600">${escapeHtml(service)}</td></tr>
           </table>
           <p>We'll reach out shortly to confirm details. You can also contact us at <a href="tel:03032818320">0303 2818320</a>.</p>
           <p style="color:#666;font-size:13px">Shah Solutions — amaherwani@gmail.com</p>
@@ -106,13 +94,13 @@ export async function POST(req: NextRequest) {
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
           <h2 style="color:#7c3aed">New Consultation Booked</h2>
           <table style="border-collapse:collapse;width:100%;margin:20px 0">
-            <tr><td style="padding:8px;color:#666;width:100px">Name</td><td style="padding:8px">${name}</td></tr>
-            <tr><td style="padding:8px;color:#666">Email</td><td style="padding:8px">${email}</td></tr>
-            <tr><td style="padding:8px;color:#666">Phone</td><td style="padding:8px">${phone ?? 'N/A'}</td></tr>
-            <tr><td style="padding:8px;color:#666">Service</td><td style="padding:8px">${service}</td></tr>
-            <tr><td style="padding:8px;color:#666">Date</td><td style="padding:8px">${formattedDate}</td></tr>
-            <tr><td style="padding:8px;color:#666">Time</td><td style="padding:8px">${formattedTime} PKT</td></tr>
-            <tr><td style="padding:8px;color:#666">Message</td><td style="padding:8px">${message ?? 'None'}</td></tr>
+            <tr><td style="padding:8px;color:#666;width:100px">Name</td><td style="padding:8px">${escapeHtml(name)}</td></tr>
+            <tr><td style="padding:8px;color:#666">Email</td><td style="padding:8px">${escapeHtml(email)}</td></tr>
+            <tr><td style="padding:8px;color:#666">Phone</td><td style="padding:8px">${escapeHtml(phone ?? 'N/A')}</td></tr>
+            <tr><td style="padding:8px;color:#666">Service</td><td style="padding:8px">${escapeHtml(service)}</td></tr>
+            <tr><td style="padding:8px;color:#666">Date</td><td style="padding:8px">${escapeHtml(formattedDate)}</td></tr>
+            <tr><td style="padding:8px;color:#666">Time</td><td style="padding:8px">${escapeHtml(formattedTime)} PKT</td></tr>
+            <tr><td style="padding:8px;color:#666">Message</td><td style="padding:8px">${escapeHtml(message ?? 'None')}</td></tr>
           </table>
         </div>
       `,

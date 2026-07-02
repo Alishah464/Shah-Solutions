@@ -53,7 +53,7 @@ const contactInfo = [
     value: '0303 2818320',
     link: 'tel:+923032818320',
     gradient: 'from-secondary to-accent',
-    desc: 'Mon – Sat, 9 AM – 8 PM PKT',
+    desc: 'Mon – Fri, 9 AM – 8 PM PKT',
   },
   {
     icon: Clock,

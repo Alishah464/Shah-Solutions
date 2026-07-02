@@ -10,6 +10,8 @@ export default function CustomCursor() {
   const rafRef = useRef<number>(0)
 
   useEffect(() => {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+
     let mouseX = 0
     let mouseY = 0
 

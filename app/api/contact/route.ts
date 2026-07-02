@@ -1,23 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
-
-/* ── In-memory rate limiter ────────────────────────────────────────────────
-   5 requests per IP per 60 seconds. Resets per function instance — good
-   enough to block automated bursts from a single source on a marketing site. */
-const ipMap = new Map<string, { count: number; resetAt: number }>()
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now()
-  const entry = ipMap.get(ip)
-
-  if (!entry || now > entry.resetAt) {
-    ipMap.set(ip, { count: 1, resetAt: now + 60_000 })
-    return false
-  }
-  if (entry.count >= 5) return true
-  entry.count++
-  return false
-}
+import { escapeHtml } from '@/lib/utils'
+import { isRateLimited } from '@/lib/rateLimit'
 
 /* ── Cloudflare Turnstile verification ──────────────────────────────────── */
 async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
@@ -43,7 +27,7 @@ export async function POST(req: NextRequest) {
       '0.0.0.0'
 
     // Rate limit check
-    if (isRateLimited(ip)) {
+    if (await isRateLimited(`contact:${ip}`, 5, 60)) {
       return NextResponse.json(
         { error: 'Too many requests. Please wait a minute and try again.' },
         { status: 429 }
@@ -95,17 +79,17 @@ export async function POST(req: NextRequest) {
                   ['Budget', budget || 'Not specified'],
                 ].map(([k, v]) => `
                   <tr>
-                    <td style="padding:10px 0;color:#94A3B8;font-size:13px;width:120px;vertical-align:top;">${k}</td>
-                    <td style="padding:10px 0;color:#F8FAFC;font-size:14px;font-weight:600;">${v}</td>
+                    <td style="padding:10px 0;color:#94A3B8;font-size:13px;width:120px;vertical-align:top;">${escapeHtml(String(k))}</td>
+                    <td style="padding:10px 0;color:#F8FAFC;font-size:14px;font-weight:600;">${escapeHtml(String(v))}</td>
                   </tr>
                 `).join('')}
                 <tr>
                   <td style="padding:10px 0;color:#94A3B8;font-size:13px;vertical-align:top;">Message</td>
-                  <td style="padding:10px 0;color:#F8FAFC;font-size:14px;white-space:pre-wrap;">${message}</td>
+                  <td style="padding:10px 0;color:#F8FAFC;font-size:14px;white-space:pre-wrap;">${escapeHtml(message)}</td>
                 </tr>
               </table>
               <div style="margin-top:32px;padding:16px;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;">
-                <p style="margin:0;color:#94A3B8;font-size:12px;">Reply directly to: <a href="mailto:${email}" style="color:#7C3AED;">${email}</a></p>
+                <p style="margin:0;color:#94A3B8;font-size:12px;">Reply directly to: <a href="mailto:${encodeURIComponent(email)}" style="color:#7C3AED;">${escapeHtml(email)}</a></p>
               </div>
             </div>
           </div>
