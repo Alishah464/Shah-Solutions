@@ -14,16 +14,17 @@ const nextConfig = {
     const csp = [
       "default-src 'self'",
       // dev: React needs eval() for callstack reconstruction; prod: strict
-      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://challenges.cloudflare.com`,
+      // googletagmanager.com: GTM loader + gtag.js
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://challenges.cloudflare.com https://www.googletagmanager.com`,
       // Tailwind inline styles + Google Fonts
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      // Images: allow self, data URIs and blob for canvas/particle
-      "img-src 'self' data: blob:",
-      // API calls: Resend + Turnstile
-      "connect-src 'self' https://api.resend.com https://challenges.cloudflare.com",
-      // Turnstile iframe
-      "frame-src https://challenges.cloudflare.com",
+      // Images: allow self, data URIs and blob for canvas/particle, GTM/GA tracking pixels
+      "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com",
+      // API calls: Resend + Turnstile + GTM config fetch + GA beacons
+      "connect-src 'self' https://api.resend.com https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com",
+      // Turnstile iframe + GTM noscript iframe fallback
+      "frame-src https://challenges.cloudflare.com https://www.googletagmanager.com",
       // Block all framing of this site
       "frame-ancestors 'none'",
       "base-uri 'self'",
@@ -45,14 +46,9 @@ const nextConfig = {
           { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
           { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
           { key: 'Cross-Origin-Resource-Policy', value: 'same-origin' },
-          { key: 'Cross-Origin-Embedder-Policy', value: 'require-corp' },
-        ],
-      },
-      // Allow Turnstile iframe to embed without COEP restriction
-      {
-        source: '/(.*)',
-        headers: [
-          { key: 'Cross-Origin-Embedder-Policy', value: 'unsafe-none' },
+          // COEP 'require-corp' is intentionally omitted: it would also block
+          // GTM/Turnstile subresources that don't send CORP headers, and this
+          // site has no need for cross-origin isolation (SharedArrayBuffer, etc).
         ],
       },
     ]

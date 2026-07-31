@@ -2,20 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { escapeHtml } from '@/lib/utils'
 import { isRateLimited } from '@/lib/rateLimit'
-
-/* ── Cloudflare Turnstile verification ──────────────────────────────────── */
-async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
-  const secret = process.env.TURNSTILE_SECRET_KEY
-  if (!secret || secret === 'your_turnstile_secret_key') return true // skip in dev
-
-  const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ secret, response: token, remoteip: ip }),
-  })
-  const data = await res.json() as { success: boolean }
-  return data.success === true
-}
+import { verifyTurnstile } from '@/lib/turnstile'
 
 /* ── Route handler ──────────────────────────────────────────────────────── */
 export async function POST(req: NextRequest) {

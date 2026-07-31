@@ -2,9 +2,11 @@ import { SignJWT, jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 
 const SESSION_COOKIE = 'ss_admin_session'
-const secret = () => new TextEncoder().encode(
-  process.env.ADMIN_SESSION_SECRET ?? 'fallback-dev-secret-change-in-prod'
-)
+const secret = () => {
+  const key = process.env.ADMIN_SESSION_SECRET
+  if (!key) throw new Error('ADMIN_SESSION_SECRET environment variable is not set')
+  return new TextEncoder().encode(key)
+}
 
 export async function createSession(): Promise<string> {
   return new SignJWT({ admin: true })
