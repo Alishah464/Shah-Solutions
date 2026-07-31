@@ -417,3 +417,51 @@ input, textarea, [contenteditable] {
 .pulse-ring {
   animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
 }
+
+/* ── Long-form article body (blog posts) ──────────────────────────────────── */
+.article-body {
+  color: #CBD5E1; /* slate-300 */
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+.article-body h2 {
+  font-family: 'Syne', 'Inter', sans-serif;
+  font-weight: 800;
+  color: white;
+  font-size: 1.6rem;
+  margin: 2.4rem 0 1rem;
+  line-height: 1.3;
+}
+.article-body h3 {
+  font-family: 'Syne', 'Inter', sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 1.25rem;
+  margin: 1.8rem 0 0.8rem;
+}
+.article-body p { margin: 0 0 1.25rem; }
+.article-body ul, .article-body ol {
+  margin: 0 0 1.25rem;
+  padding-left: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.article-body li { padding-left: 0.2rem; }
+.article-body strong { color: white; font-weight: 700; }
+.article-body a { color: #9F67FF; text-decoration: underline; text-underline-offset: 2px; }
+.article-body a:hover { color: #C4B5FD; }
+.article-body hr { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 2.5rem 0; }
+.article-body blockquote {
+  border-left: 3px solid #7C3AED;
+  padding-left: 1.2rem;
+  margin: 1.5rem 0;
+  color: #94A3B8;
+  font-style: italic;
+}
+.article-body code {
+  background: rgba(255,255,255,0.06);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
