@@ -9,6 +9,7 @@ import {
   Search, Globe, Code2, Smartphone, TrendingUp, Cloud,
   ChevronRight, ArrowRight, Star, CheckCircle2, Zap,
   Shield, Users, Award, Target, Layers, Sparkles, HelpCircle,
+  Bot, MessageSquare, LineChart,
 } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
 
@@ -17,7 +18,7 @@ const BASE = 'https://shahsolutions.vercel.app'
 const homeFaqs = [
   {
     q: 'What is Shah Solutions?',
-    a: 'Shah Solutions is a premium IT services company based in Pakistan, providing SEO optimization, GEO/AI search optimization, custom web development, mobile app development, digital marketing, and cloud solutions to businesses worldwide. We combine enterprise-grade engineering with competitive pricing.',
+    a: 'Shah Solutions is a premium IT services company based in Pakistan, providing SEO optimization, GEO/AI search optimization, custom web development, mobile app development, digital marketing, cloud solutions, AI agents, AI chatbots, and trading bots to businesses worldwide. We combine enterprise-grade engineering with competitive pricing.',
   },
   {
     q: 'What is GEO (Generative Engine Optimization)?',
@@ -33,7 +34,7 @@ const homeFaqs = [
   },
   {
     q: 'What services does Shah Solutions offer?',
-    a: 'Shah Solutions offers six core IT services: (1) SEO Optimization — technical SEO, keyword strategy, and link building; (2) GEO/AI Search Optimization — positioning your brand in AI-generated answers; (3) Web Development — custom websites and apps with Next.js and React; (4) App Development — iOS, Android, and cross-platform Flutter apps; (5) Digital Marketing — PPC, social media, and email campaigns; (6) Cloud Solutions — AWS, Azure, and GCP infrastructure and DevOps.',
+    a: 'Shah Solutions offers nine core IT services: (1) SEO Optimization — technical SEO, keyword strategy, and link building; (2) GEO/AI Search Optimization — positioning your brand in AI-generated answers; (3) Web Development — custom websites and apps with Next.js and React; (4) App Development — iOS, Android, and cross-platform Flutter apps; (5) Digital Marketing — PPC, social media, and email campaigns; (6) Cloud Solutions — AWS, Azure, and GCP infrastructure and DevOps; (7) AI Agents — custom autonomous agents that automate multi-step workflows; (8) AI Chatbots — conversational bots trained on your own business content; (9) Trading Bots — custom algorithmic trading software built to your strategy (software development only, not financial advice).',
   },
   {
     q: 'Does Shah Solutions work with international clients?',
@@ -57,7 +58,7 @@ const homePageSchema = {
       '@id': `${BASE}/#webpage`,
       url: BASE,
       name: 'Shah Solutions — Premium IT Services | SEO, GEO, Web & App Development',
-      description: 'Shah Solutions delivers expert IT services: SEO, GEO/AI search optimization, custom web development, app development, digital marketing, and cloud solutions.',
+      description: 'Shah Solutions delivers expert IT services: SEO, GEO/AI search optimization, custom web development, app development, digital marketing, cloud solutions, AI agents, AI chatbots, and trading bots.',
       isPartOf: { '@id': `${BASE}/#website` },
       about: { '@id': `${BASE}/#organization` },
       inLanguage: 'en-US',
@@ -157,6 +158,33 @@ const services = [
     title: 'Cloud Solutions',
     desc: 'Scalable, secure cloud infrastructure on AWS, Azure & GCP — from deployment to monitoring and cost optimization.',
     tags: ['AWS', 'Azure', 'DevOps'],
+  },
+  {
+    id: 'ai-agents',
+    icon: Bot,
+    color: 'from-fuchsia-600 to-purple-800',
+    glow: 'rgba(192,38,211,0.4)',
+    title: 'AI Agents',
+    desc: 'Custom autonomous AI agents that plan and take action across your tools, connected to your data with human-in-the-loop safety controls.',
+    tags: ['Workflow Automation', 'Tool Integrations', 'LLM-Powered'],
+  },
+  {
+    id: 'ai-chatbots',
+    icon: MessageSquare,
+    color: 'from-pink-600 to-rose-700',
+    glow: 'rgba(219,39,119,0.4)',
+    title: 'AI Chatbots',
+    desc: 'Custom AI chatbots trained on your own business content — deployed on web, WhatsApp, or Slack, with lead capture and human handoff.',
+    tags: ['Custom Training', 'Lead Capture', 'Multi-Channel'],
+  },
+  {
+    id: 'trading-bots',
+    icon: LineChart,
+    color: 'from-yellow-600 to-amber-700',
+    glow: 'rgba(234,179,8,0.4)',
+    title: 'Trading Bots',
+    desc: 'Custom algorithmic trading bots built to your own strategy and risk rules, with backtesting and exchange API integration.',
+    tags: ['Custom Strategy', 'Backtesting', 'Exchange APIs'],
   },
 ]
 

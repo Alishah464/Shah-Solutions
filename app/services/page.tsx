@@ -6,6 +6,7 @@ import {
   Layout, ShoppingCart, Cpu, Database, Lock, Server,
   Activity, Share2, Mail, MousePointerClick,
   Layers, GitBranch, Terminal, Gauge,
+  MessageSquare, LineChart, Workflow, Puzzle, ShieldCheck, AlertTriangle,
 } from 'lucide-react'
 import Link from 'next/link'
 import ScrollReveal from '@/components/ScrollReveal'
@@ -37,6 +38,18 @@ const serviceFaqs = [
     q: 'Do you offer ongoing support after project delivery?',
     a: 'Yes. All projects include 30 days of free post-launch support. We also offer monthly maintenance retainer plans covering updates, security patches, performance monitoring, and minor changes. SEO and digital marketing clients typically work with us on ongoing monthly contracts for sustained growth.',
   },
+  {
+    q: 'What is an AI agent, and can Shah Solutions build one for my business?',
+    a: 'An AI agent is software that plans and takes action across your tools — not just answering questions, but completing multi-step tasks. We build custom AI agents scoped to your workflows, connected to your existing systems, with human-in-the-loop approval checkpoints so nothing happens without oversight where it matters.',
+  },
+  {
+    q: 'Can you build an AI chatbot trained on our own content?',
+    a: 'Yes. We build custom AI chatbots trained on your business content — services, FAQs, policies — so they answer accurately instead of guessing. They can be deployed on your website, WhatsApp, or Slack, capture leads, and hand off to your team when a conversation needs a human.',
+  },
+  {
+    q: 'Do you build trading bots? Do you guarantee returns?',
+    a: 'We build custom algorithmic trading bots to your own strategy and risk rules, including historical backtesting and exchange/broker API integration. This is custom software development, not financial or investment advice — we do not and cannot guarantee returns, and trading involves substantial risk. Backtested or simulated performance never guarantees future results.',
+  },
 ]
 
 const servicesPageSchema = {
@@ -54,7 +67,7 @@ const servicesPageSchema = {
       '@id': `${BASE}/services#webpage`,
       url: `${BASE}/services`,
       name: 'IT Services — SEO, GEO, Web & App Development | Shah Solutions',
-      description: 'Explore Shah Solutions IT services: SEO optimization, GEO/AI search optimization, web development, app development, digital marketing, and cloud solutions.',
+      description: 'Explore Shah Solutions IT services: SEO optimization, GEO/AI search optimization, web development, app development, digital marketing, cloud solutions, AI agents, AI chatbots, and trading bots.',
       isPartOf: { '@id': `${BASE}/#website` },
       breadcrumb: { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: BASE }, { '@type': 'ListItem', position: 2, name: 'Services', item: `${BASE}/services` }] },
     },
@@ -64,6 +77,9 @@ const servicesPageSchema = {
     { '@type': 'Service', name: 'App Development', serviceType: 'Mobile App Development', description: 'Native iOS and Android apps and cross-platform Flutter/React Native applications. Full App Store submission support, real-time databases, and performance monitoring.', provider: { '@id': `${BASE}/#organization` }, areaServed: 'Worldwide', url: `${BASE}/services#app` },
     { '@type': 'Service', name: 'Digital Marketing', serviceType: 'Digital Marketing', description: 'Full-funnel digital marketing: Google and Meta PPC ads, social media management, email marketing automation, conversion rate optimization, and A/B testing.', provider: { '@id': `${BASE}/#organization` }, areaServed: 'Worldwide', url: `${BASE}/services#marketing` },
     { '@type': 'Service', name: 'Cloud Solutions', serviceType: 'Cloud Computing', description: 'Cloud infrastructure on AWS, Azure, and GCP. DevOps CI/CD pipelines, containerization, database management, security compliance, monitoring, and cost optimization.', provider: { '@id': `${BASE}/#organization` }, areaServed: 'Worldwide', url: `${BASE}/services#cloud` },
+    { '@type': 'Service', name: 'AI Agents', serviceType: 'AI Agent Development', description: 'Custom autonomous AI agents that plan and take action across your tools and data, with API integrations and human-in-the-loop approval checkpoints.', provider: { '@id': `${BASE}/#organization` }, areaServed: 'Worldwide', url: `${BASE}/services#ai-agents` },
+    { '@type': 'Service', name: 'AI Chatbots', serviceType: 'AI Chatbot Development', description: 'Custom AI chatbots trained on your business content, deployable on web, WhatsApp, or Slack, with lead capture and handoff to your team.', provider: { '@id': `${BASE}/#organization` }, areaServed: 'Worldwide', url: `${BASE}/services#ai-chatbots` },
+    { '@type': 'Service', name: 'Trading Bots', serviceType: 'Algorithmic Trading Software Development', description: 'Custom algorithmic trading bots built to your own strategy and risk rules, with historical backtesting and exchange/broker API integration. Software development only — not financial or investment advice.', provider: { '@id': `${BASE}/#organization` }, areaServed: 'Worldwide', url: `${BASE}/services#trading-bots` },
     {
       '@type': 'FAQPage',
       '@id': `${BASE}/services#faq`,
@@ -77,13 +93,14 @@ const servicesPageSchema = {
 }
 
 export const metadata: Metadata = {
-  title: 'IT Services — SEO, GEO, Web & App Development',
+  title: 'IT Services — SEO, GEO, Web, App & AI Development',
   description:
-    'Full-stack IT services: SEO optimization, GEO/AI search, custom web development, mobile app development, digital marketing, and cloud solutions. Shah Solutions Pakistan.',
+    'Full-stack IT services: SEO optimization, GEO/AI search, custom web development, mobile app development, digital marketing, cloud solutions, AI agents, AI chatbots, and trading bots. Shah Solutions Pakistan.',
   alternates: { canonical: '/services' },
   keywords: [
     'SEO services Pakistan', 'GEO optimization', 'web development services',
     'app development Pakistan', 'digital marketing agency', 'cloud solutions Pakistan',
+    'AI agent development', 'AI chatbot development', 'trading bot development',
   ],
 }
 
@@ -208,6 +225,67 @@ const serviceCategories = [
     ],
     results: ['99.99% uptime', '40% average cost reduction', 'Auto-scaling architecture'],
   },
+  {
+    id: 'ai-agents',
+    icon: Bot,
+    color: 'from-fuchsia-600 to-purple-800',
+    borderColor: 'border-fuchsia-500/20',
+    glowColor: 'rgba(192,38,211,0.3)',
+    title: 'AI Agents',
+    subtitle: 'Autonomous Software That Gets Work Done.',
+    longDesc:
+      'We design and build custom AI agents that plan, reason, and take action across your tools — automating multi-step workflows instead of just answering questions. Every agent is scoped to your business logic, connected to your existing systems, and built with human-in-the-loop checkpoints where it matters.',
+    features: [
+      { icon: Workflow, label: 'Custom Workflow Automation' },
+      { icon: Puzzle, label: 'Tool & API Integrations' },
+      { icon: ShieldCheck, label: 'Human-in-the-Loop Controls' },
+      { icon: Database, label: 'Connects to Your Existing Data' },
+      { icon: Activity, label: 'Usage Monitoring & Logging' },
+      { icon: Cpu, label: 'Built on Leading LLM Providers' },
+    ],
+    results: ['Tailored to your exact workflow', 'Safe-by-design approval checkpoints', 'Works alongside your existing team'],
+  },
+  {
+    id: 'ai-chatbots',
+    icon: MessageSquare,
+    color: 'from-pink-600 to-rose-700',
+    borderColor: 'border-pink-500/20',
+    glowColor: 'rgba(219,39,119,0.3)',
+    title: 'AI Chatbots',
+    subtitle: 'Conversational AI, Trained On Your Business.',
+    longDesc:
+      'We build custom AI chatbots — for your website, WhatsApp, or internal tools — trained on your own content so they answer accurately, capture leads, and hand off to a human exactly when needed. Not a generic script: a chatbot that actually knows your business.',
+    features: [
+      { icon: MessageSquare, label: 'Custom Conversational Flows' },
+      { icon: FileSearch, label: 'Trained on Your Content' },
+      { icon: Share2, label: 'Web, WhatsApp & Slack Deployment' },
+      { icon: Mail, label: 'Lead Capture & Handoff' },
+      { icon: Lock, label: 'Data Privacy Safeguards' },
+      { icon: Activity, label: 'Conversation Analytics' },
+    ],
+    results: ['Answers grounded in your real content', 'Escalates to your team when needed', 'Deployed wherever your customers are'],
+  },
+  {
+    id: 'trading-bots',
+    icon: LineChart,
+    color: 'from-yellow-600 to-amber-700',
+    borderColor: 'border-yellow-500/20',
+    glowColor: 'rgba(234,179,8,0.3)',
+    title: 'Trading Bots',
+    subtitle: 'Algorithmic Trading, Built To Your Strategy.',
+    longDesc:
+      'We build custom trading bots that execute your strategy programmatically — from signal generation to order execution — across the exchanges and brokers you use. Every bot is built to your rules, backtested against historical data, and handed over with full source code ownership.',
+    features: [
+      { icon: LineChart, label: 'Custom Strategy Implementation' },
+      { icon: Activity, label: 'Historical Backtesting' },
+      { icon: Server, label: 'Exchange & Broker API Integration' },
+      { icon: Gauge, label: 'Risk & Position Management Rules' },
+      { icon: Lock, label: 'Secure Key & Credential Handling' },
+      { icon: Terminal, label: 'Full Source Code Ownership' },
+    ],
+    results: ['Built to your exact strategy and risk rules', 'Backtested against historical market data'],
+    disclaimer: 'This is custom software development, not financial or investment advice. Trading involves substantial risk — backtested or simulated performance does not guarantee future results.',
+  },
 ]
 
 const process = [
@@ -275,6 +353,12 @@ export default function ServicesPage() {
                         <span className="text-slate-300 text-sm">{r}</span>
                       </div>
                     ))}
+                    {'disclaimer' in svc && svc.disclaimer && (
+                      <div className="flex items-start gap-3 pt-1">
+                        <AlertTriangle size={16} className="text-amber-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-slate-400 text-xs leading-relaxed italic">{svc.disclaimer}</span>
+                      </div>
+                    )}
                   </div>
 
                   <Link href="/contact" className="btn-primary inline-flex text-sm">
