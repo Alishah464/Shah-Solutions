@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BookOpen, ArrowRight, Sparkles } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
-import { getAllArticles, type ArticleCategory } from '@/lib/articles'
+import { getAllArticles, CATEGORY_SLUGS, type ArticleCategory } from '@/lib/articles'
 
 const BASE = 'https://shahsolutions.vercel.app'
 
@@ -72,10 +72,14 @@ export default function BlogIndexPage() {
             return (
               <div key={category}>
                 <ScrollReveal>
-                  <h2 className="font-display font-bold text-white text-xl mb-5 flex items-center gap-3">
+                  <Link
+                    href={`/blog/category/${CATEGORY_SLUGS[category]}`}
+                    className="font-display font-bold text-white text-xl mb-5 flex items-center gap-3 group w-fit hover:text-primary-light transition-colors"
+                  >
                     {category}
                     <span className="text-slate-500 text-sm font-normal">({inCategory.length})</span>
-                  </h2>
+                    <ArrowRight size={16} className="text-primary/60 group-hover:translate-x-1 transition-transform" />
+                  </Link>
                 </ScrollReveal>
                 <div className="space-y-4">
                   {inCategory.map((a, i) => (

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { getAllArticles } from '@/lib/articles'
+import { getAllArticles, CATEGORY_SLUGS } from '@/lib/articles'
 
 const BASE = 'https://shahsolutions.vercel.app'
 
@@ -9,10 +9,10 @@ const PAGE_DATES = {
   home: '2026-07-31',
   services: '2026-07-31',
   blog: '2026-07-31',
-  about: '2026-06-29',
+  about: '2026-07-31',
   portfolio: '2026-06-29',
   contact: '2026-06-29',
-  book: '2026-06-29',
+  book: '2026-07-31',
 } as const
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -28,6 +28,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/book`,      lastModified: d(PAGE_DATES.book),      changeFrequency: 'monthly', priority: 0.7 },
   ]
 
+  const categoryPages: MetadataRoute.Sitemap = Object.values(CATEGORY_SLUGS).map(slug => ({
+    url: `${BASE}/blog/category/${slug}`,
+    lastModified: d(PAGE_DATES.blog),
+    changeFrequency: 'weekly',
+    priority: 0.65,
+  }))
+
   const articlePages: MetadataRoute.Sitemap = getAllArticles().map(a => ({
     url: `${BASE}/blog/${a.slug}`,
     lastModified: new Date(`${a.date}T00:00:00Z`),
@@ -35,5 +42,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  return [...staticPages, ...articlePages]
+  return [...staticPages, ...categoryPages, ...articlePages]
 }

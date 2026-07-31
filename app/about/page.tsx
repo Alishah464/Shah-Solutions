@@ -57,6 +57,10 @@ export const metadata: Metadata = {
   description:
     'Learn about Shah Solutions — our mission, values, and the expert team behind Pakistan\'s leading IT services company. SEO, web & app development excellence since day one.',
   alternates: { canonical: '/about' },
+  keywords: [
+    'about Shah Solutions', 'IT company Pakistan history', 'Shah Solutions team',
+    'IT agency values Pakistan', 'premium IT services company',
+  ],
   openGraph: { title: 'About Shah Solutions', url: '/about' },
 }
 

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ChevronRight, ArrowRight, Calendar, BookOpen, Briefcase } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
-import { getAllArticles, getArticleBySlug, ARTICLE_SERVICE_LINK } from '@/lib/articles'
+import { getAllArticles, getArticleBySlug, ARTICLE_SERVICE_LINK, CATEGORY_SLUGS } from '@/lib/articles'
 
 const BASE = 'https://shahsolutions.vercel.app'
 
@@ -59,7 +59,8 @@ export default async function ArticlePage({ params }: Props) {
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: BASE },
           { '@type': 'ListItem', position: 2, name: 'Blog', item: `${BASE}/blog` },
-          { '@type': 'ListItem', position: 3, name: article.title, item: `${BASE}/blog/${slug}` },
+          { '@type': 'ListItem', position: 3, name: article.category, item: `${BASE}/blog/category/${CATEGORY_SLUGS[article.category]}` },
+          { '@type': 'ListItem', position: 4, name: article.title, item: `${BASE}/blog/${slug}` },
         ],
       },
       {
@@ -94,7 +95,7 @@ export default async function ArticlePage({ params }: Props) {
               <ChevronRight size={13} className="text-slate-600" />
               <Link href="/blog" className="hover:text-primary-light transition-colors">Blog</Link>
               <ChevronRight size={13} className="text-slate-600" />
-              <span className="text-slate-400">{article.category}</span>
+              <Link href={`/blog/category/${CATEGORY_SLUGS[article.category]}`} className="hover:text-primary-light transition-colors">{article.category}</Link>
             </nav>
 
             <h1 className="font-display font-black text-3xl sm:text-5xl text-white mb-5 leading-tight text-balance">
@@ -107,7 +108,12 @@ export default async function ArticlePage({ params }: Props) {
               <span className="mx-1">·</span>
               <span>Shah Solutions</span>
               <span className="mx-1">·</span>
-              <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary-light text-xs font-medium">{article.category}</span>
+              <Link
+                href={`/blog/category/${CATEGORY_SLUGS[article.category]}`}
+                className="px-2 py-0.5 rounded-full bg-primary/10 text-primary-light text-xs font-medium hover:bg-primary/20 transition-colors"
+              >
+                {article.category}
+              </Link>
             </div>
 
             <div className="article-body" dangerouslySetInnerHTML={{ __html: article.contentHtml }} />
