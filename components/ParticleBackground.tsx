@@ -16,6 +16,8 @@ const COLORS = ['rgba(124,58,237,', 'rgba(37,99,235,', 'rgba(6,182,212,']
 const MOUSE_RADIUS_SQ = 120 * 120
 const LINE_RADIUS_SQ = 100 * 100
 
+const MAX_PARTICLES = 140
+
 export default function ParticleBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const particlesRef = useRef<Particle[]>([])
@@ -24,6 +26,10 @@ export default function ParticleBackground() {
   const pausedRef = useRef(false)
 
   useEffect(() => {
+    // Respect the user's OS-level motion preference — skip the animation
+    // (and its per-frame CPU/battery cost) entirely rather than overriding it.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
@@ -32,7 +38,7 @@ export default function ParticleBackground() {
     let resizeTimer: ReturnType<typeof setTimeout>
 
     const init = () => {
-      const count = Math.floor((canvas.width * canvas.height) / 18000)
+      const count = Math.min(Math.floor((canvas.width * canvas.height) / 18000), MAX_PARTICLES)
       particlesRef.current = Array.from({ length: count }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,

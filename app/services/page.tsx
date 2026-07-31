@@ -6,12 +6,22 @@ import {
   Layout, ShoppingCart, Cpu, Database, Lock, Server,
   Activity, Share2, Mail, MousePointerClick,
   Layers, GitBranch, Terminal, Gauge,
-  MessageSquare, LineChart, Workflow, Puzzle, ShieldCheck, AlertTriangle,
+  MessageSquare, LineChart, Workflow, Puzzle, ShieldCheck, AlertTriangle, BookOpen,
 } from 'lucide-react'
 import Link from 'next/link'
 import ScrollReveal from '@/components/ScrollReveal'
+import { getAllArticles } from '@/lib/articles'
 
 const BASE = 'https://shahsolutions.vercel.app'
+
+// Contextual cross-links from each service into the blog — only where a
+// genuinely relevant article exists, rather than forcing weak matches.
+const RELATED_ARTICLES: Record<string, string[]> = {
+  seo: ['what-to-expect-hiring-seo-services-2026', 'how-to-identify-the-best-it-company-2026'],
+  geo: ['geo-generative-engine-optimization-2026', 'geo-best-practices-2026', 'aeo-answer-engine-optimization-2026'],
+  web: ['hiring-nextjs-developer-vs-agency', 'how-to-find-an-affordable-web-development-company'],
+  'ai-chatbots': ['how-to-optimize-website-for-chatgpt-2026', 'what-is-ai-seo-2026-guide'],
+}
 
 const serviceFaqs = [
   {
@@ -95,7 +105,7 @@ const servicesPageSchema = {
 export const metadata: Metadata = {
   title: 'IT Services — SEO, GEO, Web, App & AI Development',
   description:
-    'Full-stack IT services: SEO optimization, GEO/AI search, custom web development, mobile app development, digital marketing, cloud solutions, AI agents, AI chatbots, and trading bots. Shah Solutions Pakistan.',
+    'Full-stack IT services: SEO, GEO/AI search, web & app dev, digital marketing, cloud, AI agents, chatbots & trading bots. Shah Solutions, Pakistan.',
   alternates: { canonical: '/services' },
   keywords: [
     'SEO services Pakistan', 'GEO optimization', 'web development services',
@@ -296,6 +306,8 @@ const process = [
 ]
 
 export default function ServicesPage() {
+  const articleTitles: Record<string, string> = Object.fromEntries(getAllArticles().map(a => [a.slug, a.title]))
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesPageSchema) }} />
@@ -366,6 +378,28 @@ export default function ServicesPage() {
                     <span className="sm:hidden">Get Started</span>
                     <ChevronRight size={16} />
                   </Link>
+
+                  {RELATED_ARTICLES[svc.id] && (
+                    <div className="mt-6 pt-6 border-t border-white/5">
+                      <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-3">Related Reading</p>
+                      <div className="flex flex-col gap-2">
+                        {RELATED_ARTICLES[svc.id].map(slug => {
+                          const title = articleTitles[slug]
+                          if (!title) return null
+                          return (
+                            <Link
+                              key={slug}
+                              href={`/blog/${slug}`}
+                              className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-primary-light transition-colors"
+                            >
+                              <BookOpen size={13} className="flex-shrink-0" />
+                              <span>{title}</span>
+                            </Link>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </ScrollReveal>
 
                 <ScrollReveal direction={isEven ? 'right' : 'left'} delay={0.1} className={!isEven ? 'lg:order-1' : ''}>

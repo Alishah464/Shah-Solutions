@@ -3,17 +3,29 @@ import { getAllArticles } from '@/lib/articles'
 
 const BASE = 'https://shahsolutions.vercel.app'
 
+// Real per-page "last substantively edited" dates (from `git log -1 --format=%as`),
+// not build time — bump the relevant entry when a page's content actually changes.
+const PAGE_DATES = {
+  home: '2026-07-31',
+  services: '2026-07-31',
+  blog: '2026-07-31',
+  about: '2026-06-29',
+  portfolio: '2026-06-29',
+  contact: '2026-06-29',
+  book: '2026-06-29',
+} as const
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date()
+  const d = (iso: string) => new Date(`${iso}T00:00:00Z`)
 
   const staticPages: MetadataRoute.Sitemap = [
-    { url: BASE,                lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },
-    { url: `${BASE}/services`,  lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE}/blog`,      lastModified: now, changeFrequency: 'weekly',  priority: 0.8 },
-    { url: `${BASE}/about`,     lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/portfolio`, lastModified: now, changeFrequency: 'weekly',  priority: 0.8 },
-    { url: `${BASE}/contact`,   lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE}/book`,      lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: BASE,                lastModified: d(PAGE_DATES.home),      changeFrequency: 'weekly',  priority: 1.0 },
+    { url: `${BASE}/services`,  lastModified: d(PAGE_DATES.services),  changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE}/blog`,      lastModified: d(PAGE_DATES.blog),      changeFrequency: 'weekly',  priority: 0.8 },
+    { url: `${BASE}/about`,     lastModified: d(PAGE_DATES.about),     changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/portfolio`, lastModified: d(PAGE_DATES.portfolio), changeFrequency: 'weekly',  priority: 0.8 },
+    { url: `${BASE}/contact`,   lastModified: d(PAGE_DATES.contact),   changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/book`,      lastModified: d(PAGE_DATES.book),      changeFrequency: 'monthly', priority: 0.7 },
   ]
 
   const articlePages: MetadataRoute.Sitemap = getAllArticles().map(a => ({

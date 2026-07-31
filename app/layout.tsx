@@ -7,11 +7,11 @@ import ClientProviders from '@/components/ClientProviders'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Shah Solutions — Premium IT Services | SEO, GEO, Web & App Development',
+    default: 'Shah Solutions — SEO, GEO, Web, App & AI Services',
     template: '%s | Shah Solutions',
   },
   description:
-    'Shah Solutions delivers expert IT services: SEO optimization, GEO/local SEO, custom web development, mobile app development, digital marketing, and cloud solutions. Serving businesses worldwide from Pakistan.',
+    'Shah Solutions delivers SEO, GEO, web & app development, AI agents, AI chatbots, and cloud solutions for businesses worldwide — based in Pakistan.',
   keywords: [
     'IT services Pakistan',
     'SEO services Pakistan',
@@ -47,23 +47,23 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: '/',
     siteName: 'Shah Solutions',
-    title: 'Shah Solutions — Premium IT Services',
+    title: 'Shah Solutions — SEO, GEO, Web, App & AI Services',
     description:
-      'Expert IT services: SEO, GEO, Web Development, App Development & Digital Marketing. Transforming businesses worldwide.',
+      'Expert IT services: SEO, GEO, web & app development, AI agents, AI chatbots, and digital marketing. Transforming businesses worldwide.',
     images: [
       {
         url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Shah Solutions — Premium IT Services',
+        alt: 'Shah Solutions — SEO, GEO, Web, App & AI Services',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Shah Solutions — Premium IT Services',
+    title: 'Shah Solutions — SEO, GEO, Web, App & AI Services',
     description:
-      'Expert IT services: SEO, GEO, Web Development, App Development & Digital Marketing.',
+      'Expert IT services: SEO, GEO, web & app development, AI agents, AI chatbots & digital marketing.',
     images: ['/opengraph-image'],
     creator: '@shahsolutions',
   },
@@ -114,7 +114,7 @@ const siteSchemas = {
         height: 512,
         caption: 'Shah Solutions',
       },
-      image: `${BASE}/og-image.svg`,
+      image: `${BASE}/opengraph-image`,
       description: 'Shah Solutions is a premium IT services company providing SEO optimization, GEO/AI search optimization, custom web development, mobile app development, digital marketing, cloud solutions, AI agents, AI chatbots, and trading bots to businesses worldwide.',
       telephone: '+92-303-2818320',
       email: 'amaherwani@gmail.com',
