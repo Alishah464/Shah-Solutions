@@ -2,9 +2,13 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BookOpen, ArrowRight, Sparkles } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
-import { getAllArticles } from '@/lib/articles'
+import { getAllArticles, type ArticleCategory } from '@/lib/articles'
 
 const BASE = 'https://shahsolutions.vercel.app'
+
+// Order reflects how central each topic is to Shah Solutions' positioning —
+// GEO/AEO first since it's the differentiator, not alphabetical.
+const CATEGORY_ORDER: ArticleCategory[] = ['GEO / AEO', 'SEO', 'Web Development', 'Business']
 
 export const metadata: Metadata = {
   title: 'Blog — SEO, GEO & Web Development Insights',
@@ -61,28 +65,42 @@ export default function BlogIndexPage() {
       </section>
 
       <section className="pb-24 relative">
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-4">
-            {articles.map((a, i) => (
-              <ScrollReveal key={a.slug} delay={Math.min(i * 0.04, 0.4)}>
-                <Link
-                  href={`/blog/${a.slug}`}
-                  className="glass-card glass-card-hover p-6 sm:p-7 flex items-start gap-5 group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 mt-1">
-                    <BookOpen size={16} className="text-white" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h2 className="font-display font-bold text-white text-lg sm:text-xl mb-2 leading-snug group-hover:text-primary-light transition-colors">
-                      {a.title}
-                    </h2>
-                    <p className="text-slate-400 text-sm leading-relaxed">{a.description}</p>
-                  </div>
-                  <ArrowRight size={18} className="text-primary/60 flex-shrink-0 mt-2 group-hover:translate-x-1 transition-transform hidden sm:block" />
-                </Link>
-              </ScrollReveal>
-            ))}
-          </div>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+          {CATEGORY_ORDER.map(category => {
+            const inCategory = articles.filter(a => a.category === category)
+            if (inCategory.length === 0) return null
+            return (
+              <div key={category}>
+                <ScrollReveal>
+                  <h2 className="font-display font-bold text-white text-xl mb-5 flex items-center gap-3">
+                    {category}
+                    <span className="text-slate-500 text-sm font-normal">({inCategory.length})</span>
+                  </h2>
+                </ScrollReveal>
+                <div className="space-y-4">
+                  {inCategory.map((a, i) => (
+                    <ScrollReveal key={a.slug} delay={Math.min(i * 0.04, 0.4)}>
+                      <Link
+                        href={`/blog/${a.slug}`}
+                        className="glass-card glass-card-hover p-6 sm:p-7 flex items-start gap-5 group"
+                      >
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 mt-1">
+                          <BookOpen size={16} className="text-white" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-display font-bold text-white text-lg sm:text-xl mb-2 leading-snug group-hover:text-primary-light transition-colors">
+                            {a.title}
+                          </h3>
+                          <p className="text-slate-400 text-sm leading-relaxed">{a.description}</p>
+                        </div>
+                        <ArrowRight size={18} className="text-primary/60 flex-shrink-0 mt-2 group-hover:translate-x-1 transition-transform hidden sm:block" />
+                      </Link>
+                    </ScrollReveal>
+                  ))}
+                </div>
+              </div>
+            )
+          })}
         </div>
       </section>
     </>

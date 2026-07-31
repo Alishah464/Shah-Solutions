@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Calendar, Clock, User, Mail, Phone, Briefcase, MessageSquare, CheckCircle, ChevronLeft, ChevronRight } from 'lucide-react'
 import { ALL_SLOTS, formatSlot, formatDate } from '@/lib/timeSlots'
+import { bookFaqs } from '@/lib/bookFaqs'
 
 const SERVICES = ['SEO Optimization', 'GEO / Local SEO', 'Web Development', 'App Development', 'Digital Strategy', 'Consultation Only']
 
@@ -367,6 +368,24 @@ export default function BookClient() {
               ) : 'Confirm Booking'}
             </button>
           )}
+        </div>
+
+        {/* FAQ */}
+        <div className="mt-16 max-w-2xl mx-auto">
+          <h2 className="text-xl font-bold text-white text-center mb-6">Before You Book</h2>
+          <div className="space-y-3">
+            {bookFaqs.map(faq => (
+              <details key={faq.q} className="bg-[#12121a] border border-gray-800 rounded-xl overflow-hidden group">
+                <summary className="flex items-center justify-between p-4 cursor-pointer list-none hover:bg-white/3 transition-colors">
+                  <span className="font-medium text-white text-sm pr-4">{faq.q}</span>
+                  <span className="text-purple-400 text-xl flex-shrink-0 transition-transform duration-300 group-open:rotate-45">+</span>
+                </summary>
+                <div className="px-4 pb-4 text-gray-400 text-sm leading-relaxed border-t border-gray-800 pt-3">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
         </div>
       </div>
     </div>

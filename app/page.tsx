@@ -22,7 +22,7 @@ const homeFaqs = [
   },
   {
     q: 'What is GEO (Generative Engine Optimization)?',
-    a: 'GEO (Generative Engine Optimization) is the practice of optimizing content to be cited, featured, and recommended by AI-powered search systems such as ChatGPT, Google AI Overviews, Perplexity, and Microsoft Copilot. Unlike traditional SEO which targets keyword rankings in blue-link results, GEO focuses on making your brand the authoritative answer that AI search engines reference and quote.',
+    a: 'GEO is how you make sure your business gets mentioned when someone asks ChatGPT, Google AI Overviews, Perplexity, or Copilot a question your customers would ask. As more people skip the traditional results page and go straight to an AI-generated answer, brands that aren\'t optimized for GEO simply don\'t get mentioned — no matter how well they rank on Google.',
   },
   {
     q: 'What is the difference between SEO and GEO?',

@@ -30,7 +30,7 @@ const serviceFaqs = [
   },
   {
     q: 'What is GEO (Generative Engine Optimization) and how does it differ from SEO?',
-    a: 'GEO (Generative Engine Optimization) optimizes your brand to be cited in AI-generated search responses from ChatGPT, Google AI Overviews, Perplexity, and Microsoft Copilot. While SEO targets rankings in traditional blue-link results, GEO focuses on E-E-A-T authority, entity signals, and structured data so AI systems reference your brand as a trusted source.',
+    a: 'GEO is the technical and content discipline behind AI citations: structured data, clear entity signals, topical depth, and demonstrated E-E-A-T, so systems like ChatGPT, Perplexity, and Google AI Overviews treat your business as a source worth citing. It\'s a different skill set from classic keyword-and-backlink SEO, and most agencies haven\'t caught up to it yet.',
   },
   {
     q: 'How long does a web development project take at Shah Solutions?',

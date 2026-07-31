@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import BookClient from '@/components/BookClient'
+import { bookFaqs } from '@/lib/bookFaqs'
 
 const BASE = 'https://shahsolutions.vercel.app'
 
@@ -46,6 +47,15 @@ const bookSchema = {
         name: 'Free 30-minute IT Consultation',
         availability: 'https://schema.org/InStock',
       },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${BASE}/book#faq`,
+      mainEntity: bookFaqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
     },
   ],
 }

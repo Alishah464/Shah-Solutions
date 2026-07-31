@@ -1,9 +1,24 @@
 import type { Metadata } from 'next'
-import { Target, Eye, Heart, Rocket, Users, Award, Code2, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react'
+import { Target, Eye, Heart, Rocket, Users, Award, Code2, Sparkles, CheckCircle2, ArrowRight, HelpCircle } from 'lucide-react'
 import Link from 'next/link'
 import ScrollReveal from '@/components/ScrollReveal'
 
 const BASE = 'https://shahsolutions.vercel.app'
+
+const aboutFaqs = [
+  {
+    q: 'When was Shah Solutions founded, and how has it grown?',
+    a: 'Shah Solutions was founded in 2019. Since then it has crossed 50 clients (2021), delivered 100+ projects across 12 countries (2022), and pioneered Generative Engine Optimization (GEO) services in Pakistan (2023).',
+  },
+  {
+    q: 'Does Shah Solutions only work with clients in Pakistan?',
+    a: 'No. Shah Solutions is based in Pakistan but serves businesses worldwide, with client communication available in both English and Urdu.',
+  },
+  {
+    q: 'What makes Shah Solutions different from other IT agencies?',
+    a: 'Four things: measuring success by client outcomes rather than deliverables, radical transparency in reporting and pricing, a client-first culture, and staying ahead of shifts like AI search and GEO rather than reacting to them late.',
+  },
+]
 
 const aboutPageSchema = {
   '@context': 'https://schema.org',
@@ -24,6 +39,15 @@ const aboutPageSchema = {
       isPartOf: { '@id': `${BASE}/#website` },
       about: { '@id': `${BASE}/#organization` },
       inLanguage: 'en-US',
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${BASE}/about#faq`,
+      mainEntity: aboutFaqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
     },
   ],
 }
@@ -299,6 +323,37 @@ export default function AboutPage() {
               ))}
             </div>
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── FAQ ───────────────────────────────────────────────────────────── */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-dark-2/40" />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal className="text-center mb-12">
+            <div className="section-tag mx-auto inline-flex">
+              <HelpCircle size={12} />
+              Common Questions
+            </div>
+            <h2 className="font-display font-black text-3xl sm:text-4xl text-white mt-4">
+              About Us <span className="gradient-text">FAQ</span>
+            </h2>
+          </ScrollReveal>
+          <div className="space-y-3">
+            {aboutFaqs.map((faq, i) => (
+              <ScrollReveal key={faq.q} delay={i * 0.05}>
+                <details className="glass-card overflow-hidden group">
+                  <summary className="flex items-center justify-between p-5 sm:p-6 cursor-pointer list-none hover:bg-white/3 transition-colors">
+                    <span className="font-semibold text-white text-sm sm:text-base pr-4">{faq.q}</span>
+                    <span className="text-primary text-2xl flex-shrink-0 transition-transform duration-300 group-open:rotate-45">+</span>
+                  </summary>
+                  <div className="px-5 sm:px-6 pb-5 sm:pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
+                    {faq.a}
+                  </div>
+                </details>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, ArrowRight, Calendar, BookOpen } from 'lucide-react'
+import { ChevronRight, ArrowRight, Calendar, BookOpen, Briefcase } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
-import { getAllArticles, getArticleBySlug } from '@/lib/articles'
+import { getAllArticles, getArticleBySlug, ARTICLE_SERVICE_LINK } from '@/lib/articles'
 
 const BASE = 'https://shahsolutions.vercel.app'
 
@@ -24,7 +24,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: article.title,
     description: article.description,
     alternates: { canonical: `/blog/${slug}` },
-    openGraph: { title: article.title, description: article.description, url: `/blog/${slug}`, type: 'article' },
+    openGraph: {
+      title: article.title,
+      description: article.description,
+      url: `/blog/${slug}`,
+      type: 'article',
+      publishedTime: article.date,
+      authors: ['Shah Solutions'],
+      tags: [article.category],
+    },
   }
 }
 
@@ -38,7 +46,10 @@ export default async function ArticlePage({ params }: Props) {
   if (!article) notFound()
 
   const all = getAllArticles()
-  const related = all.filter(a => a.slug !== slug).slice(0, 3)
+  const sameCategory = all.filter(a => a.slug !== slug && a.category === article.category)
+  const others = all.filter(a => a.slug !== slug && a.category !== article.category)
+  const related = [...sameCategory, ...others].slice(0, 3)
+  const serviceLink = ARTICLE_SERVICE_LINK[slug]
 
   const schema = {
     '@context': 'https://schema.org',
@@ -56,9 +67,11 @@ export default async function ArticlePage({ params }: Props) {
         '@id': `${BASE}/blog/${slug}#article`,
         headline: article.title,
         description: article.description,
+        image: `${BASE}/opengraph-image`,
         url: `${BASE}/blog/${slug}`,
         datePublished: article.date,
         dateModified: article.date,
+        articleSection: article.category,
         author: { '@id': `${BASE}/#organization` },
         publisher: { '@id': `${BASE}/#organization` },
         mainEntityOfPage: `${BASE}/blog/${slug}`,
@@ -76,10 +89,13 @@ export default async function ArticlePage({ params }: Props) {
 
         <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <Link href="/blog" className="inline-flex items-center gap-2 text-slate-400 hover:text-primary-light text-sm font-medium mb-8 transition-colors">
-              <ArrowLeft size={14} />
-              Back to Blog
-            </Link>
+            <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-1.5 text-sm text-slate-500 mb-8">
+              <Link href="/" className="hover:text-primary-light transition-colors">Home</Link>
+              <ChevronRight size={13} className="text-slate-600" />
+              <Link href="/blog" className="hover:text-primary-light transition-colors">Blog</Link>
+              <ChevronRight size={13} className="text-slate-600" />
+              <span className="text-slate-400">{article.category}</span>
+            </nav>
 
             <h1 className="font-display font-black text-3xl sm:text-5xl text-white mb-5 leading-tight text-balance">
               {article.title}
@@ -90,9 +106,22 @@ export default async function ArticlePage({ params }: Props) {
               <time dateTime={article.date}>{formatDate(article.date)}</time>
               <span className="mx-1">·</span>
               <span>Shah Solutions</span>
+              <span className="mx-1">·</span>
+              <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary-light text-xs font-medium">{article.category}</span>
             </div>
 
             <div className="article-body" dangerouslySetInnerHTML={{ __html: article.contentHtml }} />
+
+            {serviceLink && (
+              <Link
+                href={serviceLink.href}
+                className="inline-flex items-center gap-2 mt-8 text-sm text-primary-light hover:text-white transition-colors"
+              >
+                <Briefcase size={14} />
+                See our {serviceLink.label} service
+                <ArrowRight size={14} />
+              </Link>
+            )}
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
