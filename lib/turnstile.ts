@@ -8,6 +8,9 @@ export async function verifyTurnstile(token: string, ip: string): Promise<boolea
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ secret, response: token, remoteip: ip }),
   })
-  const data = await res.json() as { success: boolean }
+  const data = await res.json() as { success: boolean; 'error-codes'?: string[] }
+  if (!data.success) {
+    console.error('Turnstile verification failed:', data['error-codes'])
+  }
   return data.success === true
 }

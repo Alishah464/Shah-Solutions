@@ -82,19 +82,30 @@ export default function ChatWidget() {
       const finish = (token: string) => {
         if (done) return
         done = true
+        clearInterval(retryTimer)
         settleTokenRef.current = null
         resolve(token)
       }
-      const timer = setTimeout(() => finish(''), 10000)
+      const timer = setTimeout(() => finish(''), 15000)
       settleTokenRef.current = (token: string) => {
         clearTimeout(timer)
         finish(token)
       }
-      try {
-        turnstileRef.current?.execute()
-      } catch {
-        finish('')
+      const attempt = () => {
+        try {
+          turnstileRef.current?.execute()
+        } catch {
+          // widget not mounted/ready yet — the retry below will catch it once it is
+        }
       }
+      // A fast first interaction (e.g. clicking a quick-prompt right after opening
+      // the widget) can race Cloudflare's async script/widget init — a single
+      // execute() call silently no-ops if the widget isn't rendered yet, with no
+      // error and no callback, so it would otherwise just sit until the 15s
+      // timeout. Retrying is harmless once the widget IS ready: whichever call
+      // is live completes normally and `finish()` clears this interval.
+      const retryTimer = setInterval(attempt, 500)
+      attempt()
     })
   }, [])
 
@@ -242,16 +253,17 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Invisible bot-check — executed once per message via getTurnstileToken() */}
-      <div className="hidden">
-        <Turnstile
-          ref={turnstileRef}
-          siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '1x00000000000000000000AA'}
-          options={{ size: 'invisible', execution: 'execute' }}
-          onSuccess={token => settleTokenRef.current?.(token)}
-          onError={() => settleTokenRef.current?.('')}
-        />
-      </div>
+      {/* Invisible bot-check — executed once per message via getTurnstileToken().
+          The library already renders this at 0x0 for size:'invisible'; wrapping it
+          in a display:none ancestor (as this used to) can stop the underlying
+          challenge iframe from initializing in some browsers, so it's unwrapped. */}
+      <Turnstile
+        ref={turnstileRef}
+        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '1x00000000000000000000AA'}
+        options={{ size: 'invisible', execution: 'execute' }}
+        onSuccess={token => settleTokenRef.current?.(token)}
+        onError={() => settleTokenRef.current?.('')}
+      />
 
       {/* Floating launcher button */}
       <button
