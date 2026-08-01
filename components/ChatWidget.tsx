@@ -257,7 +257,7 @@ export default function ChatWidget() {
       <button
         onClick={toggleOpen}
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
-        className="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center shadow-glow-primary hover:scale-105 active:scale-95 transition-transform duration-200"
+        className="fixed bottom-5 right-5 z-30 w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center shadow-glow-primary hover:scale-105 active:scale-95 transition-transform duration-200"
       >
         {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
         {!isOpen && hasUnread && (
@@ -267,7 +267,7 @@ export default function ChatWidget() {
 
       {/* Chat panel */}
       {isOpen && (
-        <div className="fixed bottom-24 right-5 z-50 w-[calc(100vw-2.5rem)] max-w-[380px] h-[min(600px,calc(100vh-8rem))] glass-card bg-dark-2/95 flex flex-col overflow-hidden shadow-card-hover">
+        <div className="fixed bottom-24 right-5 z-30 w-[calc(100vw-2.5rem)] max-w-[380px] h-[min(600px,calc(100vh-8rem))] glass-card !bg-dark-2/95 flex flex-col overflow-hidden shadow-card-hover">
           {/* Header */}
           <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10 bg-white/3">
             <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0">
