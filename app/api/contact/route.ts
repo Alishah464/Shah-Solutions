@@ -29,6 +29,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return NextResponse.json({ error: 'Invalid email address.' }, { status: 400 })
+    }
+
     // Turnstile verification
     if (!turnstileToken) {
       return NextResponse.json({ error: 'Please complete the CAPTCHA.' }, { status: 400 })

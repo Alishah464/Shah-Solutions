@@ -36,8 +36,11 @@ export default function CustomCursor() {
     document.addEventListener('mouseenter', onEnter)
     rafRef.current = requestAnimationFrame(loop)
 
+    const bound = new WeakSet<Element>()
     const bindHoverables = () => {
       document.querySelectorAll('a, button, [data-cursor-hover]').forEach((el) => {
+        if (bound.has(el)) return
+        bound.add(el)
         el.addEventListener('mouseenter', onEnterLink)
         el.addEventListener('mouseleave', onLeaveLink)
       })

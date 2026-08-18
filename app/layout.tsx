@@ -4,6 +4,8 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ClientProviders from '@/components/ClientProviders'
+import { SITE_URL } from '@/lib/site'
+import { inter, syne, jetbrainsMono } from './fonts'
 
 export const metadata: Metadata = {
   title: {
@@ -38,7 +40,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Shah Solutions', url: process.env.NEXT_PUBLIC_SITE_URL }],
   creator: 'Shah Solutions',
   publisher: 'Shah Solutions',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://shahsolutions.vercel.app'),
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: '/',
   },
@@ -95,7 +97,7 @@ export const viewport: Viewport = {
   colorScheme: 'dark',
 }
 
-const BASE = 'https://shahsolutions.vercel.app'
+const BASE = SITE_URL
 
 const siteSchemas = {
   '@context': 'https://schema.org',
@@ -225,17 +227,18 @@ const siteSchemas = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      data-scroll-behavior="smooth"
+      className={`${inter.variable} ${syne.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-58F9JKWW');` }} />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-8EQ10MNNGP" />
-        <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8EQ10MNNGP');` }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchemas) }}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="bg-dark text-white antialiased noise-overlay">
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58F9JKWW" height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe></noscript>

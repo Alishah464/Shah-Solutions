@@ -1,7 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getAllArticles, CATEGORY_SLUGS } from '@/lib/articles'
-
-const BASE = 'https://shahsolutions.vercel.app'
+import { SITE_URL as BASE } from '@/lib/site'
 
 // Real per-page "last substantively edited" dates (from `git log -1 --format=%as`),
 // not build time — bump the relevant entry when a page's content actually changes.

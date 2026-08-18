@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -28,7 +26,7 @@ html {
 body {
   background-color: #050510;
   color: #F8FAFC;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -294,7 +292,7 @@ input, textarea, [contenteditable] {
   font-size: 15px;
   transition: all 0.3s ease;
   outline: none;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), sans-serif;
 }
 .form-input:focus {
   border-color: #7C3AED;
@@ -425,7 +423,7 @@ input, textarea, [contenteditable] {
   line-height: 1.8;
 }
 .article-body h2 {
-  font-family: 'Syne', 'Inter', sans-serif;
+  font-family: var(--font-syne), var(--font-inter), sans-serif;
   font-weight: 800;
   color: white;
   font-size: 1.6rem;
@@ -433,7 +431,7 @@ input, textarea, [contenteditable] {
   line-height: 1.3;
 }
 .article-body h3 {
-  font-family: 'Syne', 'Inter', sans-serif;
+  font-family: var(--font-syne), var(--font-inter), sans-serif;
   font-weight: 700;
   color: white;
   font-size: 1.25rem;

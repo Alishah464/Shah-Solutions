@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { isRateLimited } from '@/lib/rateLimit'
 import { verifyTurnstile } from '@/lib/turnstile'
 import { SYSTEM_PROMPT } from '@/lib/chatKnowledge'
+import { SITE_URL } from '@/lib/site'
 
 type ChatMessage = { role: 'user' | 'assistant'; content: string }
 
@@ -60,7 +61,7 @@ export async function POST(req: NextRequest) {
     headers: {
       Authorization: `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
-      'HTTP-Referer': process.env.NEXT_PUBLIC_SITE_URL ?? 'https://shahsolutions.vercel.app',
+      'HTTP-Referer': SITE_URL,
       'X-Title': 'Shah Solutions Chatbot',
     },
     body: JSON.stringify({

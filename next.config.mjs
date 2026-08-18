@@ -16,9 +16,10 @@ const nextConfig = {
       // dev: React needs eval() for callstack reconstruction; prod: strict
       // googletagmanager.com: GTM loader + gtag.js
       `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://challenges.cloudflare.com https://www.googletagmanager.com`,
-      // Tailwind inline styles + Google Fonts
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      "font-src 'self' https://fonts.gstatic.com",
+      // Tailwind inline styles
+      "style-src 'self' 'unsafe-inline'",
+      // Fonts are self-hosted via next/font — no external font origin needed
+      "font-src 'self'",
       // Images: allow self, data URIs and blob for canvas/particle, GTM/GA tracking pixels
       "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com",
       // API calls: Resend + Turnstile + GTM config fetch + GA beacons
@@ -42,7 +43,6 @@ const nextConfig = {
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()' },
-          { key: 'X-XSS-Protection', value: '1; mode=block' },
           { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
           { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
           { key: 'Cross-Origin-Resource-Policy', value: 'same-origin' },
