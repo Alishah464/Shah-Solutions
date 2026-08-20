@@ -1,6 +1,9 @@
 import { ImageResponse } from 'next/og'
+import { SITE_URL } from '@/lib/site'
 
-export const runtime = 'edge'
+// No `runtime: 'edge'` — output: 'export' has no server to run an edge
+// function on. This still renders to a static PNG at build time.
+export const dynamic = 'force-static'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -89,6 +92,7 @@ export default function OGImage() {
         {/* Company name */}
         <div
           style={{
+            display: 'flex',
             fontSize: 60,
             fontWeight: 900,
             color: 'white',
@@ -97,7 +101,7 @@ export default function OGImage() {
             textAlign: 'center',
           }}
         >
-          Shah{' '}
+          Shah&nbsp;
           <span style={{ color: '#9F67FF' }}>Solutions</span>
         </div>
 
@@ -144,7 +148,7 @@ export default function OGImage() {
             fontSize: 14,
           }}
         >
-          shahsolutions.vercel.app
+          {new URL(SITE_URL).host}
         </div>
       </div>
     ),

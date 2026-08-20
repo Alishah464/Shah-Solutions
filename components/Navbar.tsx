@@ -8,10 +8,11 @@ import { Code2, Menu, X, ChevronRight } from 'lucide-react'
 
 const links = [
   { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
   { href: '/services', label: 'Services' },
+  { href: '/industries', label: 'Industries' },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/blog', label: 'Blog' },
+  { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ]
 

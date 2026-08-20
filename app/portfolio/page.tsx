@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import PortfolioClient from '@/components/PortfolioClient'
-
-const BASE = 'https://shahsolutions.vercel.app'
+import { SITE_URL as BASE } from '@/lib/seo'
 
 const portfolioSchema = {
   '@context': 'https://schema.org',

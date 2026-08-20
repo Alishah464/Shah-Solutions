@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BookOpen, ArrowRight, Sparkles } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
-import { getAllArticles, CATEGORY_SLUGS, type ArticleCategory } from '@/lib/articles'
-
-const BASE = 'https://shahsolutions.vercel.app'
+import { getAllArticles, CATEGORY_SLUGS, type ArticleCategory } from '@/lib/blog'
+import { SITE_URL as BASE } from '@/lib/seo'
 
 // Order reflects how central each topic is to Shah Solutions' positioning —
 // GEO/AEO first since it's the differentiator, not alphabetical.

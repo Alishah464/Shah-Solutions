@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
+  darkMode: ['class'],
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -8,6 +9,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
       colors: {
         dark: {
           DEFAULT: '#050510',
@@ -19,18 +25,44 @@ const config: Config = {
           DEFAULT: '#7C3AED',
           light: '#9F67FF',
           dark: '#5B21B6',
+          foreground: 'hsl(var(--primary-foreground))',
         },
         secondary: {
           DEFAULT: '#2563EB',
           light: '#3B82F6',
           dark: '#1D4ED8',
+          foreground: 'hsl(var(--secondary-foreground))',
         },
         accent: {
           DEFAULT: '#06B6D4',
           light: '#22D3EE',
           dark: '#0891B2',
+          foreground: 'hsl(var(--accent-foreground))',
         },
         gold: '#FBBF24',
+        // shadcn/ui semantic tokens — CSS-var driven so components/ui/*
+        // automatically pick up the brand palette defined in globals.css.
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
@@ -98,6 +130,14 @@ const config: Config = {
           '0%, 100%': { opacity: '0.2', transform: 'scale(1)' },
           '50%': { opacity: '1', transform: 'scale(1.4)' },
         },
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
       },
       boxShadow: {
         'glow-primary': '0 0 30px rgba(124,58,237,0.6)',
@@ -111,7 +151,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-animate')],
 }
 
 export default config

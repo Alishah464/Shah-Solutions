@@ -10,10 +10,10 @@ import {
   ChevronRight, ArrowRight, Star, CheckCircle2, Zap,
   Shield, Users, Award, Target, Layers, Sparkles, HelpCircle,
   Bot, MessageSquare, LineChart,
+  ShoppingCart, Boxes, Building2, HeartPulse, GraduationCap,
 } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
-
-const BASE = 'https://shahsolutions.vercel.app'
+import { SITE_URL as BASE } from '@/lib/seo'
 
 const homeFaqs = [
   {
@@ -124,7 +124,7 @@ const services = [
     tags: ['AI Search', 'GEO Strategy', 'Answer Engine'],
   },
   {
-    id: 'web',
+    id: 'web-development',
     icon: Code2,
     color: 'from-cyan-600 to-blue-700',
     glow: 'rgba(6,182,212,0.4)',
@@ -133,7 +133,7 @@ const services = [
     tags: ['Next.js', 'React', 'E-Commerce'],
   },
   {
-    id: 'app',
+    id: 'app-development',
     icon: Smartphone,
     color: 'from-emerald-600 to-cyan-700',
     glow: 'rgba(16,185,129,0.4)',
@@ -142,7 +142,7 @@ const services = [
     tags: ['Flutter', 'React Native', 'iOS / Android'],
   },
   {
-    id: 'marketing',
+    id: 'digital-marketing',
     icon: TrendingUp,
     color: 'from-orange-600 to-red-700',
     glow: 'rgba(234,88,12,0.4)',
@@ -151,7 +151,7 @@ const services = [
     tags: ['PPC Ads', 'Social Media', 'Email Marketing'],
   },
   {
-    id: 'cloud',
+    id: 'cloud-solutions',
     icon: Cloud,
     color: 'from-violet-600 to-indigo-700',
     glow: 'rgba(139,92,246,0.4)',
@@ -186,6 +186,14 @@ const services = [
     desc: 'Custom algorithmic trading bots built to your own strategy and risk rules, with backtesting and exchange API integration.',
     tags: ['Custom Strategy', 'Backtesting', 'Exchange APIs'],
   },
+]
+
+const industries = [
+  { slug: 'ecommerce', title: 'E-commerce', icon: ShoppingCart },
+  { slug: 'saas', title: 'SaaS', icon: Boxes },
+  { slug: 'real-estate', title: 'Real Estate', icon: Building2 },
+  { slug: 'healthcare', title: 'Healthcare', icon: HeartPulse },
+  { slug: 'education', title: 'Education', icon: GraduationCap },
 ]
 
 const stats = [
@@ -328,23 +336,6 @@ export default function HomePage() {
             </Link>
           </motion.div>
 
-          {/* AI Builder discovery link */}
-          <motion.div
-            className="flex justify-center mt-6"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-          >
-            <Link
-              href="/ai-builder"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm hover:border-primary/50 hover:bg-primary/10 hover:text-white transition-colors"
-            >
-              <Sparkles size={14} className="text-primary-light" />
-              New: Build your website with AI
-              <ChevronRight size={14} />
-            </Link>
-          </motion.div>
-
           {/* Trust badges */}
           <motion.div
             className="flex flex-wrap items-center justify-center gap-6 mt-16"
@@ -411,7 +402,8 @@ export default function HomePage() {
               const Icon = svc.icon
               return (
                 <ScrollReveal key={svc.id} delay={i * 0.08}>
-                  <div
+                  <Link
+                    href={`/services/${svc.id}`}
                     className="glass-card glass-card-hover p-8 h-full flex flex-col group"
                     style={{ '--glow': svc.glow } as React.CSSProperties}
                   >
@@ -437,7 +429,7 @@ export default function HomePage() {
                         </span>
                       ))}
                     </div>
-                  </div>
+                  </Link>
                 </ScrollReveal>
               )
             })}
@@ -449,6 +441,52 @@ export default function HomePage() {
               <ArrowRight size={16} />
             </Link>
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── TRUST BAR ─────────────────────────────────────────────────────── */}
+      <section className="py-10 relative border-y border-white/5">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-center text-slate-500 text-xs font-semibold uppercase tracking-widest mb-6">
+            Trusted by businesses across Pakistan &amp; worldwide
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-slate-400 text-sm font-medium">
+            {['12+ Countries Served', '150+ Projects Delivered', '5+ Years in Business', '98% Client Satisfaction'].map((item) => (
+              <span key={item} className="flex items-center gap-2">
+                <CheckCircle2 size={14} className="text-emerald-400" />
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── INDUSTRIES ────────────────────────────────────────────────────── */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="orb orb-blue absolute top-0 left-1/4 w-96 h-96 opacity-15" />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal className="text-center mb-16">
+            <div className="section-tag mx-auto inline-flex">
+              <Layers size={12} />
+              Industries We Serve
+            </div>
+            <h2 className="font-display font-black text-4xl sm:text-5xl text-white mt-4">
+              Built for Your <span className="gradient-text">Industry</span>
+            </h2>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            {industries.map((ind, i) => (
+              <ScrollReveal key={ind.slug} delay={i * 0.06}>
+                <Link href={`/industries/${ind.slug}`} className="glass-card glass-card-hover p-6 flex flex-col items-center text-center gap-3 group">
+                  <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <ind.icon size={20} className="text-primary-light" />
+                  </div>
+                  <span className="text-white text-sm font-medium">{ind.title}</span>
+                </Link>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
 

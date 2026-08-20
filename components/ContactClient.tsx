@@ -1,9 +1,8 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
 import {
   Mail, Phone, Clock, Send, CheckCircle2, AlertCircle,
   Sparkles, MessageSquare, User, Briefcase, Globe,
@@ -17,7 +16,14 @@ interface FormData {
   service: string
   budget: string
   message: string
+  botcheck: string
 }
+
+// Free-tier form backend (web3forms.com) — the site is a static export with
+// no server of its own, so submission happens directly from the browser.
+// Get a key at https://web3forms.com (instant, just an email) and set it as
+// NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY.
+const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? ''
 
 const services = [
   'SEO Optimization',
@@ -97,33 +103,36 @@ export default function ContactClient() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [openFaq, setOpenFaq] = useState<number | null>(null)
-  const [turnstileToken, setTurnstileToken] = useState('')
-  const turnstileRef = useRef<TurnstileInstance>(null)
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>()
 
   const onSubmit = async (data: FormData) => {
-    if (!turnstileToken) {
-      setError('Please complete the CAPTCHA before submitting.')
-      return
-    }
+    if (data.botcheck) return // honeypot tripped — silently drop
     setLoading(true)
     setError('')
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, turnstileToken }),
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `New project inquiry from ${data.name}`,
+          from_name: 'Shah Solutions Website',
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          service: data.service,
+          budget: data.budget,
+          message: data.message,
+        }),
       })
       const json = await res.json()
-      if (!res.ok) throw new Error(json.error ?? 'Failed to send')
+      if (!json.success) throw new Error(json.message ?? 'Failed to send')
       setSubmitted(true)
       reset()
-      setTurnstileToken('')
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Something went wrong.'
       setError(msg + ' You can also email us at amaherwani@gmail.com')
-      turnstileRef.current?.reset()
     } finally {
       setLoading(false)
     }
@@ -342,16 +351,14 @@ export default function ContactClient() {
                           )}
                         </div>
 
-                        <div className="flex justify-center">
-                          <Turnstile
-                            ref={turnstileRef}
-                            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '1x00000000000000000000AA'}
-                            onSuccess={setTurnstileToken}
-                            onExpire={() => setTurnstileToken('')}
-                            onError={() => setTurnstileToken('')}
-                            options={{ theme: 'dark', size: 'normal' }}
-                          />
-                        </div>
+                        <input
+                          type="text"
+                          tabIndex={-1}
+                          autoComplete="off"
+                          className="hidden"
+                          aria-hidden="true"
+                          {...register('botcheck')}
+                        />
 
                         {error && (
                           <div className="flex items-center gap-2 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
@@ -362,7 +369,7 @@ export default function ContactClient() {
 
                         <button
                           type="submit"
-                          disabled={loading || !turnstileToken}
+                          disabled={loading}
                           className="btn-primary w-full justify-center py-4 text-base disabled:opacity-60 disabled:cursor-not-allowed"
                         >
                           {loading ? (
@@ -433,7 +440,19 @@ export default function ContactClient() {
                       <Phone size={16} className="text-secondary" />
                       <div>
                         <p className="font-medium">0303 2818320</p>
-                        <p className="text-slate-400 text-xs">Call or WhatsApp</p>
+                        <p className="text-slate-400 text-xs">Call us directly</p>
+                      </div>
+                    </a>
+                    <a
+                      href="https://wa.me/923032818320"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors text-sm text-white"
+                    >
+                      <MessageSquare size={16} className="text-emerald-400" />
+                      <div>
+                        <p className="font-medium">WhatsApp Us</p>
+                        <p className="text-slate-400 text-xs">Fastest response</p>
                       </div>
                     </a>
                   </div>

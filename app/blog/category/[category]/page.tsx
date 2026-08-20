@@ -3,9 +3,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { BookOpen, ArrowRight, ChevronRight } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
-import { getAllArticles, categoryFromSlug, CATEGORY_SLUGS, CATEGORY_DESCRIPTIONS } from '@/lib/articles'
-
-const BASE = 'https://shahsolutions.vercel.app'
+import { getAllArticles, categoryFromSlug, CATEGORY_SLUGS, CATEGORY_DESCRIPTIONS } from '@/lib/blog'
+import { SITE_URL as BASE } from '@/lib/seo'
 
 interface Props {
   params: Promise<{ category: string }>

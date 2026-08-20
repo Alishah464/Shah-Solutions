@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import ContactClient from '@/components/ContactClient'
-
-const BASE = 'https://shahsolutions.vercel.app'
+import { SITE_URL as BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Contact Us — Free IT Consultation',

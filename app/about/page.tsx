@@ -2,8 +2,7 @@ import type { Metadata } from 'next'
 import { Target, Eye, Heart, Rocket, Users, Award, Code2, Sparkles, CheckCircle2, ArrowRight, HelpCircle } from 'lucide-react'
 import Link from 'next/link'
 import ScrollReveal from '@/components/ScrollReveal'
-
-const BASE = 'https://shahsolutions.vercel.app'
+import { SITE_URL as BASE } from '@/lib/seo'
 
 const aboutFaqs = [
   {

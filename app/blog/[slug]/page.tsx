@@ -1,11 +1,23 @@
 import type { Metadata } from 'next'
+import type { ComponentProps, ReactElement } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ChevronRight, ArrowRight, Calendar, BookOpen, Briefcase } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
-import { getAllArticles, getArticleBySlug, ARTICLE_SERVICE_LINK, CATEGORY_SLUGS } from '@/lib/articles'
+import { getAllArticles, getArticleBySlug, ARTICLE_SERVICE_LINK, CATEGORY_SLUGS } from '@/lib/blog'
+import { SITE_URL as BASE } from '@/lib/seo'
 
-const BASE = 'https://shahsolutions.vercel.app'
+// Source MDX bodies inconsistently use `#` for section headings instead of
+// `##`. The page renders its own single <h1> from the title, so every
+// heading found in the body is demoted one level here.
+const mdxComponents = {
+  h1: (props: ComponentProps<'h2'>) => <h2 {...props} />,
+  h2: (props: ComponentProps<'h3'>) => <h3 {...props} />,
+  h3: (props: ComponentProps<'h4'>) => <h4 {...props} />,
+  h4: (props: ComponentProps<'h5'>) => <h5 {...props} />,
+  h5: (props: ComponentProps<'h6'>) => <h6 {...props} />,
+  h6: (props: ComponentProps<'h6'>) => <h6 {...props} />,
+}
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -50,6 +62,10 @@ export default async function ArticlePage({ params }: Props) {
   const others = all.filter(a => a.slug !== slug && a.category !== article.category)
   const related = [...sameCategory, ...others].slice(0, 3)
   const serviceLink = ARTICLE_SERVICE_LINK[slug]
+
+  const { default: ArticleBody } = (await import(`@/content/blog/${slug}.mdx`)) as {
+    default: (props: { components?: typeof mdxComponents }) => ReactElement
+  }
 
   const schema = {
     '@context': 'https://schema.org',
@@ -116,7 +132,9 @@ export default async function ArticlePage({ params }: Props) {
               </Link>
             </div>
 
-            <div className="article-body" dangerouslySetInnerHTML={{ __html: article.contentHtml }} />
+            <div className="article-body">
+              <ArticleBody components={mdxComponents} />
+            </div>
 
             {serviceLink && (
               <Link

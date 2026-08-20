@@ -2,12 +2,12 @@ import Link from 'next/link'
 import { Code2, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react'
 
 const services = [
-  { label: 'SEO Optimization', href: '/services#seo' },
-  { label: 'GEO / AI Search', href: '/services#geo' },
-  { label: 'Web Development', href: '/services#web' },
-  { label: 'App Development', href: '/services#app' },
-  { label: 'Digital Marketing', href: '/services#marketing' },
-  { label: 'Cloud Solutions', href: '/services#cloud' },
+  { label: 'SEO Optimization', href: '/services/seo' },
+  { label: 'GEO / AI Search', href: '/services/geo' },
+  { label: 'Web Development', href: '/services/web-development' },
+  { label: 'App Development', href: '/services/app-development' },
+  { label: 'Digital Marketing', href: '/services/digital-marketing' },
+  { label: 'Cloud Solutions', href: '/services/cloud-solutions' },
 ]
 
 const pages = [
