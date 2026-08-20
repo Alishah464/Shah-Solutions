@@ -3,6 +3,8 @@ import { isRateLimited } from '@/lib/rateLimit'
 import { verifyTurnstile } from '@/lib/turnstile'
 import { SYSTEM_PROMPT } from '@/lib/chatKnowledge'
 import { SITE_URL } from '@/lib/site'
+import { classifyOpenRouterStatus, openRouterErrorMessage } from '@/lib/openrouter'
+import { logAiUsage } from '@/lib/aiUsageLog'
 
 type ChatMessage = { role: 'user' | 'assistant'; content: string }
 
@@ -56,30 +58,49 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ reply: FALLBACK_REPLY, configured: false })
   }
 
-  const upstream = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-      'HTTP-Referer': SITE_URL,
-      'X-Title': 'Shah Solutions Chatbot',
-    },
-    body: JSON.stringify({
-      model: process.env.OPENROUTER_MODEL || 'openai/gpt-oss-20b:free',
-      messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
-      stream: true,
-      temperature: 0.4,
-      max_tokens: 500,
-    }),
-  })
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 20000)
+  const started = Date.now()
+
+  let upstream: Response
+  try {
+    upstream = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': SITE_URL,
+        'X-Title': 'Shah Solutions Chatbot',
+      },
+      body: JSON.stringify({
+        model: process.env.OPENROUTER_MODEL || 'openai/gpt-oss-20b:free',
+        messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
+        stream: true,
+        temperature: 0.4,
+        max_tokens: 500,
+      }),
+      signal: controller.signal,
+    })
+  } catch (err) {
+    const kind = err instanceof Error && err.name === 'AbortError' ? 'timeout' : 'network'
+    console.error(`OpenRouter error: ${kind}`, err)
+    logAiUsage({ feature: 'chat', success: false, errorKind: kind, latencyMs: Date.now() - started })
+    return NextResponse.json({ reply: openRouterErrorMessage(kind), configured: true })
+  } finally {
+    clearTimeout(timeout)
+  }
 
   if (!upstream.ok || !upstream.body) {
-    console.error('OpenRouter error:', upstream.status, await upstream.text().catch(() => ''))
-    return NextResponse.json(
-      { reply: "Sorry, I'm having trouble connecting right now. Please try again, or reach us at /contact.", configured: true },
-      { status: 200 }
-    )
+    const detail = await upstream.text().catch(() => '')
+    console.error('OpenRouter error:', upstream.status, detail)
+    const kind = classifyOpenRouterStatus(upstream.status)
+    logAiUsage({ feature: 'chat', success: false, errorKind: kind, latencyMs: Date.now() - started })
+    return NextResponse.json({ reply: openRouterErrorMessage(kind), configured: true })
   }
+
+  // Time-to-first-byte, not full stream duration — the route hands the raw body straight
+  // through and doesn't otherwise observe when the stream actually finishes.
+  logAiUsage({ feature: 'chat', success: true, latencyMs: Date.now() - started })
 
   return new Response(upstream.body, {
     headers: {

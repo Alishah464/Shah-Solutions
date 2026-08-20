@@ -328,6 +328,23 @@ export default function HomePage() {
             </Link>
           </motion.div>
 
+          {/* AI Builder discovery link */}
+          <motion.div
+            className="flex justify-center mt-6"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+          >
+            <Link
+              href="/ai-builder"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm hover:border-primary/50 hover:bg-primary/10 hover:text-white transition-colors"
+            >
+              <Sparkles size={14} className="text-primary-light" />
+              New: Build your website with AI
+              <ChevronRight size={14} />
+            </Link>
+          </motion.div>
+
           {/* Trust badges */}
           <motion.div
             className="flex flex-wrap items-center justify-center gap-6 mt-16"
@@ -358,7 +375,7 @@ export default function HomePage() {
                     {statsInView ? (
                       <CountUp end={value} duration={2.5} suffix={suffix} />
                     ) : (
-                      `0${suffix}`
+                      `${value}${suffix}`
                     )}
                   </div>
                   <div className="text-slate-400 text-sm font-medium">{label}</div>
