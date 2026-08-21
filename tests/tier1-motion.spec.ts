@@ -21,28 +21,42 @@ test.describe('tier 1 — motion system, magnetic buttons, nav', () => {
     await page.goto('/')
     const link = page.getByRole('link', { name: /Get a Free Consultation/i })
     await expect(link).toBeVisible()
+    // A late web-font swap can still shift text/button position after the
+    // box otherwise looks "stable" — wait for fonts first too.
+    await page.evaluate(() => document.fonts.ready)
 
     const box = await waitForStableBox(link)
 
     const wrapper = link.locator('xpath=..')
 
-    // Enter from outside first, then move to a corner (not dead-center) in
-    // steps, so real intermediate mousemove events land on the element.
-    await page.mouse.move(box.x - 50, box.y - 50)
-    await page.mouse.move(box.x + box.width - 4, box.y + 4, { steps: 10 })
+    // Dispatch the mousemove in-page rather than via Playwright's simulated
+    // OS cursor: it's synchronous, always targets the wrapper directly (no
+    // ambiguity about intermediate elements under the real cursor path), and
+    // — critically — the poll can retry the dispatch itself, so a component
+    // that isn't "enabled" yet (its own effect checking pointer:fine/reduced
+    // motion hasn't committed) just gets tried again a moment later instead
+    // of silently missing its one chance at an event.
+    const dispatchMove = (cx: number, cy: number) =>
+      wrapper.evaluate((el, [x, y]) => {
+        el.dispatchEvent(new MouseEvent('mousemove', { clientX: x, clientY: y, bubbles: true }))
+      }, [cx, cy] as [number, number])
 
-    let transform = ''
+    const cornerX = box.x + box.width - 4
+    const cornerY = box.y + 4
+
+    let transform = 'none'
     await expect.poll(async () => {
+      await dispatchMove(cornerX, cornerY)
       transform = await wrapper.evaluate((el) => getComputedStyle(el).transform)
       return transform
-    }, { timeout: 10_000 }).not.toBe('none')
+    }, { timeout: 10_000, intervals: [200] }).not.toBe('none')
 
     // Moving away should relax the offset back toward identity.
-    await page.mouse.move(20, 20, { steps: 10 })
-    await expect.poll(
-      () => wrapper.evaluate((el) => getComputedStyle(el).transform),
-      { timeout: 10_000 }
-    ).not.toBe(transform)
+    const awayTransform = transform
+    await expect.poll(async () => {
+      await dispatchMove(20, 20)
+      return wrapper.evaluate((el) => getComputedStyle(el).transform)
+    }, { timeout: 15_000, intervals: [200] }).not.toBe(awayTransform)
   })
 
   test('navbar Get Started button is also magnetic', async ({ page }) => {

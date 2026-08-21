@@ -13,6 +13,14 @@ import {
 import ScrollReveal from '@/components/ScrollReveal'
 import MagneticButton from '@/components/MagneticButton'
 import AIPlayground from '@/components/AIPlayground'
+import ShaderBackground from '@/components/ShaderBackground'
+import dynamic from 'next/dynamic'
+
+// @react-three/fiber's module-level setup isn't safe to import during
+// Next.js's Node-side static export (breaks with a React-internals error
+// even when <Canvas> never actually renders server-side) — defer the whole
+// module to the client.
+const HeroScene = dynamic(() => import('@/components/HeroScene'), { ssr: false })
 import { SITE_URL as BASE } from '@/lib/seo'
 
 const homeFaqs = [
@@ -204,6 +212,15 @@ export default function HomePage() {
   const heroY = useTransform(scrollY, [0, 600], prefersReducedMotion ? [0, 0] : [0, -120])
   const heroOpacity = useTransform(scrollY, [0, 400], prefersReducedMotion ? [1, 1] : [1, 0.3])
 
+  // Gates the *import* of the Three.js hero scene, not just its CSS
+  // visibility — without this, mobile still downloads the ~300KB+ chunk for
+  // a component it never shows. Starts false on both server and client so
+  // there's no hydration mismatch; flips true post-mount only on desktop.
+  const [showHeroScene, setShowHeroScene] = useState(false)
+  useEffect(() => {
+    setShowHeroScene(window.innerWidth >= 1024)
+  }, [])
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homePageSchema) }} />
@@ -212,6 +229,7 @@ export default function HomePage() {
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         {/* Background elements */}
         <div className="absolute inset-0 grid-bg opacity-40" />
+        <ShaderBackground />
         <div className="orb orb-purple absolute top-1/4 -left-32 w-[600px] h-[600px] animate-float" />
         <div className="orb orb-blue absolute bottom-1/4 -right-32 w-[500px] h-[500px] animate-float-delay" />
         <div className="orb orb-cyan absolute top-3/4 left-1/2 w-[300px] h-[300px]" style={{ animationDelay: '4s' }} />
@@ -227,91 +245,101 @@ export default function HomePage() {
           ))}
         </div>
 
-        <motion.div
-          className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
-          style={{ y: heroY, opacity: heroOpacity }}
-        >
-          {/* Tag */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex justify-center mb-8"
+            className="grid lg:grid-cols-2 gap-12 items-center"
+            style={{ y: heroY, opacity: heroOpacity }}
           >
-            <div className="section-tag">
-              <Sparkles size={12} />
-              AI • Software • Digital Growth
+            {/* LEFT: copy */}
+            <div className="text-center lg:text-left">
+              {/* Tag */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="flex justify-center lg:justify-start mb-8"
+              >
+                <div className="section-tag">
+                  <Sparkles size={12} />
+                  AI • Software • Digital Growth
+                </div>
+              </motion.div>
+
+              {/* Main heading */}
+              <motion.h1
+                className="font-display font-black text-4xl sm:text-6xl lg:text-7xl leading-[1.05] mb-6"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+              >
+                <span className="text-white">AI, Software &amp;</span>
+                <br />
+                <span className="gradient-text-animate">Digital Growth</span>
+                <br />
+                <span className="text-white">Company in Pakistan</span>
+              </motion.h1>
+
+              {/* Typed subtitle */}
+              <motion.div
+                className="text-lg sm:text-2xl text-slate-300 mb-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-1 sm:gap-2"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+              >
+                <span>We specialize in</span>
+                <span className="gradient-text font-bold min-h-[1.4em] min-w-0 sm:min-w-[220px] text-center sm:text-left typing-cursor">
+                  {typedText}
+                </span>
+              </motion.div>
+
+              <motion.p
+                className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 mb-10 sm:mb-12 leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                We build high-performance websites, AI solutions, mobile applications, and SEO
+                strategies that help businesses grow online.
+              </motion.p>
+
+              {/* CTAs */}
+              <motion.div
+                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+              >
+                <MagneticButton href="/contact" className="btn-primary text-base px-8 py-4">
+                  <span>Get a Free Consultation</span>
+                  <ChevronRight size={18} />
+                </MagneticButton>
+                <MagneticButton href="/portfolio" className="btn-secondary text-base px-8 py-4">
+                  View Our Work
+                </MagneticButton>
+              </motion.div>
+
+              {/* Trust badges */}
+              <motion.div
+                className="flex flex-wrap items-center justify-center lg:justify-start gap-6 mt-16"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.9 }}
+              >
+                {['Modern Tech Stack', 'Direct Communication', 'Transparent Pricing', 'Fast Turnaround'].map((badge) => (
+                  <div key={badge} className="flex items-center gap-2 text-slate-400 text-sm">
+                    <CheckCircle2 size={14} className="text-emerald-400" />
+                    {badge}
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* RIGHT: interactive 3D core */}
+            <div className="hidden lg:block relative h-[480px]">
+              {showHeroScene && <HeroScene />}
             </div>
           </motion.div>
-
-          {/* Main heading */}
-          <motion.h1
-            className="font-display font-black text-4xl sm:text-6xl lg:text-7xl leading-[1.05] mb-6"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-          >
-            <span className="text-white">AI, Software &amp;</span>
-            <br />
-            <span className="gradient-text-animate">Digital Growth</span>
-            <br />
-            <span className="text-white">Company in Pakistan</span>
-          </motion.h1>
-
-          {/* Typed subtitle */}
-          <motion.div
-            className="text-lg sm:text-2xl text-slate-300 mb-4 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
-            <span>We specialize in</span>
-            <span className="gradient-text font-bold min-h-[1.4em] min-w-0 sm:min-w-[220px] text-center sm:text-left typing-cursor">
-              {typedText}
-            </span>
-          </motion.div>
-
-          <motion.p
-            className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-10 sm:mb-12 leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-          >
-            We build high-performance websites, AI solutions, mobile applications, and SEO
-            strategies that help businesses grow online.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-          >
-            <MagneticButton href="/contact" className="btn-primary text-base px-8 py-4">
-              <span>Get a Free Consultation</span>
-              <ChevronRight size={18} />
-            </MagneticButton>
-            <MagneticButton href="/portfolio" className="btn-secondary text-base px-8 py-4">
-              View Our Work
-            </MagneticButton>
-          </motion.div>
-
-          {/* Trust badges */}
-          <motion.div
-            className="flex flex-wrap items-center justify-center gap-6 mt-16"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.9 }}
-          >
-            {['Modern Tech Stack', 'Direct Communication', 'Transparent Pricing', 'Fast Turnaround'].map((badge) => (
-              <div key={badge} className="flex items-center gap-2 text-slate-400 text-sm">
-                <CheckCircle2 size={14} className="text-emerald-400" />
-                {badge}
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
+        </div>
 
       </section>
 
