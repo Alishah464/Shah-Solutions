@@ -1,5 +1,20 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, type Locator } from '@playwright/test'
 import { stubReducedMotion } from './utils'
+
+/** The hero CTA fades/slides in with a delay; wait until its bounding box
+ * stops changing between two reads before we compute hover coordinates from
+ * it, or we race the entrance animation and hover a stale position. */
+async function waitForStableBox(locator: Locator) {
+  let last = await locator.boundingBox()
+  for (let i = 0; i < 20; i++) {
+    await new Promise((r) => setTimeout(r, 150))
+    const next = await locator.boundingBox()
+    if (last && next && last.x === next.x && last.y === next.y) return next
+    last = next
+  }
+  if (!last) throw new Error('element never had a bounding box')
+  return last
+}
 
 test.describe('tier 1 — motion system, magnetic buttons, nav', () => {
   test('hero CTA is a magnetic button that displaces on hover', async ({ page }) => {
@@ -7,8 +22,7 @@ test.describe('tier 1 — motion system, magnetic buttons, nav', () => {
     const link = page.getByRole('link', { name: /Get a Free Consultation/i })
     await expect(link).toBeVisible()
 
-    const box = await link.boundingBox()
-    if (!box) throw new Error('no bounding box for hero CTA')
+    const box = await waitForStableBox(link)
 
     const wrapper = link.locator('xpath=..')
 

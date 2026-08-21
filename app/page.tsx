@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
 import MagneticButton from '@/components/MagneticButton'
+import AIPlayground from '@/components/AIPlayground'
 import { SITE_URL as BASE } from '@/lib/seo'
 
 const homeFaqs = [
@@ -409,6 +410,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <AIPlayground />
 
       {/* ── WHY CHOOSE US ─────────────────────────────────────────────────── */}
       <section className="py-24 relative overflow-hidden">
