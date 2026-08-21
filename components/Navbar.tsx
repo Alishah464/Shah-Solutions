@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Code2, Menu, X, ChevronRight, ChevronDown } from 'lucide-react'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { Code2, Menu, X, ChevronRight, ChevronDown, Search } from 'lucide-react'
+import MagneticButton from '@/components/MagneticButton'
 
 const serviceLinks = [
   { href: '/services/seo', label: 'SEO' },
@@ -38,6 +39,7 @@ export default function Navbar() {
   const [scrollProgress, setScrollProgress] = useState(0)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const pathname = usePathname()
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
     const onScroll = () => {
@@ -68,7 +70,7 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-50"
         initial={{ y: -80 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+        transition={{ duration: prefersReducedMotion ? 0.15 : 0.6, ease: [0.25, 0.4, 0.25, 1] }}
       >
         <div
           className={`transition-all duration-300 ${
@@ -157,13 +159,21 @@ export default function Navbar() {
 
               {/* CTA */}
               <div className="hidden md:flex items-center gap-3">
+                <button
+                  onClick={() => window.dispatchEvent(new Event('open-command-palette'))}
+                  className="flex items-center gap-1.5 px-3 py-2.5 rounded-lg border border-white/10 text-slate-400 hover:text-white hover:border-white/20 transition-colors duration-200 text-xs"
+                  aria-label="Open search"
+                >
+                  <Search size={13} />
+                  <kbd className="font-mono">⌘K</kbd>
+                </button>
                 <Link href="/book" className="text-sm font-medium px-4 py-2.5 border border-purple-500/50 text-purple-300 hover:text-white hover:border-purple-400 rounded-lg transition-colors duration-200">
                   Book Consultation
                 </Link>
-                <Link href="/contact" className="btn-primary text-sm py-2.5 px-6">
+                <MagneticButton href="/contact" className="btn-primary text-sm py-2.5 px-6" strength={0.35}>
                   <span>Get Started</span>
                   <ChevronRight size={16} />
-                </Link>
+                </MagneticButton>
               </div>
 
               {/* Mobile Toggle */}
@@ -194,10 +204,10 @@ export default function Navbar() {
         {mobileOpen && (
           <motion.div
             className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-[rgba(5,5,16,0.98)] backdrop-blur-2xl"
-            initial={{ opacity: 0, clipPath: 'circle(0% at calc(100% - 56px) 40px)' }}
-            animate={{ opacity: 1, clipPath: 'circle(150% at calc(100% - 56px) 40px)' }}
-            exit={{ opacity: 0, clipPath: 'circle(0% at calc(100% - 56px) 40px)' }}
-            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+            initial={{ opacity: 0, clipPath: prefersReducedMotion ? undefined : 'circle(0% at calc(100% - 56px) 40px)' }}
+            animate={{ opacity: 1, clipPath: prefersReducedMotion ? undefined : 'circle(150% at calc(100% - 56px) 40px)' }}
+            exit={{ opacity: 0, clipPath: prefersReducedMotion ? undefined : 'circle(0% at calc(100% - 56px) 40px)' }}
+            transition={{ duration: prefersReducedMotion ? 0.2 : 0.5, ease: [0.4, 0, 0.2, 1] }}
           >
             <div className="absolute inset-0 grid-bg opacity-20" />
             <nav className="flex flex-col items-center gap-6 relative z-10">

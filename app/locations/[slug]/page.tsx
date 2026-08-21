@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ChevronRight, ArrowRight, CheckCircle2, MapPin } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
+import MagneticButton from '@/components/MagneticButton'
 import { locationPages, getLocationPageBySlug, serviceOfferings } from '@/lib/locationsData'
 import { buildMetadata, buildBreadcrumbSchema, buildSchemaGraph, SITE_URL as BASE } from '@/lib/seo'
 
@@ -110,10 +111,10 @@ export default async function LocationPage({ params }: Props) {
             <p className="text-slate-500 text-sm max-w-2xl leading-relaxed">{city.blurb}</p>
 
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
-              <Link href="/contact" className="btn-primary text-sm">
+              <MagneticButton href="/contact" className="btn-primary text-sm">
                 <span>Get a Free Consultation</span>
                 <ArrowRight size={16} />
-              </Link>
+              </MagneticButton>
               <Link href={offering.servicePageHref} className="btn-secondary text-sm">
                 See Full {offering.label.replace(' Company', '')} Details
               </Link>
@@ -202,10 +203,10 @@ export default async function LocationPage({ params }: Props) {
               Book a free 30-minute strategy call — no commitment required.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary px-8 py-4 text-base">
+              <MagneticButton href="/contact" className="btn-primary px-8 py-4 text-base">
                 <span>Book Free Strategy Call</span>
                 <ArrowRight size={16} />
-              </Link>
+              </MagneticButton>
               <a href="tel:+923032818320" className="btn-secondary px-8 py-4 text-base">
                 Call Now: 0303 2818320
               </a>

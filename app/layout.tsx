@@ -3,6 +3,8 @@ import Script from 'next/script'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import CustomCursor from '@/components/CustomCursor'
+import CommandPalette from '@/components/CommandPalette'
 import { SITE_URL } from '@/lib/site'
 import { inter, syne, jetbrainsMono } from './fonts'
 
@@ -242,6 +244,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           gtag('js', new Date());
           gtag('config', 'G-8EQ10MNNGP');
         `}</Script>
+        <CustomCursor />
+        <CommandPalette />
         <Navbar />
         <main className="relative z-10 overflow-x-hidden">{children}</main>
         <Footer />

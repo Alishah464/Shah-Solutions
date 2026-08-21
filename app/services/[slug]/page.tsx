@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { CheckCircle2, ArrowRight, ChevronRight, AlertTriangle, BookOpen, Sparkles } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
+import MagneticButton from '@/components/MagneticButton'
 import { serviceCategories, getServiceBySlug, RELATED_ARTICLES } from '@/lib/servicesData'
 import { getAllArticles } from '@/lib/blog'
 import { buildMetadata, buildBreadcrumbSchema, buildSchemaGraph, SITE_URL as BASE } from '@/lib/seo'
@@ -104,10 +105,10 @@ export default async function ServiceDetailPage({ params }: Props) {
               )}
             </div>
 
-            <Link href="/contact" className="btn-primary inline-flex text-sm">
+            <MagneticButton href="/contact" className="btn-primary inline-flex text-sm">
               <span>Get Started with {svc.title}</span>
               <ChevronRight size={16} />
-            </Link>
+            </MagneticButton>
 
             {related && (
               <div className="mt-8 pt-6 border-t border-white/5">
@@ -194,10 +195,10 @@ export default async function ServiceDetailPage({ params }: Props) {
               Book a free 30-minute strategy call and we&apos;ll show you exactly where you stand.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary px-8 py-4 text-base">
+              <MagneticButton href="/contact" className="btn-primary px-8 py-4 text-base">
                 <span>Book Free Strategy Call</span>
                 <ArrowRight size={16} />
-              </Link>
+              </MagneticButton>
               <a href="tel:+923032818320" className="btn-secondary px-8 py-4 text-base">
                 Call Now: 0303 2818320
               </a>

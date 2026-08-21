@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import {
   Search, Globe, Code2, Smartphone, TrendingUp,
   ChevronRight, ArrowRight, CheckCircle2, Zap,
@@ -11,6 +11,7 @@ import {
   ShoppingCart, Boxes, Building2, HeartPulse, GraduationCap,
 } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
+import MagneticButton from '@/components/MagneticButton'
 import { SITE_URL as BASE } from '@/lib/seo'
 
 const homeFaqs = [
@@ -74,12 +75,20 @@ const homePageSchema = {
 }
 
 /* ── Typed text hook ──────────────────────────────────────────────────────── */
-function useTyped(words: string[], speed = 100, pause = 2000) {
+function useTyped(words: string[], speed = 100, pause = 2000, disabled = false) {
   const [text, setText] = useState('')
   const [wordIndex, setWordIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
 
   useEffect(() => {
+    if (disabled) {
+      // Runs post-hydration only, so this never diverges from the SSR
+      // markup (which always renders the empty initial state) — avoids a
+      // hydration mismatch while still skipping the animation for users
+      // who requested reduced motion.
+      setText(words[0])
+      return
+    }
     const current = words[wordIndex % words.length]
     const timeout = setTimeout(() => {
       if (!isDeleting) {
@@ -96,7 +105,7 @@ function useTyped(words: string[], speed = 100, pause = 2000) {
       }
     }, isDeleting ? speed / 2 : speed)
     return () => clearTimeout(timeout)
-  }, [text, isDeleting, wordIndex, words, speed, pause])
+  }, [text, isDeleting, wordIndex, words, speed, pause, disabled])
 
   return text
 }
@@ -187,11 +196,12 @@ const whyUs = [
 
 /* ── Component ────────────────────────────────────────────────────────────── */
 export default function HomePage() {
-  const typedText = useTyped(['SEO Domination', 'Stunning Websites', 'Powerful Apps', 'AI-Driven GEO', 'Digital Growth'], 80, 2200)
+  const prefersReducedMotion = useReducedMotion()
+  const typedText = useTyped(['SEO Domination', 'Stunning Websites', 'Powerful Apps', 'AI-Driven GEO', 'Digital Growth'], 80, 2200, !!prefersReducedMotion)
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
-  const heroY = useTransform(scrollY, [0, 600], [0, -120])
-  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0.3])
+  const heroY = useTransform(scrollY, [0, 600], prefersReducedMotion ? [0, 0] : [0, -120])
+  const heroOpacity = useTransform(scrollY, [0, 400], prefersReducedMotion ? [1, 1] : [1, 0.3])
 
   return (
     <>
@@ -277,13 +287,13 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
           >
-            <Link href="/contact" className="btn-primary text-base px-8 py-4">
+            <MagneticButton href="/contact" className="btn-primary text-base px-8 py-4">
               <span>Get a Free Consultation</span>
               <ChevronRight size={18} />
-            </Link>
-            <Link href="/portfolio" className="btn-secondary text-base px-8 py-4">
+            </MagneticButton>
+            <MagneticButton href="/portfolio" className="btn-secondary text-base px-8 py-4">
               View Our Work
-            </Link>
+            </MagneticButton>
           </motion.div>
 
           {/* Trust badges */}
@@ -422,10 +432,10 @@ export default function HomePage() {
                 obsession for quality, performance, and results whether you&apos;re a startup or
                 a Fortune 500 company.
               </p>
-              <Link href="/about" className="btn-primary inline-flex">
+              <MagneticButton href="/about" className="btn-primary inline-flex">
                 <span>Meet Our Team</span>
                 <ChevronRight size={16} />
-              </Link>
+              </MagneticButton>
             </ScrollReveal>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -499,10 +509,10 @@ export default function HomePage() {
               and how we can help you get there.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary text-base px-10 py-4">
+              <MagneticButton href="/contact" className="btn-primary text-base px-10 py-4">
                 <span>Get Free Consultation</span>
                 <ChevronRight size={18} />
-              </Link>
+              </MagneticButton>
               <a href="tel:+923032818320" className="btn-secondary text-base px-10 py-4">
                 Call: 0303 2818320
               </a>

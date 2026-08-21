@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ChevronRight, ArrowRight, Calendar, BookOpen, Briefcase } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
+import MagneticButton from '@/components/MagneticButton'
 import { getAllArticles, getArticleBySlug, ARTICLE_SERVICE_LINK, CATEGORY_SLUGS } from '@/lib/blog'
 import { SITE_URL as BASE } from '@/lib/seo'
 
@@ -155,10 +156,10 @@ export default async function ArticlePage({ params }: Props) {
                 Aiventra Labs builds SEO, GEO, and AI-search strategy into every project. Book a free 30-minute
                 consultation and we&apos;ll show you exactly where you stand.
               </p>
-              <Link href="/book" className="btn-primary inline-flex text-sm">
+              <MagneticButton href="/book" className="btn-primary inline-flex text-sm">
                 <span>Book a Free Consultation</span>
                 <ArrowRight size={16} />
-              </Link>
+              </MagneticButton>
             </div>
           </ScrollReveal>
 

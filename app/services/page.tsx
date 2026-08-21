@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Sparkles, ChevronRight, Layers } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
+import MagneticButton from '@/components/MagneticButton'
 import { serviceCategories, process, serviceFaqs } from '@/lib/servicesData'
 import { buildMetadata, buildBreadcrumbSchema, buildFaqSchema, buildSchemaGraph, SITE_URL as BASE } from '@/lib/seo'
 
@@ -182,10 +183,10 @@ export default function ServicesPage() {
               and recommend exactly what will move the needle for your business.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary px-8 py-4 text-base">
+              <MagneticButton href="/contact" className="btn-primary px-8 py-4 text-base">
                 <span>Book Free Strategy Call</span>
                 <ArrowRight size={16} />
-              </Link>
+              </MagneticButton>
               <a href="tel:+923032818320" className="btn-secondary px-8 py-4 text-base">
                 Call Now: 0303 2818320
               </a>

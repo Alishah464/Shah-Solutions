@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Calendar, Mail, Phone, MessageSquare, CheckCircle2, ArrowRight, Sparkles, Clock } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
+import MagneticButton from '@/components/MagneticButton'
 import { SITE_URL as BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
@@ -181,10 +182,10 @@ export default function BookPage() {
                 ))}
               </div>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <Link href="/contact" className="btn-primary justify-center">
+                <MagneticButton href="/contact" className="btn-primary justify-center">
                   <span>Or Use the Contact Form</span>
                   <ArrowRight size={16} />
-                </Link>
+                </MagneticButton>
               </div>
             </div>
           </ScrollReveal>

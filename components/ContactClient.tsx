@@ -8,6 +8,7 @@ import {
   Sparkles, MessageSquare, User, Briefcase, Globe,
 } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
+import { MagneticSubmitButton } from '@/components/MagneticButton'
 
 interface FormData {
   name: string
@@ -369,9 +370,10 @@ export default function ContactClient() {
                           </div>
                         )}
 
-                        <button
+                        <MagneticSubmitButton
                           type="submit"
                           disabled={loading}
+                          wrapperClassName="w-full block"
                           className="btn-primary w-full justify-center py-4 text-base disabled:opacity-60 disabled:cursor-not-allowed"
                         >
                           {loading ? (
@@ -385,7 +387,7 @@ export default function ContactClient() {
                               <Send size={16} />
                             </>
                           )}
-                        </button>
+                        </MagneticSubmitButton>
 
                         <p className="text-slate-500 text-xs text-center">
                           By submitting you agree to be contacted by Aiventra Labs.

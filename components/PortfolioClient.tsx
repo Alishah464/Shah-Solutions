@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { ArrowRight, ChevronRight, Sparkles } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
+import MagneticButton from '@/components/MagneticButton'
 import { serviceCategories } from '@/lib/servicesData'
 
 const featured = serviceCategories.filter(s => s.slug !== 'trading-bots')
@@ -43,6 +44,7 @@ export default function PortfolioClient() {
                   <Link
                     href={`/services/${svc.slug}`}
                     className="glass-card glass-card-hover p-8 h-full flex flex-col group"
+                    data-cursor-text="EXPLORE"
                   >
                     <div
                       className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${svc.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
@@ -77,10 +79,10 @@ export default function PortfolioClient() {
               Let&apos;s build something remarkable together.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary px-8 py-4 text-base">
+              <MagneticButton href="/contact" className="btn-primary px-8 py-4 text-base">
                 <span>Start Your Project</span>
                 <ChevronRight size={16} />
-              </Link>
+              </MagneticButton>
               <Link href="/services" className="btn-secondary px-8 py-4 text-base">
                 Explore Services
                 <ArrowRight size={16} />

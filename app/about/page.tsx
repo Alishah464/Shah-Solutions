@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Target, Eye, Heart, Rocket, Users, Code2, Sparkles, ArrowRight, HelpCircle } from 'lucide-react'
 import Link from 'next/link'
 import ScrollReveal from '@/components/ScrollReveal'
+import MagneticButton from '@/components/MagneticButton'
 import { SITE_URL as BASE } from '@/lib/seo'
 
 const aboutFaqs = [
@@ -313,10 +314,10 @@ export default function AboutPage() {
               No pressure, no commitment — just good ideas.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary px-8 py-4 text-base">
+              <MagneticButton href="/contact" className="btn-primary px-8 py-4 text-base">
                 <span>Start the Conversation</span>
                 <ArrowRight size={16} />
-              </Link>
+              </MagneticButton>
               <Link href="/services" className="btn-secondary px-8 py-4 text-base">
                 See Our Services
               </Link>
