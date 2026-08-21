@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test'
-import { stubReducedMotion } from './utils'
+import { stubReducedMotion, bypassSplashIntro } from './utils'
 
 test.describe('tier 2 — shader background', () => {
+  test.beforeEach(async ({ page }) => bypassSplashIntro(page))
+
   test('renders behind the hero and does not block the CTA', async ({ page }) => {
     const errors: string[] = []
     page.on('pageerror', (err) => errors.push(err.message))

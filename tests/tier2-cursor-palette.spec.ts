@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { stubReducedMotion } from './utils'
+import { stubReducedMotion, bypassSplashIntro } from './utils'
 
 test.describe('tier 2 — custom cursor', () => {
   test('activates on a fine-pointer desktop device', async ({ page }) => {
@@ -50,6 +50,7 @@ test.describe('tier 2 — command palette', () => {
   // does not reflect real keyboard input, where our keydown handler's
   // preventDefault() reliably wins). The dedicated test below covers the
   // shortcut itself with retries; these cover the palette's actual behavior.
+  test.beforeEach(async ({ page }) => bypassSplashIntro(page))
 
   test('opens via the navbar ⌘K button and navigates to a filtered result', async ({ page }) => {
     await page.goto('/')

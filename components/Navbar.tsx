@@ -211,6 +211,21 @@ export default function Navbar() {
           >
             <div className="absolute inset-0 grid-bg opacity-20" />
             <nav className="flex flex-col items-center gap-6 relative z-10">
+              <motion.button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false)
+                  window.dispatchEvent(new Event('open-command-palette'))
+                }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ delay: 0.05 }}
+                className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 text-slate-400 text-sm"
+              >
+                <Search size={14} />
+                Search
+              </motion.button>
               {links.map((link, i) => (
                 <motion.div
                   key={link.href}

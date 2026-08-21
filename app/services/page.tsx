@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArrowRight, Sparkles, ChevronRight, Layers } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
 import MagneticButton from '@/components/MagneticButton'
+import ProcessStoryteller from '@/components/ProcessStoryteller'
 import { serviceCategories, process, serviceFaqs } from '@/lib/servicesData'
 import { buildMetadata, buildBreadcrumbSchema, buildFaqSchema, buildSchemaGraph, SITE_URL as BASE } from '@/lib/seo'
 
@@ -113,27 +114,7 @@ export default function ServicesPage() {
             </h2>
           </ScrollReveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {process.map((p, i) => (
-              <ScrollReveal key={p.step} delay={i * 0.1}>
-                <div className="glass-card glass-card-hover p-8 relative">
-                  <div className="text-6xl font-display font-black text-white/5 absolute top-4 right-6 select-none">
-                    {p.step}
-                  </div>
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-6 font-display font-bold text-white text-sm">
-                    {p.step}
-                  </div>
-                  <h3 className="font-display font-bold text-white text-lg mb-3">{p.title}</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">{p.desc}</p>
-                  {i < process.length - 1 && (
-                    <div className="hidden lg:block absolute -right-4 top-1/2 -translate-y-1/2 z-10">
-                      <ArrowRight size={16} className="text-primary/50" />
-                    </div>
-                  )}
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
+          <ProcessStoryteller steps={process} />
         </div>
       </section>
 

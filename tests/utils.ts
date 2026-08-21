@@ -28,3 +28,17 @@ export async function stubReducedMotion(page: Page) {
     }
   })
 }
+
+/**
+ * The homepage shows a full-screen splash overlay for ~800ms on first visit
+ * per session (components/SplashIntro.tsx) — intentional for real users, but
+ * it can block/delay Playwright's actionability checks on anything else it
+ * covers, making unrelated tests racy depending on exactly when they try to
+ * interact. Pre-seed the sessionStorage flag it checks so it never mounts,
+ * for tests that aren't specifically about the splash itself.
+ */
+export async function bypassSplashIntro(page: Page) {
+  await page.addInitScript(() => {
+    sessionStorage.setItem('aiventra-intro-seen', '1')
+  })
+}

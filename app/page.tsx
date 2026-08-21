@@ -14,6 +14,7 @@ import ScrollReveal from '@/components/ScrollReveal'
 import MagneticButton from '@/components/MagneticButton'
 import AIPlayground from '@/components/AIPlayground'
 import ShaderBackground from '@/components/ShaderBackground'
+import SplashIntro from '@/components/SplashIntro'
 import dynamic from 'next/dynamic'
 
 // @react-three/fiber's module-level setup isn't safe to import during
@@ -224,6 +225,7 @@ export default function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homePageSchema) }} />
+      <SplashIntro />
 
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">

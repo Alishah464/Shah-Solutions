@@ -1,5 +1,5 @@
 import { test, expect, type Locator } from '@playwright/test'
-import { stubReducedMotion } from './utils'
+import { stubReducedMotion, bypassSplashIntro } from './utils'
 
 /** The hero CTA fades/slides in with a delay; wait until its bounding box
  * stops changing between two reads before we compute hover coordinates from
@@ -17,6 +17,8 @@ async function waitForStableBox(locator: Locator) {
 }
 
 test.describe('tier 1 — motion system, magnetic buttons, nav', () => {
+  test.beforeEach(async ({ page }) => bypassSplashIntro(page))
+
   test('hero CTA is a magnetic button that displaces on hover', async ({ page }) => {
     await page.goto('/')
     const link = page.getByRole('link', { name: /Get a Free Consultation/i })

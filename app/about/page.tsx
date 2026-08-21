@@ -3,6 +3,7 @@ import { Target, Eye, Heart, Rocket, Users, Code2, Sparkles, ArrowRight, HelpCir
 import Link from 'next/link'
 import ScrollReveal from '@/components/ScrollReveal'
 import MagneticButton from '@/components/MagneticButton'
+import TechConstellation from '@/components/TechConstellation'
 import { SITE_URL as BASE } from '@/lib/seo'
 
 const aboutFaqs = [
@@ -94,11 +95,6 @@ const team = [
     expertise: 'Full-Stack Development, Business Strategy',
     gradient: 'from-primary to-secondary',
   },
-]
-
-const techStack = [
-  'Next.js', 'React', 'TypeScript', 'Flutter', 'Node.js',
-  'Python', 'AWS', 'Vercel', 'PostgreSQL', 'MongoDB', 'Tailwind', 'Figma',
 ]
 
 export default function AboutPage() {
@@ -254,17 +250,7 @@ export default function AboutPage() {
           </ScrollReveal>
 
           <ScrollReveal>
-            <div className="flex flex-wrap justify-center gap-3">
-              {techStack.map((tech, i) => (
-                <div
-                  key={tech}
-                  className="px-5 py-2.5 glass-card text-slate-300 text-sm font-mono glass-card-hover font-medium"
-                  style={{ animationDelay: `${i * 0.05}s` }}
-                >
-                  {tech}
-                </div>
-              ))}
-            </div>
+            <TechConstellation />
           </ScrollReveal>
         </div>
       </section>

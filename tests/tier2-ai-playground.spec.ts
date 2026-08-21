@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test'
-import { stubReducedMotion } from './utils'
+import { stubReducedMotion, bypassSplashIntro } from './utils'
 
 test.describe('tier 2 — AI playground', () => {
+  test.beforeEach(async ({ page }) => bypassSplashIntro(page))
+
   test('is present on the homepage with an honest demo disclaimer', async ({ page }) => {
     await page.goto('/')
     await expect(page.getByRole('heading', { name: 'Ask Aiventra' })).toBeVisible()

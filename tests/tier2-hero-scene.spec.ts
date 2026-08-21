@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test'
-import { stubReducedMotion } from './utils'
+import { stubReducedMotion, bypassSplashIntro } from './utils'
 
 test.describe('tier 2 — 3D hero scene', () => {
+  test.beforeEach(async ({ page }) => bypassSplashIntro(page))
+
   test('mounts a canvas on desktop without console errors', async ({ page }) => {
     const errors: string[] = []
     page.on('pageerror', (err) => errors.push(err.message))

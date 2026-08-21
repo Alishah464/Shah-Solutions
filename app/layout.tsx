@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import CustomCursor from '@/components/CustomCursor'
 import CommandPalette from '@/components/CommandPalette'
+import PageTransition from '@/components/PageTransition'
 import { SITE_URL } from '@/lib/site'
 import { inter, syne, jetbrainsMono } from './fonts'
 
@@ -247,7 +248,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CustomCursor />
         <CommandPalette />
         <Navbar />
-        <main className="relative z-10 overflow-x-hidden">{children}</main>
+        <main className="relative z-10 overflow-x-hidden">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer />
       </body>
     </html>
