@@ -432,12 +432,10 @@ export default function HomePage() {
               Ready to Start?
             </div>
             <h2 className="font-display font-black text-4xl sm:text-6xl text-white mb-6 leading-tight">
-              Let&apos;s Build Something{' '}
-              <span className="gradient-text">Extraordinary</span>
+              Have an Idea Worth <span className="gradient-text">Building?</span>
             </h2>
             <p className="text-slate-400 text-lg mb-10 max-w-2xl mx-auto">
-              Free consultation — no commitment required. Let&apos;s talk about your goals
-              and how we can help you get there.
+              Let&apos;s turn it into something real. Free consultation — no commitment required.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <MagneticButton href="/contact" className="btn-primary text-base px-10 py-4">
