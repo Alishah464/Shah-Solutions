@@ -80,10 +80,10 @@ test.describe('tier 1 — motion system, magnetic buttons, nav', () => {
     await page.goto('/about')
     const bar = page.locator('.progress-bar')
     const before = await bar.evaluate((el) => (el as HTMLElement).style.width)
-    await page.mouse.wheel(0, 4000)
-    await page.waitForTimeout(300)
-    const after = await bar.evaluate((el) => (el as HTMLElement).style.width)
-    expect(after).not.toBe(before)
+    await expect.poll(async () => {
+      await page.mouse.wheel(0, 4000)
+      return bar.evaluate((el) => (el as HTMLElement).style.width)
+    }, { timeout: 10_000, intervals: [300] }).not.toBe(before)
   })
 
   test('services dropdown lists the 6 primary services', async ({ page }) => {

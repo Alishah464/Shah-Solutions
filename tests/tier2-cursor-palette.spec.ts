@@ -59,7 +59,7 @@ test.describe('tier 2 — command palette', () => {
     await expect(dialog).toBeVisible()
 
     await page.getByPlaceholder('Search Aiventra Labs...').fill('AI Chatbots')
-    await page.getByRole('button', { name: /AI Chatbots/i }).click()
+    await dialog.getByRole('button', { name: /AI Chatbots/i }).click()
     await expect(page).toHaveURL(/\/services\/ai-chatbots$/, { timeout: 15_000 })
     await expect(dialog).toBeHidden()
   })

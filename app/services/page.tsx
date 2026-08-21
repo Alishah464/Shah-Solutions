@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles, ChevronRight, Layers } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
 import MagneticButton from '@/components/MagneticButton'
 import ProcessStoryteller from '@/components/ProcessStoryteller'
+import GlowCard from '@/components/GlowCard'
 import { serviceCategories, process, serviceFaqs } from '@/lib/servicesData'
 import { buildMetadata, buildBreadcrumbSchema, buildFaqSchema, buildSchemaGraph, SITE_URL as BASE } from '@/lib/seo'
 
@@ -78,8 +79,9 @@ export default function ServicesPage() {
               const Icon = svc.icon
               return (
                 <ScrollReveal key={svc.slug} delay={Math.min(i * 0.05, 0.3)}>
-                  <Link
+                  <GlowCard
                     href={`/services/${svc.slug}`}
+                    cursorText="VIEW"
                     className={`glass-card glass-card-hover p-6 sm:p-7 h-full flex flex-col border ${svc.borderColor} group`}
                   >
                     <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${svc.color} flex items-center justify-center mb-6`}>
@@ -91,7 +93,7 @@ export default function ServicesPage() {
                       Learn more
                       <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </span>
-                  </Link>
+                  </GlowCard>
                 </ScrollReveal>
               )
             })}

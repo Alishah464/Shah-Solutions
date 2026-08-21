@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowRight, ChevronRight, Sparkles } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
 import MagneticButton from '@/components/MagneticButton'
+import GlowCard from '@/components/GlowCard'
 import { serviceCategories } from '@/lib/servicesData'
 
 const featured = serviceCategories.filter(s => s.slug !== 'trading-bots')
@@ -41,10 +42,10 @@ export default function PortfolioClient() {
               const Icon = svc.icon
               return (
                 <ScrollReveal key={svc.slug} delay={i * 0.06}>
-                  <Link
+                  <GlowCard
                     href={`/services/${svc.slug}`}
+                    cursorText="EXPLORE"
                     className="glass-card glass-card-hover p-8 h-full flex flex-col group"
-                    data-cursor-text="EXPLORE"
                   >
                     <div
                       className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${svc.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
@@ -58,7 +59,7 @@ export default function PortfolioClient() {
                       See how we approach it
                       <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </span>
-                  </Link>
+                  </GlowCard>
                 </ScrollReveal>
               )
             })}

@@ -394,6 +394,26 @@ body {
   cursor: auto;
 }
 
+/* ── Glow card (cursor-follow gradient) ───────────────────────────────────── */
+.glow-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.glow-card-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 50%), rgba(124, 58, 237, 0.22), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.glow-card:hover .glow-card-overlay {
+  opacity: 1;
+}
+
 /* ── Progress bar at top ──────────────────────────────────────────────────── */
 .progress-bar {
   position: fixed;

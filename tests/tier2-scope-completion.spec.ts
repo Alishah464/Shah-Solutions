@@ -8,7 +8,7 @@ test.describe('mobile command palette access', () => {
     await bypassSplashIntro(page)
     await page.goto('/')
     await page.getByRole('button', { name: 'Toggle menu' }).click()
-    await page.getByRole('button', { name: 'Search' }).click()
+    await page.getByRole('button', { name: 'Search', exact: true }).click()
     await expect(page.getByRole('dialog', { name: 'Command palette' })).toBeVisible()
   })
 })

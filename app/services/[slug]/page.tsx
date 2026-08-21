@@ -141,15 +141,23 @@ export default async function ServiceDetailPage({ params }: Props) {
               <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${svc.color} flex items-center justify-center mb-8`}>
                 <Icon size={30} className="text-white" />
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                {svc.features.map(({ icon: FIcon, label }) => (
-                  <div key={label} className="flex items-center gap-3 p-3 rounded-xl bg-white/3 hover:bg-white/6 transition-colors duration-200">
-                    <div className="w-7 h-7 rounded-lg bg-white/8 flex items-center justify-center flex-shrink-0">
-                      <FIcon size={14} className="text-slate-300" />
-                    </div>
-                    <span className="text-slate-300 text-xs font-medium">{label}</span>
-                  </div>
-                ))}
+              <div className="relative">
+                <div className="absolute left-[18px] top-2 bottom-2 w-px bg-gradient-to-b from-primary via-secondary to-accent opacity-25" />
+                <div className="space-y-3">
+                  {svc.features.map(({ icon: FIcon, label }, i) => (
+                    <ScrollReveal key={label} delay={i * 0.08} direction="left" once={false}>
+                      <div className="flex items-center gap-4">
+                        <div
+                          className={`w-9 h-9 rounded-xl bg-gradient-to-br ${svc.color} flex items-center justify-center flex-shrink-0 relative z-10`}
+                          style={{ boxShadow: `0 4px 16px ${svc.glowColor}` }}
+                        >
+                          <FIcon size={16} className="text-white" />
+                        </div>
+                        <span className="text-slate-200 text-sm font-medium">{label}</span>
+                      </div>
+                    </ScrollReveal>
+                  ))}
+                </div>
               </div>
             </div>
           </ScrollReveal>

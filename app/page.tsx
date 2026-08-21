@@ -4,16 +4,15 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import {
-  Search, Globe, Code2, Smartphone, TrendingUp,
   ChevronRight, ArrowRight, CheckCircle2, Zap,
   Shield, Users, Award, Target, Layers, Sparkles, HelpCircle,
-  Bot, MessageSquare,
   ShoppingCart, Boxes, Building2, HeartPulse, GraduationCap,
 } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
 import MagneticButton from '@/components/MagneticButton'
 import AIPlayground from '@/components/AIPlayground'
 import ShaderBackground from '@/components/ShaderBackground'
+import CapabilitiesShowcase from '@/components/CapabilitiesShowcase'
 import SplashIntro from '@/components/SplashIntro'
 import dynamic from 'next/dynamic'
 
@@ -119,73 +118,6 @@ function useTyped(words: string[], speed = 100, pause = 2000, disabled = false) 
 
   return text
 }
-
-/* ── Data ─────────────────────────────────────────────────────────────────── */
-const services = [
-  {
-    id: 'seo',
-    icon: Search,
-    color: 'from-purple-600 to-purple-800',
-    glow: 'rgba(124,58,237,0.4)',
-    title: 'SEO Optimization',
-    desc: 'Dominate search rankings with technical SEO, keyword mastery, link building, and content strategy built to grow your organic traffic.',
-    tags: ['On-Page SEO', 'Technical SEO', 'Link Building'],
-  },
-  {
-    id: 'geo',
-    icon: Globe,
-    color: 'from-blue-600 to-blue-800',
-    glow: 'rgba(37,99,235,0.4)',
-    title: 'GEO / AI SEO',
-    desc: 'Generative Engine Optimization for AI-powered search — get featured in ChatGPT, Perplexity, and Google AI Overviews.',
-    tags: ['AI Search', 'GEO Strategy', 'Answer Engine'],
-  },
-  {
-    id: 'web-development',
-    icon: Code2,
-    color: 'from-cyan-600 to-blue-700',
-    glow: 'rgba(6,182,212,0.4)',
-    title: 'Web Development',
-    desc: 'Lightning-fast, pixel-perfect websites built with Next.js, React, and modern frameworks that convert visitors into customers.',
-    tags: ['Next.js', 'React', 'E-Commerce'],
-  },
-  {
-    id: 'mobile-app-development',
-    icon: Smartphone,
-    color: 'from-emerald-600 to-cyan-700',
-    glow: 'rgba(16,185,129,0.4)',
-    title: 'Mobile App Development',
-    desc: 'Native iOS & Android and cross-platform Flutter apps with stunning UX that users love and businesses rely on.',
-    tags: ['Flutter', 'React Native', 'iOS / Android'],
-  },
-  {
-    id: 'ai-development',
-    icon: Bot,
-    color: 'from-fuchsia-600 to-purple-800',
-    glow: 'rgba(192,38,211,0.4)',
-    title: 'AI Development',
-    desc: 'Custom AI agents and automation that plan and take action across your tools, connected to your data with human-in-the-loop safety controls.',
-    tags: ['Workflow Automation', 'Tool Integrations', 'LLM-Powered'],
-  },
-  {
-    id: 'ai-chatbots',
-    icon: MessageSquare,
-    color: 'from-pink-600 to-rose-700',
-    glow: 'rgba(219,39,119,0.4)',
-    title: 'AI Chatbots',
-    desc: 'Custom AI chatbots trained on your own business content — deployed on web, WhatsApp, or Slack, with lead capture and human handoff.',
-    tags: ['Custom Training', 'Lead Capture', 'Multi-Channel'],
-  },
-  {
-    id: 'digital-marketing',
-    icon: TrendingUp,
-    color: 'from-orange-600 to-red-700',
-    glow: 'rgba(234,88,12,0.4)',
-    title: 'Digital Marketing',
-    desc: 'Full-funnel digital marketing — social media, PPC, email campaigns, and conversion optimization for measurable ROI.',
-    tags: ['PPC Ads', 'Social Media', 'Email Marketing'],
-  },
-]
 
 const industries = [
   { slug: 'ecommerce', title: 'E-commerce', icon: ShoppingCart },
@@ -365,43 +297,9 @@ export default function HomePage() {
             </p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((svc, i) => {
-              const Icon = svc.icon
-              return (
-                <ScrollReveal key={svc.id} delay={i * 0.08}>
-                  <Link
-                    href={`/services/${svc.id}`}
-                    className="glass-card glass-card-hover p-8 h-full flex flex-col group"
-                    style={{ '--glow': svc.glow } as React.CSSProperties}
-                  >
-                    <div
-                      className={`service-icon-wrap bg-gradient-to-br ${svc.color} group-hover:scale-110 group-hover:rotate-3`}
-                      style={{ boxShadow: `0 8px 30px ${svc.glow}` }}
-                    >
-                      <Icon size={28} className="text-white" />
-                    </div>
-                    <h3 className="font-display font-bold text-xl text-white mb-3">
-                      {svc.title}
-                    </h3>
-                    <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-1">
-                      {svc.desc}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {svc.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 text-xs rounded-full bg-white/5 border border-white/10 text-slate-300"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </Link>
-                </ScrollReveal>
-              )
-            })}
-          </div>
+          <ScrollReveal>
+            <CapabilitiesShowcase />
+          </ScrollReveal>
 
           <ScrollReveal className="text-center mt-12">
             <Link href="/services" className="btn-secondary inline-flex">
