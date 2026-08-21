@@ -8,7 +8,7 @@ import { buildMetadata, buildBreadcrumbSchema, buildSchemaGraph, SITE_URL as BAS
 export const metadata: Metadata = buildMetadata({
   title: 'Industries We Serve — E-commerce, SaaS, Real Estate & More',
   description:
-    'Shah Solutions builds SEO, web development, and AI solutions tailored to e-commerce, SaaS, real estate, healthcare, and education businesses.',
+    'Aiventra Labs builds SEO, web development, and AI solutions tailored to e-commerce, SaaS, real estate, healthcare, and education businesses.',
   path: '/industries',
   keywords: ['IT solutions by industry', 'e-commerce SEO Pakistan', 'SaaS marketing site', 'real estate website Pakistan'],
 })
@@ -19,7 +19,7 @@ const schema = buildSchemaGraph([
     '@type': 'CollectionPage',
     '@id': `${BASE}/industries#webpage`,
     url: `${BASE}/industries`,
-    name: 'Industries We Serve | Shah Solutions',
+    name: 'Industries We Serve | Aiventra Labs',
     isPartOf: { '@id': `${BASE}/#website` },
   },
 ])

@@ -29,7 +29,9 @@ const services = [
   'SEO Optimization',
   'GEO / AI Search',
   'Web Development',
-  'App Development',
+  'Mobile App Development',
+  'AI Development',
+  'AI Chatbots',
   'Digital Marketing',
   'Cloud Solutions',
   'Multiple Services',
@@ -75,7 +77,7 @@ const contactInfo = [
     value: 'Serving Worldwide',
     link: null,
     gradient: 'from-orange-500 to-primary',
-    desc: 'Clients in 12+ countries',
+    desc: 'Remote-first, any timezone',
   },
 ]
 
@@ -117,7 +119,7 @@ export default function ContactClient() {
         body: JSON.stringify({
           access_key: WEB3FORMS_ACCESS_KEY,
           subject: `New project inquiry from ${data.name}`,
-          from_name: 'Shah Solutions Website',
+          from_name: 'Aiventra Labs Website',
           name: data.name,
           email: data.email,
           phone: data.phone,
@@ -386,7 +388,7 @@ export default function ContactClient() {
                         </button>
 
                         <p className="text-slate-500 text-xs text-center">
-                          By submitting you agree to be contacted by Shah Solutions.
+                          By submitting you agree to be contacted by Aiventra Labs.
                           We respect your privacy — no spam, ever.
                         </p>
                       </motion.form>

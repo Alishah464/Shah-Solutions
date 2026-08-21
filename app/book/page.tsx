@@ -7,13 +7,13 @@ import { SITE_URL as BASE } from '@/lib/seo'
 export const metadata: Metadata = {
   title: 'Book a Free Consultation',
   description:
-    'Book a free 30-minute IT consultation with Shah Solutions. Reach us by WhatsApp, phone, or email for SEO, web development, or app development.',
+    'Book a free 30-minute IT consultation with Aiventra Labs. Reach us by WhatsApp, phone, or email for SEO, web development, or app development.',
   alternates: { canonical: '/book' },
   keywords: [
     'book IT consultation Pakistan', 'free web development consultation', 'book SEO consultation',
-    'schedule meeting Shah Solutions', 'free consultation Pakistan IT',
+    'schedule meeting Aiventra Labs', 'free consultation Pakistan IT',
   ],
-  openGraph: { title: 'Book a Free IT Consultation | Shah Solutions', url: '/book' },
+  openGraph: { title: 'Book a Free IT Consultation | Aiventra Labs', url: '/book' },
 }
 
 const bookFaqs = [
@@ -49,15 +49,15 @@ const bookSchema = {
       '@type': 'WebPage',
       '@id': `${BASE}/book#webpage`,
       url: `${BASE}/book`,
-      name: 'Book a Free IT Consultation | Shah Solutions',
-      description: 'Book a free 30-minute consultation with Shah Solutions specialists via WhatsApp, phone, or email.',
+      name: 'Book a Free IT Consultation | Aiventra Labs',
+      description: 'Book a free 30-minute consultation with Aiventra Labs specialists via WhatsApp, phone, or email.',
       isPartOf: { '@id': `${BASE}/#website` },
       inLanguage: 'en-US',
     },
     {
       '@type': 'Service',
       name: 'Free IT Consultation',
-      description: 'Free 30-minute consultation with Shah Solutions IT specialists for SEO, GEO, web development, app development, and digital marketing.',
+      description: 'Free 30-minute consultation with Aiventra Labs IT specialists for SEO, GEO, web development, app development, and digital marketing.',
       provider: { '@id': `${BASE}/#organization` },
       offers: {
         '@type': 'Offer',

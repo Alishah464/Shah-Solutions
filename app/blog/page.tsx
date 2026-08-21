@@ -5,14 +5,14 @@ import ScrollReveal from '@/components/ScrollReveal'
 import { getAllArticles, CATEGORY_SLUGS, type ArticleCategory } from '@/lib/blog'
 import { SITE_URL as BASE } from '@/lib/seo'
 
-// Order reflects how central each topic is to Shah Solutions' positioning —
+// Order reflects how central each topic is to Aiventra Labs' positioning —
 // GEO/AEO first since it's the differentiator, not alphabetical.
 const CATEGORY_ORDER: ArticleCategory[] = ['GEO / AEO', 'SEO', 'Web Development', 'Business']
 
 export const metadata: Metadata = {
   title: 'Blog — SEO, GEO & Web Development Insights',
   description:
-    'Guides on SEO, GEO/AI search optimization, AEO, and web development from Shah Solutions — practical, 2026-dated insights for businesses navigating AI-powered search.',
+    'Guides on SEO, GEO/AI search optimization, AEO, and web development from Aiventra Labs — practical, 2026-dated insights for businesses navigating AI-powered search.',
   alternates: { canonical: '/blog' },
   keywords: [
     'SEO blog', 'GEO guide', 'AEO answer engine optimization',
@@ -27,7 +27,7 @@ export default function BlogIndexPage() {
     '@context': 'https://schema.org',
     '@type': 'Blog',
     '@id': `${BASE}/blog#blog`,
-    name: 'Shah Solutions Blog',
+    name: 'Aiventra Labs Blog',
     url: `${BASE}/blog`,
     publisher: { '@id': `${BASE}/#organization` },
     blogPost: articles.map(a => ({
@@ -53,7 +53,7 @@ export default function BlogIndexPage() {
               Insights &amp; Guides
             </div>
             <h1 className="font-display font-black text-4xl sm:text-6xl text-white mt-4 mb-6 leading-tight">
-              The Shah Solutions <span className="gradient-text-animate">Blog</span>
+              The Aiventra Labs <span className="gradient-text-animate">Blog</span>
             </h1>
             <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
               Practical guides on SEO, GEO/AI search optimization, and web development —

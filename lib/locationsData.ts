@@ -6,29 +6,9 @@ export interface City {
 
 export const cities: City[] = [
   {
-    slug: 'karachi',
-    name: 'Karachi',
-    blurb: 'Pakistan\'s largest city and commercial capital, home to the country\'s densest concentration of e-commerce brands, trading houses, and tech startups competing for the same search terms.',
-  },
-  {
-    slug: 'lahore',
-    name: 'Lahore',
-    blurb: 'Pakistan\'s cultural and commercial heart in Punjab, with a fast-growing base of retail, real estate, and education businesses fighting for local search visibility.',
-  },
-  {
-    slug: 'islamabad',
-    name: 'Islamabad',
-    blurb: 'The capital, with a business landscape shaped by government contractors, consultancies, and a growing tech sector clustered around Blue Area and the twin city of Rawalpindi.',
-  },
-  {
-    slug: 'rawalpindi',
-    name: 'Rawalpindi',
-    blurb: 'A major commercial and logistics hub adjoining Islamabad, with strong demand from retail, real estate, and service businesses for local online visibility.',
-  },
-  {
-    slug: 'faisalabad',
-    name: 'Faisalabad',
-    blurb: 'Pakistan\'s textile and manufacturing capital, where B2B exporters and local retailers alike are increasingly competing for buyers who now start their search online.',
+    slug: 'pakistan',
+    name: 'Pakistan',
+    blurb: 'We work remote-first with businesses across Pakistan — from Karachi and Lahore to Islamabad and beyond — competing for the same search terms as bigger, better-funded competitors.',
   },
 ]
 

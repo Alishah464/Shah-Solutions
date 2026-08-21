@@ -3,13 +3,11 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
-import CountUp from 'react-countup'
 import {
-  Search, Globe, Code2, Smartphone, TrendingUp, Cloud,
-  ChevronRight, ArrowRight, Star, CheckCircle2, Zap,
+  Search, Globe, Code2, Smartphone, TrendingUp,
+  ChevronRight, ArrowRight, CheckCircle2, Zap,
   Shield, Users, Award, Target, Layers, Sparkles, HelpCircle,
-  Bot, MessageSquare, LineChart,
+  Bot, MessageSquare,
   ShoppingCart, Boxes, Building2, HeartPulse, GraduationCap,
 } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
@@ -17,8 +15,8 @@ import { SITE_URL as BASE } from '@/lib/seo'
 
 const homeFaqs = [
   {
-    q: 'What is Shah Solutions?',
-    a: 'Shah Solutions is a premium IT services company based in Pakistan, providing SEO optimization, GEO/AI search optimization, custom web development, mobile app development, digital marketing, cloud solutions, AI agents, AI chatbots, and trading bots to businesses worldwide. We combine enterprise-grade engineering with competitive pricing.',
+    q: 'What is Aiventra Labs?',
+    a: 'Aiventra Labs is an AI, software, and digital growth company based in Pakistan, providing SEO optimization, GEO/AI search optimization, custom web development, mobile app development, digital marketing, and AI development (agents and chatbots) to businesses worldwide. We combine enterprise-grade engineering with competitive pricing.',
   },
   {
     q: 'What is GEO (Generative Engine Optimization)?',
@@ -30,22 +28,22 @@ const homeFaqs = [
   },
   {
     q: 'How long does SEO take to show results?',
-    a: 'SEO results typically begin appearing within 3–6 months of implementation. Shah Solutions clients see significant ranking improvements within 90 days for target keywords in most niches. Full authority-level results — sustained page-1 rankings and substantial organic traffic growth — typically develop over 6–12 months of consistent optimization.',
+    a: 'SEO results typically begin appearing within 3–6 months of implementation. Aiventra Labs clients see significant ranking improvements within 90 days for target keywords in most niches. Full authority-level results — sustained page-1 rankings and substantial organic traffic growth — typically develop over 6–12 months of consistent optimization.',
   },
   {
-    q: 'What services does Shah Solutions offer?',
-    a: 'Shah Solutions offers nine core IT services: (1) SEO Optimization — technical SEO, keyword strategy, and link building; (2) GEO/AI Search Optimization — positioning your brand in AI-generated answers; (3) Web Development — custom websites and apps with Next.js and React; (4) App Development — iOS, Android, and cross-platform Flutter apps; (5) Digital Marketing — PPC, social media, and email campaigns; (6) Cloud Solutions — AWS, Azure, and GCP infrastructure and DevOps; (7) AI Agents — custom autonomous agents that automate multi-step workflows; (8) AI Chatbots — conversational bots trained on your own business content; (9) Trading Bots — custom algorithmic trading software built to your strategy (software development only, not financial advice).',
+    q: 'What services does Aiventra Labs offer?',
+    a: 'Aiventra Labs offers: (1) SEO Optimization — technical SEO, keyword strategy, and link building; (2) GEO/AI Search Optimization — positioning your brand in AI-generated answers; (3) Web Development — custom websites and apps with Next.js and React; (4) Mobile App Development — iOS, Android, and cross-platform Flutter apps; (5) Digital Marketing — PPC, social media, and email campaigns; (6) AI Development — custom AI agents and automation that connect to your existing tools; (7) AI Chatbots — conversational bots trained on your own business content. We also take on cloud infrastructure and custom algorithmic trading software as specialized, dedicated projects on request.',
   },
   {
-    q: 'Does Shah Solutions work with international clients?',
-    a: 'Yes. Shah Solutions serves clients worldwide from its base in Pakistan. We work with businesses across North America, Europe, the Middle East, and Southeast Asia. All communication is in English and we accommodate multiple time zones. Our pricing is competitive internationally while maintaining enterprise-level quality.',
+    q: 'Does Aiventra Labs work with international clients?',
+    a: 'Yes. Aiventra Labs serves clients worldwide from its base in Pakistan. We work with businesses across North America, Europe, the Middle East, and Southeast Asia. All communication is in English and we accommodate multiple time zones. Our pricing is competitive internationally while maintaining enterprise-level quality.',
   },
   {
     q: 'How can I book a consultation?',
-    a: 'You can book a free 30-minute consultation directly at shahsolutions.vercel.app/book. Consultations are available Monday through Friday, 12 PM to 4:30 PM Pakistan Standard Time. You can also contact us at amaherwani@gmail.com or call +92-303-2818320.',
+    a: 'You can book a free 30-minute consultation directly at aiventralabs.vercel.app/book. Consultations are available Monday through Friday, 12 PM to 4:30 PM Pakistan Standard Time. You can also contact us at amaherwani@gmail.com or call +92-303-2818320.',
   },
   {
-    q: 'What technologies does Shah Solutions use?',
+    q: 'What technologies does Aiventra Labs use?',
     a: 'For web development we use Next.js, React, TypeScript, and Tailwind CSS. For mobile apps we use Flutter and React Native. Our backend stack includes Node.js, PostgreSQL, and MongoDB. Cloud deployments run on Vercel, AWS, Azure, and Google Cloud Platform.',
   },
 ]
@@ -57,8 +55,8 @@ const homePageSchema = {
       '@type': 'WebPage',
       '@id': `${BASE}/#webpage`,
       url: BASE,
-      name: 'Shah Solutions — Premium IT Services | SEO, GEO, Web & App Development',
-      description: 'Shah Solutions delivers expert IT services: SEO, GEO/AI search optimization, custom web development, app development, digital marketing, cloud solutions, AI agents, AI chatbots, and trading bots.',
+      name: 'Aiventra Labs — AI, Software & Digital Growth Company in Pakistan',
+      description: 'Aiventra Labs builds high-performance websites, AI solutions, mobile applications, and SEO/GEO strategies that help businesses grow online.',
       isPartOf: { '@id': `${BASE}/#website` },
       about: { '@id': `${BASE}/#organization` },
       inLanguage: 'en-US',
@@ -111,7 +109,7 @@ const services = [
     color: 'from-purple-600 to-purple-800',
     glow: 'rgba(124,58,237,0.4)',
     title: 'SEO Optimization',
-    desc: 'Dominate search rankings with technical SEO, keyword mastery, link building, and content strategy that drives 10x organic traffic.',
+    desc: 'Dominate search rankings with technical SEO, keyword mastery, link building, and content strategy built to grow your organic traffic.',
     tags: ['On-Page SEO', 'Technical SEO', 'Link Building'],
   },
   {
@@ -133,39 +131,21 @@ const services = [
     tags: ['Next.js', 'React', 'E-Commerce'],
   },
   {
-    id: 'app-development',
+    id: 'mobile-app-development',
     icon: Smartphone,
     color: 'from-emerald-600 to-cyan-700',
     glow: 'rgba(16,185,129,0.4)',
-    title: 'App Development',
+    title: 'Mobile App Development',
     desc: 'Native iOS & Android and cross-platform Flutter apps with stunning UX that users love and businesses rely on.',
     tags: ['Flutter', 'React Native', 'iOS / Android'],
   },
   {
-    id: 'digital-marketing',
-    icon: TrendingUp,
-    color: 'from-orange-600 to-red-700',
-    glow: 'rgba(234,88,12,0.4)',
-    title: 'Digital Marketing',
-    desc: 'Full-funnel digital marketing — social media, PPC, email campaigns, and conversion optimization for measurable ROI.',
-    tags: ['PPC Ads', 'Social Media', 'Email Marketing'],
-  },
-  {
-    id: 'cloud-solutions',
-    icon: Cloud,
-    color: 'from-violet-600 to-indigo-700',
-    glow: 'rgba(139,92,246,0.4)',
-    title: 'Cloud Solutions',
-    desc: 'Scalable, secure cloud infrastructure on AWS, Azure & GCP — from deployment to monitoring and cost optimization.',
-    tags: ['AWS', 'Azure', 'DevOps'],
-  },
-  {
-    id: 'ai-agents',
+    id: 'ai-development',
     icon: Bot,
     color: 'from-fuchsia-600 to-purple-800',
     glow: 'rgba(192,38,211,0.4)',
-    title: 'AI Agents',
-    desc: 'Custom autonomous AI agents that plan and take action across your tools, connected to your data with human-in-the-loop safety controls.',
+    title: 'AI Development',
+    desc: 'Custom AI agents and automation that plan and take action across your tools, connected to your data with human-in-the-loop safety controls.',
     tags: ['Workflow Automation', 'Tool Integrations', 'LLM-Powered'],
   },
   {
@@ -178,13 +158,13 @@ const services = [
     tags: ['Custom Training', 'Lead Capture', 'Multi-Channel'],
   },
   {
-    id: 'trading-bots',
-    icon: LineChart,
-    color: 'from-yellow-600 to-amber-700',
-    glow: 'rgba(234,179,8,0.4)',
-    title: 'Trading Bots',
-    desc: 'Custom algorithmic trading bots built to your own strategy and risk rules, with backtesting and exchange API integration.',
-    tags: ['Custom Strategy', 'Backtesting', 'Exchange APIs'],
+    id: 'digital-marketing',
+    icon: TrendingUp,
+    color: 'from-orange-600 to-red-700',
+    glow: 'rgba(234,88,12,0.4)',
+    title: 'Digital Marketing',
+    desc: 'Full-funnel digital marketing — social media, PPC, email campaigns, and conversion optimization for measurable ROI.',
+    tags: ['PPC Ads', 'Social Media', 'Email Marketing'],
   },
 ]
 
@@ -196,13 +176,6 @@ const industries = [
   { slug: 'education', title: 'Education', icon: GraduationCap },
 ]
 
-const stats = [
-  { value: 150, suffix: '+', label: 'Projects Delivered' },
-  { value: 80, suffix: '+', label: 'Happy Clients' },
-  { value: 5, suffix: '+', label: 'Years Experience' },
-  { value: 98, suffix: '%', label: 'Client Satisfaction' },
-]
-
 const whyUs = [
   { icon: Zap, title: 'Lightning Fast', desc: 'Sub-2s load times. Optimized for Core Web Vitals and real-world performance.' },
   { icon: Shield, title: 'Enterprise Security', desc: 'Bank-grade security, OWASP compliance, and regular vulnerability assessments.' },
@@ -212,27 +185,6 @@ const whyUs = [
   { icon: Award, title: 'Quality First', desc: 'Rigorous QA processes ensure every delivery exceeds expectations.' },
 ]
 
-const testimonials = [
-  {
-    name: 'Ahmed Khan',
-    role: 'CEO, TechVentures PK',
-    rating: 5,
-    text: 'Shah Solutions transformed our online presence. Our organic traffic grew 340% in just 4 months. Exceptional team!',
-  },
-  {
-    name: 'Sarah Johnson',
-    role: 'Marketing Director, GlobalBiz',
-    rating: 5,
-    text: 'The web platform they built is blazing fast and our conversion rate jumped 60%. Truly world-class development.',
-  },
-  {
-    name: 'Usman Malik',
-    role: 'Founder, StartupHub',
-    rating: 5,
-    text: 'Our Flutter app was delivered on time, on budget, and our users love it. Best IT partner we\'ve ever had.',
-  },
-]
-
 /* ── Component ────────────────────────────────────────────────────────────── */
 export default function HomePage() {
   const typedText = useTyped(['SEO Domination', 'Stunning Websites', 'Powerful Apps', 'AI-Driven GEO', 'Digital Growth'], 80, 2200)
@@ -240,8 +192,6 @@ export default function HomePage() {
   const { scrollY } = useScroll()
   const heroY = useTransform(scrollY, [0, 600], [0, -120])
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0.3])
-
-  const [statsRef, statsInView] = useInView({ threshold: 0.3, triggerOnce: true })
 
   return (
     <>
@@ -279,22 +229,22 @@ export default function HomePage() {
           >
             <div className="section-tag">
               <Sparkles size={12} />
-              Pakistan&apos;s Premier IT Agency
+              AI • Software • Digital Growth
             </div>
           </motion.div>
 
           {/* Main heading */}
           <motion.h1
-            className="font-display font-black text-4xl sm:text-6xl lg:text-8xl leading-[1.05] mb-6"
+            className="font-display font-black text-4xl sm:text-6xl lg:text-7xl leading-[1.05] mb-6"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            <span className="text-white">Engineering</span>
+            <span className="text-white">AI, Software &amp;</span>
             <br />
-            <span className="gradient-text-animate">Tomorrow&apos;s</span>
+            <span className="gradient-text-animate">Digital Growth</span>
             <br />
-            <span className="text-white">Digital World</span>
+            <span className="text-white">Company in Pakistan</span>
           </motion.h1>
 
           {/* Typed subtitle */}
@@ -316,8 +266,8 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            Shah Solutions delivers cutting-edge IT services — transforming your vision into
-            digital excellence with measurable, lasting results.
+            We build high-performance websites, AI solutions, mobile applications, and SEO
+            strategies that help businesses grow online.
           </motion.p>
 
           {/* CTAs */}
@@ -328,7 +278,7 @@ export default function HomePage() {
             transition={{ delay: 0.6 }}
           >
             <Link href="/contact" className="btn-primary text-base px-8 py-4">
-              <span>Start Your Project</span>
+              <span>Get a Free Consultation</span>
               <ChevronRight size={18} />
             </Link>
             <Link href="/portfolio" className="btn-secondary text-base px-8 py-4">
@@ -343,7 +293,7 @@ export default function HomePage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
           >
-            {['Top-Rated Agency', '24/7 Support', 'Worldwide Delivery', 'Proven Results'].map((badge) => (
+            {['Modern Tech Stack', 'Direct Communication', 'Transparent Pricing', 'Fast Turnaround'].map((badge) => (
               <div key={badge} className="flex items-center gap-2 text-slate-400 text-sm">
                 <CheckCircle2 size={14} className="text-emerald-400" />
                 {badge}
@@ -352,29 +302,6 @@ export default function HomePage() {
           </motion.div>
         </motion.div>
 
-      </section>
-
-      {/* ── STATS ─────────────────────────────────────────────────────────── */}
-      <section ref={statsRef} className="py-20 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark-2/50 to-dark" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {stats.map(({ value, suffix, label }, i) => (
-              <ScrollReveal key={label} delay={i * 0.1}>
-                <div className="stat-card group">
-                  <div className="text-4xl sm:text-5xl font-display font-black gradient-text mb-2">
-                    {statsInView ? (
-                      <CountUp end={value} duration={2.5} suffix={suffix} />
-                    ) : (
-                      `${value}${suffix}`
-                    )}
-                  </div>
-                  <div className="text-slate-400 text-sm font-medium">{label}</div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* ── SERVICES ──────────────────────────────────────────────────────── */}
@@ -444,23 +371,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── TRUST BAR ─────────────────────────────────────────────────────── */}
-      <section className="py-10 relative border-y border-white/5">
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-slate-500 text-xs font-semibold uppercase tracking-widest mb-6">
-            Trusted by businesses across Pakistan &amp; worldwide
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-slate-400 text-sm font-medium">
-            {['12+ Countries Served', '150+ Projects Delivered', '5+ Years in Business', '98% Client Satisfaction'].map((item) => (
-              <span key={item} className="flex items-center gap-2">
-                <CheckCircle2 size={14} className="text-emerald-400" />
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── INDUSTRIES ────────────────────────────────────────────────────── */}
       <section className="py-24 relative overflow-hidden">
         <div className="orb orb-blue absolute top-0 left-1/4 w-96 h-96 opacity-15" />
@@ -500,7 +410,7 @@ export default function HomePage() {
             <ScrollReveal direction="left">
               <div className="section-tag">
                 <Sparkles size={12} />
-                Why Shah Solutions
+                Why Aiventra Labs
               </div>
               <h2 className="font-display font-black text-4xl sm:text-5xl text-white mt-4 mb-6 leading-tight">
                 We Don&apos;t Just Build.
@@ -534,49 +444,6 @@ export default function HomePage() {
                 )
               })}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── TESTIMONIALS ──────────────────────────────────────────────────── */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="orb orb-purple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] opacity-10" />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal className="text-center mb-16">
-            <div className="section-tag mx-auto inline-flex">
-              <Star size={12} />
-              Client Success Stories
-            </div>
-            <h2 className="font-display font-black text-4xl sm:text-5xl text-white mt-4">
-              What Our Clients <span className="gradient-text">Say</span>
-            </h2>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <ScrollReveal key={t.name} delay={i * 0.1}>
-                <div className="glass-card p-8 glass-card-hover h-full flex flex-col">
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(t.rating)].map((_, j) => (
-                      <Star key={j} size={14} className="text-gold fill-gold" />
-                    ))}
-                  </div>
-                  <p className="text-slate-300 text-sm leading-relaxed mb-6 flex-1 italic">
-                    &ldquo;{t.text}&rdquo;
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-sm">
-                      {t.name[0]}
-                    </div>
-                    <div>
-                      <div className="text-white font-semibold text-sm">{t.name}</div>
-                      <div className="text-slate-500 text-xs">{t.role}</div>
-                    </div>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
           </div>
         </div>
       </section>
@@ -628,8 +495,8 @@ export default function HomePage() {
               <span className="gradient-text">Extraordinary</span>
             </h2>
             <p className="text-slate-400 text-lg mb-10 max-w-2xl mx-auto">
-              Join 80+ businesses that trust Shah Solutions to power their digital presence.
-              Free consultation — no commitment required.
+              Free consultation — no commitment required. Let&apos;s talk about your goals
+              and how we can help you get there.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact" className="btn-primary text-base px-10 py-4">

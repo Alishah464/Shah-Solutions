@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `/blog/${slug}`,
       type: 'article',
       publishedTime: article.date,
-      authors: ['Shah Solutions'],
+      authors: ['Aiventra Labs'],
       tags: [article.category],
     },
   }
@@ -122,7 +122,7 @@ export default async function ArticlePage({ params }: Props) {
               <Calendar size={14} />
               <time dateTime={article.date}>{formatDate(article.date)}</time>
               <span className="mx-1">·</span>
-              <span>Shah Solutions</span>
+              <span>Aiventra Labs</span>
               <span className="mx-1">·</span>
               <Link
                 href={`/blog/category/${CATEGORY_SLUGS[article.category]}`}
@@ -152,7 +152,7 @@ export default async function ArticlePage({ params }: Props) {
             <div className="glass-card p-6 sm:p-8 mt-14 border border-primary/20 text-center">
               <h2 className="font-display font-bold text-white text-xl mb-3">Want this done for your business?</h2>
               <p className="text-slate-400 text-sm mb-6 max-w-lg mx-auto">
-                Shah Solutions builds SEO, GEO, and AI-search strategy into every project. Book a free 30-minute
+                Aiventra Labs builds SEO, GEO, and AI-search strategy into every project. Book a free 30-minute
                 consultation and we&apos;ll show you exactly where you stand.
               </p>
               <Link href="/book" className="btn-primary inline-flex text-sm">

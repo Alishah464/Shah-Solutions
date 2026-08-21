@@ -86,7 +86,7 @@ export default function OGImage() {
             boxShadow: '0 0 40px rgba(124,58,237,0.5)',
           }}
         >
-          <span style={{ color: 'white', fontSize: 28, fontWeight: 800 }}>SS</span>
+          <span style={{ color: 'white', fontSize: 28, fontWeight: 800 }}>AL</span>
         </div>
 
         {/* Company name */}
@@ -101,8 +101,8 @@ export default function OGImage() {
             textAlign: 'center',
           }}
         >
-          Shah&nbsp;
-          <span style={{ color: '#9F67FF' }}>Solutions</span>
+          Aiventra&nbsp;
+          <span style={{ color: '#9F67FF' }}>Labs</span>
         </div>
 
         {/* Tagline */}
@@ -116,12 +116,12 @@ export default function OGImage() {
             lineHeight: 1.4,
           }}
         >
-          Premium IT Services — SEO · GEO · Web Dev · App Dev
+          AI, Software &amp; Digital Growth — SEO · GEO · Web Dev · AI Dev
         </div>
 
         {/* Pills */}
         <div style={{ display: 'flex', gap: 12 }}>
-          {['Pakistan\'s Premier IT Agency', 'Serving Worldwide', '150+ Projects Delivered'].map((label) => (
+          {['Based in Pakistan', 'Serving Worldwide', 'AI · Software · Digital Growth'].map((label) => (
             <div
               key={label}
               style={{

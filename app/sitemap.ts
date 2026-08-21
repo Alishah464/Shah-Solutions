@@ -19,6 +19,8 @@ const PAGE_DATES = {
   portfolio: '2026-06-29',
   contact: '2026-08-20',
   book: '2026-08-20',
+  privacyPolicy: '2026-08-21',
+  terms: '2026-08-21',
 } as const
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -34,6 +36,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/portfolio`,   lastModified: d(PAGE_DATES.portfolio),  changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${BASE}/contact`,     lastModified: d(PAGE_DATES.contact),    changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/book`,        lastModified: d(PAGE_DATES.book),       changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/privacy-policy`, lastModified: d(PAGE_DATES.privacyPolicy), changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE}/terms`,          lastModified: d(PAGE_DATES.terms),         changeFrequency: 'yearly', priority: 0.3 },
   ]
 
   const servicePages: MetadataRoute.Sitemap = serviceCategories.map(s => ({

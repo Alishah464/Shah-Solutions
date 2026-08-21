@@ -16,8 +16,8 @@ const portfolioSchema = {
       '@type': 'CollectionPage',
       '@id': `${BASE}/portfolio#webpage`,
       url: `${BASE}/portfolio`,
-      name: 'Portfolio — Web, App, SEO & Marketing Projects | Shah Solutions',
-      description: 'Explore 150+ delivered projects: web development, app development, SEO campaigns, GEO optimization, and digital marketing. Real results for real businesses.',
+      name: 'Portfolio — What We Build | Aiventra Labs',
+      description: 'See what Aiventra Labs builds: web development, mobile app development, SEO, GEO, AI development, and digital marketing capabilities.',
       isPartOf: { '@id': `${BASE}/#website` },
       creator: { '@id': `${BASE}/#organization` },
       inLanguage: 'en-US',
@@ -26,13 +26,13 @@ const portfolioSchema = {
 }
 
 export const metadata: Metadata = {
-  title: 'Portfolio — Web, App, SEO & Marketing Projects',
+  title: 'Portfolio — What We Build',
   description:
-    'Explore Shah Solutions portfolio: 150+ delivered projects in web development, app development, SEO campaigns, GEO optimization, and digital marketing. Real results, real businesses.',
+    'See what Aiventra Labs builds: web development, mobile app development, SEO, GEO, AI development, and digital marketing capabilities.',
   alternates: { canonical: '/portfolio' },
   keywords: [
-    'IT portfolio Pakistan', 'web development projects', 'app development portfolio',
-    'SEO case studies', 'digital marketing results',
+    'IT portfolio Pakistan', 'web development capabilities', 'app development company',
+    'SEO agency Pakistan', 'digital marketing agency',
   ],
 }
 

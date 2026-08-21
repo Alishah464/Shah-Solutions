@@ -6,14 +6,14 @@ import { serviceCategories, process, serviceFaqs } from '@/lib/servicesData'
 import { buildMetadata, buildBreadcrumbSchema, buildFaqSchema, buildSchemaGraph, SITE_URL as BASE } from '@/lib/seo'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'IT Services — SEO, GEO, Web, App & AI Development',
+  title: 'Services — SEO, GEO, Web, App & AI Development',
   description:
-    'Full-stack IT services: SEO, GEO/AI search, web & app dev, digital marketing, cloud, AI agents, chatbots & trading bots. Shah Solutions, Pakistan.',
+    'AI, software & digital growth services: SEO, GEO/AI search, web & mobile app development, AI agents, chatbots & digital marketing. Aiventra Labs, Pakistan.',
   path: '/services',
   keywords: [
     'SEO services Pakistan', 'GEO optimization', 'web development services',
-    'app development Pakistan', 'digital marketing agency', 'cloud solutions Pakistan',
-    'AI agent development', 'AI chatbot development', 'trading bot development',
+    'mobile app development Pakistan', 'digital marketing agency',
+    'AI agent development', 'AI chatbot development', 'AI development company Pakistan',
   ],
 })
 
@@ -23,8 +23,8 @@ const servicesPageSchema = buildSchemaGraph([
     '@type': 'WebPage',
     '@id': `${BASE}/services#webpage`,
     url: `${BASE}/services`,
-    name: 'IT Services — SEO, GEO, Web & App Development | Shah Solutions',
-    description: 'Explore Shah Solutions IT services: SEO optimization, GEO/AI search optimization, web development, app development, digital marketing, cloud solutions, AI agents, AI chatbots, and trading bots.',
+    name: 'Services — SEO, GEO, Web & App Development | Aiventra Labs',
+    description: 'Explore Aiventra Labs services: SEO optimization, GEO/AI search optimization, web development, mobile app development, digital marketing, AI agents, and AI chatbots.',
     isPartOf: { '@id': `${BASE}/#website` },
   },
   ...serviceCategories.map(svc => ({

@@ -6,9 +6,9 @@ import { cities, serviceOfferings } from '@/lib/locationsData'
 import { buildMetadata, buildBreadcrumbSchema, buildSchemaGraph, SITE_URL as BASE } from '@/lib/seo'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Locations We Serve — SEO & Web Development Across Pakistan',
+  title: 'Where We Work — SEO & Web Development in Pakistan',
   description:
-    'Shah Solutions provides SEO, web development, and digital marketing services in Karachi, Lahore, Islamabad, Rawalpindi, and Faisalabad.',
+    'Aiventra Labs provides SEO, web development, and digital marketing services to businesses across Pakistan, remote-first.',
   path: '/locations',
   keywords: ['SEO company Pakistan', 'web development company Pakistan', 'digital marketing agency Pakistan'],
 })
@@ -19,7 +19,7 @@ const schema = buildSchemaGraph([
     '@type': 'CollectionPage',
     '@id': `${BASE}/locations#webpage`,
     url: `${BASE}/locations`,
-    name: 'Locations We Serve | Shah Solutions',
+    name: 'Locations We Serve | Aiventra Labs',
     isPartOf: { '@id': `${BASE}/#website` },
   },
 ])
@@ -43,7 +43,7 @@ export default function LocationsPage() {
               Serving Businesses <span className="gradient-text-animate">Across Pakistan</span>
             </h1>
             <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
-              SEO, web development, and digital marketing — tailored to how each city&apos;s market actually searches and buys.
+              SEO, web development, and digital marketing — delivered remote-first to businesses across the country.
             </p>
           </ScrollReveal>
         </div>

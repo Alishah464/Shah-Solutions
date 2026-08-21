@@ -1,20 +1,20 @@
 import type { Metadata } from 'next'
-import { Target, Eye, Heart, Rocket, Users, Award, Code2, Sparkles, CheckCircle2, ArrowRight, HelpCircle } from 'lucide-react'
+import { Target, Eye, Heart, Rocket, Users, Code2, Sparkles, ArrowRight, HelpCircle } from 'lucide-react'
 import Link from 'next/link'
 import ScrollReveal from '@/components/ScrollReveal'
 import { SITE_URL as BASE } from '@/lib/seo'
 
 const aboutFaqs = [
   {
-    q: 'When was Shah Solutions founded, and how has it grown?',
-    a: 'Shah Solutions was founded in 2019. Since then it has crossed 50 clients (2021), delivered 100+ projects across 12 countries (2022), and pioneered Generative Engine Optimization (GEO) services in Pakistan (2023).',
+    q: 'Who is behind Aiventra Labs?',
+    a: 'Aiventra Labs is a Pakistan-based AI, software, and digital growth company founded and led by Alishah, with engineering, SEO, and design specialists brought in project by project as scope requires.',
   },
   {
-    q: 'Does Shah Solutions only work with clients in Pakistan?',
-    a: 'No. Shah Solutions is based in Pakistan but serves businesses worldwide, with client communication available in both English and Urdu.',
+    q: 'Does Aiventra Labs only work with clients in Pakistan?',
+    a: 'No. Aiventra Labs is based in Pakistan but serves businesses worldwide, with client communication available in both English and Urdu.',
   },
   {
-    q: 'What makes Shah Solutions different from other IT agencies?',
+    q: 'What makes Aiventra Labs different from other IT agencies?',
     a: 'Four things: measuring success by client outcomes rather than deliverables, radical transparency in reporting and pricing, a client-first culture, and staying ahead of shifts like AI search and GEO rather than reacting to them late.',
   },
 ]
@@ -33,8 +33,8 @@ const aboutPageSchema = {
       '@type': 'AboutPage',
       '@id': `${BASE}/about#webpage`,
       url: `${BASE}/about`,
-      name: 'About Shah Solutions — Pakistan\'s Premier IT Agency',
-      description: 'Learn about Shah Solutions — our mission, team, values, and journey as a premium IT services company serving businesses worldwide from Pakistan.',
+      name: 'About Aiventra Labs — AI, Software & Digital Growth Company',
+      description: 'Learn about Aiventra Labs — our mission, team, values, and approach as an AI, software, and digital growth company based in Pakistan, serving businesses worldwide.',
       isPartOf: { '@id': `${BASE}/#website` },
       about: { '@id': `${BASE}/#organization` },
       inLanguage: 'en-US',
@@ -52,15 +52,15 @@ const aboutPageSchema = {
 }
 
 export const metadata: Metadata = {
-  title: 'About Shah Solutions — Pakistan\'s Premier IT Company',
+  title: 'About Aiventra Labs — AI, Software & Digital Growth Company',
   description:
-    'Learn about Shah Solutions — our mission, values, and the expert team behind Pakistan\'s leading IT services company. SEO, web & app development excellence since day one.',
+    'Learn about Aiventra Labs — our mission, values, and approach to SEO, web development, and AI development for businesses in Pakistan and worldwide.',
   alternates: { canonical: '/about' },
   keywords: [
-    'about Shah Solutions', 'IT company Pakistan history', 'Shah Solutions team',
-    'IT agency values Pakistan', 'premium IT services company',
+    'about Aiventra Labs', 'Aiventra Labs team',
+    'IT agency values Pakistan', 'AI software company Pakistan',
   ],
-  openGraph: { title: 'About Shah Solutions', url: '/about' },
+  openGraph: { title: 'About Aiventra Labs', url: '/about' },
 }
 
 const values = [
@@ -93,33 +93,6 @@ const team = [
     expertise: 'Full-Stack Development, Business Strategy',
     gradient: 'from-primary to-secondary',
   },
-  {
-    name: 'Dev Lead',
-    role: 'Head of Engineering',
-    expertise: 'React, Next.js, Cloud Architecture',
-    gradient: 'from-secondary to-accent',
-  },
-  {
-    name: 'SEO Director',
-    role: 'SEO & GEO Specialist',
-    expertise: 'Technical SEO, AI Search, Content Strategy',
-    gradient: 'from-accent to-emerald-500',
-  },
-  {
-    name: 'Creative Director',
-    role: 'UI/UX Design Lead',
-    expertise: 'Figma, Motion Design, Brand Identity',
-    gradient: 'from-orange-500 to-primary',
-  },
-]
-
-const milestones = [
-  { year: '2019', event: 'Shah Solutions founded with a mission to democratize premium IT services.' },
-  { year: '2020', event: 'Expanded services to include GEO and AI-driven SEO strategies.' },
-  { year: '2021', event: 'Crossed 50 clients milestone; launched mobile app development division.' },
-  { year: '2022', event: 'Delivered 100+ projects across 12 countries with 98% satisfaction rate.' },
-  { year: '2023', event: 'Pioneered Generative Engine Optimization (GEO) services in Pakistan.' },
-  { year: '2024', event: 'Launched cloud solutions division; team expanded to 20+ specialists.' },
 ]
 
 const techStack = [
@@ -145,12 +118,11 @@ export default function AboutPage() {
             </div>
             <h1 className="font-display font-black text-4xl sm:text-6xl lg:text-7xl text-white mt-4 mb-6 leading-tight">
               We Are{' '}
-              <span className="gradient-text-animate">Shah Solutions</span>
+              <span className="gradient-text-animate">Aiventra Labs</span>
             </h1>
             <p className="text-slate-300 text-xl leading-relaxed mb-8">
-              Born from a passion for technology and a relentless drive for results, Shah Solutions
-              has grown into Pakistan&apos;s most trusted IT partner for businesses that refuse to
-              settle for average.
+              Born from a passion for technology and a relentless drive for results, Aiventra Labs
+              is a Pakistan-based partner for businesses that refuse to settle for average.
             </p>
             <p className="text-slate-400 leading-relaxed">
               We combine Silicon Valley-level engineering with deep local market knowledge to
@@ -236,14 +208,17 @@ export default function AboutPage() {
           <ScrollReveal className="text-center mb-16">
             <div className="section-tag mx-auto inline-flex">
               <Users size={12} />
-              The Team
+              Leadership
             </div>
             <h2 className="font-display font-black text-4xl sm:text-5xl text-white mt-4">
-              Experts Behind <span className="gradient-text">Every Win</span>
+              Founder-Led, <span className="gradient-text">Client-Obsessed</span>
             </h2>
+            <p className="text-slate-400 mt-4 max-w-xl mx-auto">
+              Aiventra Labs is led directly by its founder, with specialists brought in project by project as scope requires.
+            </p>
           </ScrollReveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="max-w-xs mx-auto">
             {team.map((member, i) => (
               <ScrollReveal key={member.name} delay={i * 0.1}>
                 <div className="glass-card glass-card-hover p-6 text-center">
@@ -259,42 +234,6 @@ export default function AboutPage() {
                 </div>
               </ScrollReveal>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── MILESTONES ────────────────────────────────────────────────────── */}
-      <section className="py-20 relative">
-        <div className="orb orb-purple absolute right-0 top-1/2 w-96 h-96 opacity-15" />
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal className="text-center mb-16">
-            <div className="section-tag mx-auto inline-flex">
-              <Award size={12} />
-              Our Journey
-            </div>
-            <h2 className="font-display font-black text-4xl sm:text-5xl text-white mt-4">
-              A Story of <span className="gradient-text">Growth</span>
-            </h2>
-          </ScrollReveal>
-
-          <div className="relative">
-            <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-secondary to-accent" />
-            <div className="space-y-6 sm:space-y-8">
-              {milestones.map((m, i) => (
-                <ScrollReveal key={m.year} delay={i * 0.1} direction="left">
-                  <div className="flex gap-4 sm:gap-8 items-start pl-0">
-                    <div className="relative flex-shrink-0">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-display font-bold text-white text-xs sm:text-sm z-10 relative glow-primary">
-                        {m.year}
-                      </div>
-                    </div>
-                    <div className="glass-card p-4 sm:p-5 flex-1 glass-card-hover">
-                      <p className="text-slate-300 text-sm leading-relaxed">{m.event}</p>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
           </div>
         </div>
       </section>

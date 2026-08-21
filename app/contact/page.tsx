@@ -5,13 +5,13 @@ import { SITE_URL as BASE } from '@/lib/seo'
 export const metadata: Metadata = {
   title: 'Contact Us — Free IT Consultation',
   description:
-    'Contact Shah Solutions for IT services. Get a free consultation for SEO, GEO, web development, or app development. We respond within 2 hours.',
+    'Contact Aiventra Labs for IT services. Get a free consultation for SEO, GEO, web development, or app development. We respond within 2 hours.',
   alternates: { canonical: '/contact' },
   keywords: [
-    'contact Shah Solutions', 'IT consultation Pakistan', 'free SEO consultation',
+    'contact Aiventra Labs', 'IT consultation Pakistan', 'free SEO consultation',
     'web development quote', 'hire IT company Pakistan',
   ],
-  openGraph: { title: 'Contact Shah Solutions — Free IT Consultation', url: '/contact' },
+  openGraph: { title: 'Contact Aiventra Labs — Free IT Consultation', url: '/contact' },
 }
 
 const contactSchema = {
@@ -28,8 +28,8 @@ const contactSchema = {
       '@type': 'ContactPage',
       '@id': `${BASE}/contact#webpage`,
       url: `${BASE}/contact`,
-      name: 'Contact Shah Solutions — Free IT Consultation',
-      description: 'Contact Shah Solutions for IT services. Free consultation for SEO, GEO, web development, and app development. Response within 2 hours.',
+      name: 'Contact Aiventra Labs — Free IT Consultation',
+      description: 'Contact Aiventra Labs for IT services. Free consultation for SEO, GEO, web development, and app development. Response within 2 hours.',
       isPartOf: { '@id': `${BASE}/#website` },
       inLanguage: 'en-US',
     },

@@ -4,12 +4,28 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Code2, Menu, X, ChevronRight } from 'lucide-react'
+import { Code2, Menu, X, ChevronRight, ChevronDown } from 'lucide-react'
+
+const serviceLinks = [
+  { href: '/services/seo', label: 'SEO' },
+  { href: '/services/web-development', label: 'Web Development' },
+  { href: '/services/ai-development', label: 'AI Development' },
+  { href: '/services/ai-chatbots', label: 'AI Chatbots' },
+  { href: '/services/mobile-app-development', label: 'Mobile App Development' },
+  { href: '/services/digital-marketing', label: 'Digital Marketing' },
+]
+
+const industryLinks = [
+  { href: '/industries/ecommerce', label: 'E-commerce' },
+  { href: '/industries/saas', label: 'SaaS' },
+  { href: '/industries/real-estate', label: 'Real Estate' },
+  { href: '/industries/healthcare', label: 'Healthcare' },
+]
 
 const links = [
   { href: '/', label: 'Home' },
-  { href: '/services', label: 'Services' },
-  { href: '/industries', label: 'Industries' },
+  { href: '/services', label: 'Services', dropdown: serviceLinks },
+  { href: '/industries', label: 'Industries', dropdown: industryLinks },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/blog', label: 'Blog' },
   { href: '/about', label: 'About' },
@@ -20,6 +36,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -70,7 +87,7 @@ export default function Navbar() {
                 </div>
                 <div className="flex flex-col min-w-0">
                   <span className="font-display font-bold text-lg sm:text-xl leading-none gradient-text-animate truncate">
-                    Shah Solutions
+                    Aiventra Labs
                   </span>
                   <span className="text-[10px] text-slate-400 font-mono tracking-widest uppercase leading-none mt-0.5">
                     IT Services
@@ -81,24 +98,59 @@ export default function Navbar() {
               {/* Desktop Nav */}
               <nav className="hidden md:flex items-center gap-1">
                 {links.map((link) => {
-                  const isActive = pathname === link.href
+                  const isActive = pathname === link.href || (link.dropdown?.some((d) => pathname === d.href) ?? false)
                   return (
-                    <Link
+                    <div
                       key={link.href}
-                      href={link.href}
-                      className="relative px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors duration-200 group"
+                      className="relative"
+                      onMouseEnter={() => link.dropdown && setOpenDropdown(link.href)}
+                      onMouseLeave={() => link.dropdown && setOpenDropdown(null)}
                     >
-                      {isActive && (
-                        <motion.span
-                          layoutId="nav-active"
-                          className="absolute inset-0 bg-white/5 rounded-lg"
-                        />
+                      <Link
+                        href={link.href}
+                        className="relative px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors duration-200 group flex items-center gap-1"
+                      >
+                        {isActive && (
+                          <motion.span
+                            layoutId="nav-active"
+                            className="absolute inset-0 bg-white/5 rounded-lg"
+                          />
+                        )}
+                        <span className="relative z-10">{link.label}</span>
+                        {link.dropdown && (
+                          <ChevronDown size={14} className="relative z-10 transition-transform duration-200 group-hover:rotate-180" />
+                        )}
+                        {isActive && (
+                          <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full" />
+                        )}
+                      </Link>
+
+                      {link.dropdown && (
+                        <AnimatePresence>
+                          {openDropdown === link.href && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: 8 }}
+                              transition={{ duration: 0.15 }}
+                              className="absolute top-full left-0 pt-2 w-64"
+                            >
+                              <div className="glass-card p-2 border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                                {link.dropdown.map((item) => (
+                                  <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    className="block px-4 py-2.5 text-sm text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-150"
+                                  >
+                                    {item.label}
+                                  </Link>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       )}
-                      <span className="relative z-10">{link.label}</span>
-                      {isActive && (
-                        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full" />
-                      )}
-                    </Link>
+                    </div>
                   )
                 })}
               </nav>

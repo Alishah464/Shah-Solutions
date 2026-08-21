@@ -5,9 +5,10 @@ const services = [
   { label: 'SEO Optimization', href: '/services/seo' },
   { label: 'GEO / AI Search', href: '/services/geo' },
   { label: 'Web Development', href: '/services/web-development' },
-  { label: 'App Development', href: '/services/app-development' },
+  { label: 'AI Development', href: '/services/ai-development' },
+  { label: 'AI Chatbots', href: '/services/ai-chatbots' },
+  { label: 'Mobile App Development', href: '/services/mobile-app-development' },
   { label: 'Digital Marketing', href: '/services/digital-marketing' },
-  { label: 'Cloud Solutions', href: '/services/cloud-solutions' },
 ]
 
 const pages = [
@@ -36,7 +37,7 @@ export default function Footer() {
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center glow-primary group-hover:scale-110 transition-transform">
                 <Code2 size={20} className="text-white" />
               </div>
-              <span className="font-display font-bold text-xl gradient-text-animate">Shah Solutions</span>
+              <span className="font-display font-bold text-xl gradient-text-animate">Aiventra Labs</span>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed">
               Engineering tomorrow&apos;s digital world. Premium IT services crafted with precision
@@ -129,15 +130,11 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-slate-500 text-sm">
-            &copy; {new Date().getFullYear()} Shah Solutions. All rights reserved.
+            &copy; {new Date().getFullYear()} Aiventra Labs. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <span className="text-slate-500 text-sm">Privacy Policy</span>
-            <span className="text-slate-500 text-sm">Terms of Service</span>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-slate-400 text-xs">All Systems Operational</span>
-            </div>
+            <Link href="/privacy-policy" className="text-slate-500 hover:text-white text-sm transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="text-slate-500 hover:text-white text-sm transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

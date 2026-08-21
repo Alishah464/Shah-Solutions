@@ -40,16 +40,16 @@
   <path d="M100 106L116 120L100 134" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M124 134H140" stroke="white" stroke-width="5" stroke-linecap="round"/>
   <!-- Company name -->
-  <text x="80" y="250" font-family="Inter,system-ui,sans-serif" font-size="72" font-weight="900" fill="url(#g1)">Shah Solutions</text>
-  <text x="80" y="310" font-family="Inter,system-ui,sans-serif" font-size="28" fill="#94A3B8" letter-spacing="3">PREMIUM IT SERVICES</text>
+  <text x="80" y="250" font-family="Inter,system-ui,sans-serif" font-size="72" font-weight="900" fill="url(#g1)">Aiventra Labs</text>
+  <text x="80" y="310" font-family="Inter,system-ui,sans-serif" font-size="28" fill="#94A3B8" letter-spacing="3">AI · SOFTWARE · DIGITAL GROWTH</text>
   <!-- Services row -->
   <g font-family="Inter,system-ui,sans-serif" font-size="20" fill="#64748B">
     <text x="80" y="410">SEO Optimization</text>
     <text x="80" y="445">GEO / AI Search</text>
     <text x="340" y="410">Web Development</text>
-    <text x="340" y="445">App Development</text>
+    <text x="340" y="445">Mobile App Development</text>
     <text x="620" y="410">Digital Marketing</text>
-    <text x="620" y="445">Cloud Solutions</text>
+    <text x="620" y="445">AI Development</text>
   </g>
   <!-- Divider -->
   <line x1="80" y1="475" x2="700" y2="475" stroke="url(#g1)" stroke-width="2" opacity="0.5"/>
@@ -58,5 +58,5 @@
   <text x="80" y="545" font-family="Inter,system-ui,sans-serif" font-size="20" fill="#64748B">0303 2818320 · Worldwide Delivery</text>
   <!-- Badge -->
   <rect x="860" y="260" width="260" height="100" rx="50" fill="#7C3AED" fill-opacity="0.12" stroke="#7C3AED" stroke-opacity="0.4" stroke-width="1.5"/>
-  <text x="990" y="320" font-family="Inter,system-ui,sans-serif" font-size="22" font-weight="700" fill="white" text-anchor="middle">Pakistan's #1 IT Agency</text>
+  <text x="990" y="320" font-family="Inter,system-ui,sans-serif" font-size="22" font-weight="700" fill="white" text-anchor="middle">Based in Pakistan</text>
 </svg>

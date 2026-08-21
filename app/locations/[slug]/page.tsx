@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ChevronRight, ArrowRight, CheckCircle2, MapPin } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
-import { locationPages, getLocationPageBySlug, cities, serviceOfferings } from '@/lib/locationsData'
+import { locationPages, getLocationPageBySlug, serviceOfferings } from '@/lib/locationsData'
 import { buildMetadata, buildBreadcrumbSchema, buildSchemaGraph, SITE_URL as BASE } from '@/lib/seo'
 
 interface Props {
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = `${loc.offering.label} in ${loc.city.name}`
   return buildMetadata({
     title,
-    description: `Shah Solutions is a ${loc.offering.label.toLowerCase()} serving ${loc.city.name}, Pakistan. ${loc.offering.pitch}`,
+    description: `Aiventra Labs is a ${loc.offering.label.toLowerCase()} serving businesses across ${loc.city.name}. ${loc.offering.pitch}`,
     path: `/locations/${slug}`,
     keywords: [
       `${loc.offering.label} ${loc.city.name}`,
@@ -39,19 +39,18 @@ export default async function LocationPage({ params }: Props) {
 
   const { city, offering } = loc
   const otherServicesInCity = serviceOfferings.filter(o => o.key !== offering.key)
-  const sameServiceOtherCities = cities.filter(c => c.slug !== city.slug).slice(0, 4)
 
   const faqs = [
     {
-      q: `Does Shah Solutions have a team based in ${city.name}?`,
-      a: `Shah Solutions serves clients across Pakistan, including ${city.name}, with remote-first delivery and flexible calls scheduled around your timezone. Most of our ${city.name} clients work with us entirely online — from discovery call to launch.`,
+      q: `Does Aiventra Labs have a team based in ${city.name}?`,
+      a: `Aiventra Labs is based in Pakistan and works remote-first with clients across the country, with flexible calls scheduled around your timezone. Most clients work with us entirely online — from discovery call to launch.`,
     },
     {
       q: `How much does ${offering.label.toLowerCase()} cost in ${city.name}?`,
       a: `Pricing depends on scope. We provide a transparent, itemized proposal after a free consultation, so you know exactly what you're paying for before committing — no hidden fees.`,
     },
     {
-      q: `How is Shah Solutions different from other ${offering.label.toLowerCase()} options in ${city.name}?`,
+      q: `How is Aiventra Labs different from other ${offering.label.toLowerCase()} options in ${city.name}?`,
       a: `We combine technical depth with straightforward communication and transparent reporting. ${offering.pitch}`,
     },
   ]
@@ -68,7 +67,7 @@ export default async function LocationPage({ params }: Props) {
       serviceType: offering.label,
       description: offering.pitch,
       provider: { '@id': `${BASE}/#organization` },
-      areaServed: { '@type': 'City', name: city.name },
+      areaServed: { '@type': 'Country', name: city.name },
       url: `${BASE}/locations/${slug}`,
     },
     {
@@ -102,7 +101,7 @@ export default async function LocationPage({ params }: Props) {
 
             <div className="section-tag">
               <MapPin size={12} />
-              {city.name}, Pakistan
+              {city.name}
             </div>
             <h1 className="font-display font-black text-4xl sm:text-6xl text-white mt-4 mb-5 leading-tight">
               {offering.label} in <span className="gradient-text-animate">{city.name}</span>
@@ -112,7 +111,7 @@ export default async function LocationPage({ params }: Props) {
 
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
               <Link href="/contact" className="btn-primary text-sm">
-                <span>Get a Free {city.name} Consultation</span>
+                <span>Get a Free Consultation</span>
                 <ArrowRight size={16} />
               </Link>
               <Link href={offering.servicePageHref} className="btn-secondary text-sm">
@@ -171,7 +170,7 @@ export default async function LocationPage({ params }: Props) {
 
       {/* ── CROSS LINKS ───────────────────────────────────────────────────── */}
       <section className="py-16 relative">
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 gap-10">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <h3 className="font-display font-bold text-white text-lg mb-4">Other Services in {city.name}</h3>
             <div className="flex flex-col gap-2">
@@ -187,21 +186,6 @@ export default async function LocationPage({ params }: Props) {
               ))}
             </div>
           </ScrollReveal>
-          <ScrollReveal delay={0.08}>
-            <h3 className="font-display font-bold text-white text-lg mb-4">{offering.label} in Other Cities</h3>
-            <div className="flex flex-col gap-2">
-              {sameServiceOtherCities.map(c => (
-                <Link
-                  key={c.slug}
-                  href={`/locations/${offering.slugPrefix}-${c.slug}`}
-                  className="text-sm text-slate-400 hover:text-primary-light transition-colors inline-flex items-center gap-2"
-                >
-                  <ArrowRight size={12} />
-                  {offering.label} in {c.name}
-                </Link>
-              ))}
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 
@@ -212,7 +196,7 @@ export default async function LocationPage({ params }: Props) {
         <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <h2 className="font-display font-black text-3xl sm:text-4xl text-white mb-6">
-              Let&apos;s Grow Your {city.name} Business
+              Let&apos;s Grow Your Business in {city.name}
             </h2>
             <p className="text-slate-400 text-lg mb-10">
               Book a free 30-minute strategy call — no commitment required.

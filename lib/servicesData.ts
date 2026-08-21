@@ -45,7 +45,7 @@ export const serviceCategories: ServiceCategory[] = [
       { icon: Gauge, label: 'Core Web Vitals Optimization' },
       { icon: Activity, label: 'SEO Analytics & Reporting' },
     ],
-    results: ['300% average traffic increase', 'Page 1 rankings in 90 days', 'Measurable ROI tracking'],
+    results: ['Full technical SEO audits and fixes', 'Keyword-mapped content strategy', 'Transparent monthly reporting'],
   },
   {
     slug: 'geo',
@@ -67,7 +67,7 @@ export const serviceCategories: ServiceCategory[] = [
       { icon: Store, label: 'Google Business Optimization' },
       { icon: Activity, label: 'AI Search Monitoring' },
     ],
-    results: ['Featured in AI search results', 'Authority E-E-A-T signals', 'Local pack dominance'],
+    results: ['Structured for AI citation', 'Authority E-E-A-T signals', 'Improved local search visibility'],
   },
   {
     slug: 'web-development',
@@ -89,16 +89,16 @@ export const serviceCategories: ServiceCategory[] = [
       { icon: Gauge, label: 'Performance Optimization' },
       { icon: Lock, label: 'Security Hardening' },
     ],
-    results: ['Sub-2s load times', '99.9% uptime SLA', 'Mobile-first responsive'],
+    results: ['Sub-2s load time target', 'Mobile-first responsive design', 'Built for reliability'],
   },
   {
-    slug: 'app-development',
+    slug: 'mobile-app-development',
     legacyAnchor: 'app',
     icon: Smartphone,
     color: 'from-emerald-600 to-teal-700',
     borderColor: 'border-emerald-500/20',
     glowColor: 'rgba(16,185,129,0.3)',
-    title: 'App Development',
+    title: 'Mobile App Development',
     subtitle: 'Apps That Users Love. Businesses Rely On.',
     serviceType: 'Mobile App Development',
     longDesc:
@@ -111,7 +111,7 @@ export const serviceCategories: ServiceCategory[] = [
       { icon: Lock, label: 'App Store Submission' },
       { icon: Activity, label: 'Performance Monitoring' },
     ],
-    results: ['4.8+ App Store ratings', '50ms response APIs', 'Offline-first architecture'],
+    results: ['Built for App Store & Play Store approval', 'Fast, responsive APIs', 'Offline-first architecture'],
   },
   {
     slug: 'digital-marketing',
@@ -133,7 +133,7 @@ export const serviceCategories: ServiceCategory[] = [
       { icon: Activity, label: 'Marketing Analytics' },
       { icon: GitBranch, label: 'A/B Testing & Optimization' },
     ],
-    results: ['Average 4.5x ROAS', '60% higher conversion rates', 'Full attribution reporting'],
+    results: ['Full-funnel campaign strategy', 'Conversion-focused landing pages', 'Full attribution reporting'],
   },
   {
     slug: 'cloud-solutions',
@@ -155,20 +155,20 @@ export const serviceCategories: ServiceCategory[] = [
       { icon: Activity, label: 'Monitoring & Alerting' },
       { icon: Gauge, label: 'Cost Optimization' },
     ],
-    results: ['99.99% uptime', '40% average cost reduction', 'Auto-scaling architecture'],
+    results: ['Reliable, monitored infrastructure', 'Cost-optimized architecture', 'Auto-scaling setup'],
   },
   {
-    slug: 'ai-agents',
+    slug: 'ai-development',
     legacyAnchor: 'ai-agents',
     icon: Bot,
     color: 'from-fuchsia-600 to-purple-800',
     borderColor: 'border-fuchsia-500/20',
     glowColor: 'rgba(192,38,211,0.3)',
-    title: 'AI Agents',
+    title: 'AI Development',
     subtitle: 'Autonomous Software That Gets Work Done.',
-    serviceType: 'AI Agent Development',
+    serviceType: 'AI Development',
     longDesc:
-      'We design and build custom AI agents that plan, reason, and take action across your tools — automating multi-step workflows instead of just answering questions. Every agent is scoped to your business logic, connected to your existing systems, and built with human-in-the-loop checkpoints where it matters.',
+      'We design and build custom AI agents and automation that plan, reason, and take action across your tools — automating multi-step workflows instead of just answering questions. Every system is scoped to your business logic, connected to your existing systems, and built with human-in-the-loop checkpoints where it matters.',
     features: [
       { icon: Workflow, label: 'Custom Workflow Automation' },
       { icon: Puzzle, label: 'Tool & API Integrations' },
@@ -239,7 +239,7 @@ export const process = [
 
 export const serviceFaqs = [
   {
-    q: 'What does Shah Solutions SEO optimization service include?',
+    q: 'What does Aiventra Labs SEO optimization service include?',
     a: 'Our SEO service covers full technical SEO audits, keyword research and mapping, authority link building, on-page optimization, Core Web Vitals improvements, structured data implementation, and monthly reporting. We handle both on-page and off-page factors for comprehensive search visibility across Google and Bing.',
   },
   {
@@ -247,7 +247,7 @@ export const serviceFaqs = [
     a: 'GEO is the technical and content discipline behind AI citations: structured data, clear entity signals, topical depth, and demonstrated E-E-A-T, so systems like ChatGPT, Perplexity, and Google AI Overviews treat your business as a source worth citing. It\'s a different skill set from classic keyword-and-backlink SEO, and most agencies haven\'t caught up to it yet.',
   },
   {
-    q: 'How long does a web development project take at Shah Solutions?',
+    q: 'How long does a web development project take at Aiventra Labs?',
     a: 'A standard business website takes 2–4 weeks. E-commerce platforms take 4–8 weeks. Custom web applications take 6–16 weeks depending on complexity. Timelines are agreed upfront in our project proposal, with weekly updates and live preview environments throughout.',
   },
   {
@@ -255,15 +255,15 @@ export const serviceFaqs = [
     a: 'Yes. We build native Android and iOS apps as well as cross-platform applications using Flutter and React Native. Cross-platform development reduces cost and time-to-market while maintaining near-native performance. We also handle App Store and Google Play submission and post-launch support.',
   },
   {
-    q: 'What cloud platforms does Shah Solutions support?',
-    a: 'Shah Solutions designs and manages infrastructure on Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP). We also deploy on Vercel, Cloudflare, and DigitalOcean. All cloud setups include CI/CD pipelines, monitoring, alerting, and cost optimization.',
+    q: 'What cloud platforms does Aiventra Labs support?',
+    a: 'Aiventra Labs designs and manages infrastructure on Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP). We also deploy on Vercel, Cloudflare, and DigitalOcean. All cloud setups include CI/CD pipelines, monitoring, alerting, and cost optimization.',
   },
   {
     q: 'Do you offer ongoing support after project delivery?',
     a: 'Yes. All projects include 30 days of free post-launch support. We also offer monthly maintenance retainer plans covering updates, security patches, performance monitoring, and minor changes. SEO and digital marketing clients typically work with us on ongoing monthly contracts for sustained growth.',
   },
   {
-    q: 'What is an AI agent, and can Shah Solutions build one for my business?',
+    q: 'What is an AI agent, and can Aiventra Labs build one for my business?',
     a: 'An AI agent is software that plans and takes action across your tools — not just answering questions, but completing multi-step tasks. We build custom AI agents scoped to your workflows, connected to your existing systems, with human-in-the-loop approval checkpoints so nothing happens without oversight where it matters.',
   },
   {
