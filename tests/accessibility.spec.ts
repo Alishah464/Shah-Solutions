@@ -18,6 +18,25 @@ for (const path of pages) {
     await bypassSplashIntro(page)
     await page.goto(path)
     await page.waitForLoadState('networkidle')
+    // ScrollReveal only fades content in once its IntersectionObserver fires,
+    // which never happens for anything below the fold unless the page is
+    // actually scrolled — so without this, axe permanently sees opacity:0
+    // text on every section a real visitor would naturally scroll past.
+    // Walk the whole page in viewport-sized steps so every section gets a
+    // chance to trigger, then settle back at the top before scanning.
+    await page.evaluate(async () => {
+      const step = Math.max(window.innerHeight * 0.8, 200)
+      const total = document.body.scrollHeight
+      for (let y = 0; y < total; y += step) {
+        window.scrollTo(0, y)
+        await new Promise((r) => setTimeout(r, 60))
+      }
+      window.scrollTo(0, total)
+      await new Promise((r) => setTimeout(r, 60))
+      window.scrollTo(0, 0)
+    })
+    // Let the now-triggered fade-in transitions finish before scanning.
+    await page.waitForTimeout(800)
 
     const results = await new AxeBuilder({ page }).withTags(TAGS).analyze()
 

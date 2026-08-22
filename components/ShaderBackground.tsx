@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import { useReducedMotion } from 'framer-motion'
+import { isSoftwareRenderer } from '@/lib/webgl'
 
 // Raw WebGL rather than a 3D library — this is a single full-screen quad
 // with a cheap fragment shader, kept to the hero only per the "3D/shader as
@@ -79,6 +80,7 @@ export default function ShaderBackground() {
     if (!canvas) return
     const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: true })
     if (!gl) return
+    if (isSoftwareRenderer(gl)) return
 
     const vs = compileShader(gl, gl.VERTEX_SHADER, VERTEX_SRC)
     const fs = compileShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_SRC)
@@ -105,14 +107,18 @@ export default function ShaderBackground() {
     gl.enable(gl.BLEND)
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA)
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
+    // Soft, blurred blobs don't need a full-resolution buffer — rendering
+    // smaller and letting the GPU upscale to the canvas's CSS size cuts
+    // fragment-shader cost substantially with no visible quality loss.
+    const RENDER_SCALE = 0.6
     let mouseX = 0
     let mouseY = 0
 
     function resize() {
       const rect = canvas!.getBoundingClientRect()
-      canvas!.width = Math.max(1, rect.width * dpr)
-      canvas!.height = Math.max(1, rect.height * dpr)
+      canvas!.width = Math.max(1, Math.round(rect.width * dpr * RENDER_SCALE))
+      canvas!.height = Math.max(1, Math.round(rect.height * dpr * RENDER_SCALE))
       gl!.viewport(0, 0, canvas!.width, canvas!.height)
     }
     resize()
@@ -120,8 +126,8 @@ export default function ShaderBackground() {
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas!.getBoundingClientRect()
-      mouseX = (e.clientX - rect.left) * dpr
-      mouseY = (rect.height - (e.clientY - rect.top)) * dpr
+      mouseX = (e.clientX - rect.left) * dpr * RENDER_SCALE
+      mouseY = (rect.height - (e.clientY - rect.top)) * dpr * RENDER_SCALE
     }
     window.addEventListener('mousemove', handleMouseMove)
 
@@ -130,8 +136,13 @@ export default function ShaderBackground() {
     document.addEventListener('visibilitychange', handleVisibility)
 
     let raf = 0
+    let lastFrame = 0
+    const FRAME_INTERVAL = 1000 / 30
     const start = performance.now()
-    function render() {
+    function render(now: number) {
+      raf = requestAnimationFrame(render)
+      if (now - lastFrame < FRAME_INTERVAL) return
+      lastFrame = now
       if (visible) {
         gl!.uniform2f(resLoc, canvas!.width, canvas!.height)
         gl!.uniform1f(timeLoc, (performance.now() - start) / 1000)
@@ -139,7 +150,6 @@ export default function ShaderBackground() {
         gl!.clear(gl!.COLOR_BUFFER_BIT)
         gl!.drawArrays(gl!.TRIANGLES, 0, 6)
       }
-      raf = requestAnimationFrame(render)
     }
     raf = requestAnimationFrame(render)
 

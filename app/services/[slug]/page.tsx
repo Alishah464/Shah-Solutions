@@ -145,7 +145,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 <div className="absolute left-[18px] top-2 bottom-2 w-px bg-gradient-to-b from-primary via-secondary to-accent opacity-25" />
                 <div className="space-y-3">
                   {svc.features.map(({ icon: FIcon, label }, i) => (
-                    <ScrollReveal key={label} delay={i * 0.08} direction="left" once={false}>
+                    <ScrollReveal key={label} delay={i * 0.08} direction="left">
                       <div className="flex items-center gap-4">
                         <div
                           className={`w-9 h-9 rounded-xl bg-gradient-to-br ${svc.color} flex items-center justify-center flex-shrink-0 relative z-10`}

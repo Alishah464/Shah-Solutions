@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { useReducedMotion } from 'framer-motion'
+import { isSoftwareRenderer } from '@/lib/webgl'
 
 const NODE_COLORS = [0x7c3aed, 0x2563eb, 0x06b6d4]
 // Roughly the AI / Software / Data satellites sketched in the brief —
@@ -39,7 +40,12 @@ export default function HeroScene() {
     } catch {
       return
     }
-    if (!renderer.getContext()) {
+    const gl = renderer.getContext()
+    if (!gl) {
+      renderer.dispose()
+      return
+    }
+    if (isSoftwareRenderer(gl)) {
       renderer.dispose()
       return
     }
@@ -121,13 +127,17 @@ export default function HeroScene() {
 
     let raf = 0
     let last = performance.now()
+    const FRAME_INTERVAL = 1000 / 30
     if (prefersReducedMotion) {
       group.rotation.set(0.2, 0.6, 0)
     }
 
     function animate(now: number) {
-      const delta = Math.min((now - last) / 1000, 0.1)
-      last = now
+      raf = requestAnimationFrame(animate)
+      const elapsed = now - last
+      if (elapsed < FRAME_INTERVAL) return
+      const delta = Math.min(elapsed / 1000, 0.1)
+      last = now - (elapsed % FRAME_INTERVAL)
       if (visible) {
         if (!prefersReducedMotion) {
           group.rotation.y += delta * 0.15
@@ -136,7 +146,6 @@ export default function HeroScene() {
         }
         renderer.render(scene, camera)
       }
-      raf = requestAnimationFrame(animate)
     }
     raf = requestAnimationFrame(animate)
 

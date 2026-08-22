@@ -10,9 +10,8 @@ import {
 } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
 import MagneticButton from '@/components/MagneticButton'
-import AIPlayground from '@/components/AIPlayground'
+import TypedText from '@/components/TypedText'
 import ShaderBackground from '@/components/ShaderBackground'
-import CapabilitiesShowcase from '@/components/CapabilitiesShowcase'
 import SplashIntro from '@/components/SplashIntro'
 import dynamic from 'next/dynamic'
 
@@ -21,6 +20,13 @@ import dynamic from 'next/dynamic'
 // even when <Canvas> never actually renders server-side) — defer the whole
 // module to the client.
 const HeroScene = dynamic(() => import('@/components/HeroScene'), { ssr: false })
+
+// These are fully interactive but sit well below the fold — still prerendered
+// into the static HTML (ssr defaults to true), just split into their own
+// chunks so their JS doesn't compete with the hero/above-the-fold content for
+// the main thread during the page's critical initial-load window.
+const CapabilitiesShowcase = dynamic(() => import('@/components/CapabilitiesShowcase'))
+const AIPlayground = dynamic(() => import('@/components/AIPlayground'))
 import { SITE_URL as BASE } from '@/lib/seo'
 import { trackEvent } from '@/lib/analytics'
 
@@ -84,42 +90,6 @@ const homePageSchema = {
   ],
 }
 
-/* ── Typed text hook ──────────────────────────────────────────────────────── */
-function useTyped(words: string[], speed = 100, pause = 2000, disabled = false) {
-  const [text, setText] = useState('')
-  const [wordIndex, setWordIndex] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
-
-  useEffect(() => {
-    if (disabled) {
-      // Runs post-hydration only, so this never diverges from the SSR
-      // markup (which always renders the empty initial state) — avoids a
-      // hydration mismatch while still skipping the animation for users
-      // who requested reduced motion.
-      setText(words[0])
-      return
-    }
-    const current = words[wordIndex % words.length]
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        setText(current.slice(0, text.length + 1))
-        if (text.length === current.length) {
-          setTimeout(() => setIsDeleting(true), pause)
-        }
-      } else {
-        setText(current.slice(0, text.length - 1))
-        if (text.length === 0) {
-          setIsDeleting(false)
-          setWordIndex((i) => i + 1)
-        }
-      }
-    }, isDeleting ? speed / 2 : speed)
-    return () => clearTimeout(timeout)
-  }, [text, isDeleting, wordIndex, words, speed, pause, disabled])
-
-  return text
-}
-
 const industries = [
   { slug: 'ecommerce', title: 'E-commerce', icon: ShoppingCart },
   { slug: 'saas', title: 'SaaS', icon: Boxes },
@@ -140,7 +110,6 @@ const whyUs = [
 /* ── Component ────────────────────────────────────────────────────────────── */
 export default function HomePage() {
   const prefersReducedMotion = useReducedMotion()
-  const typedText = useTyped(['SEO Domination', 'Stunning Websites', 'Powerful Apps', 'AI-Driven GEO', 'Digital Growth'], 80, 2200, !!prefersReducedMotion)
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
   const heroY = useTransform(scrollY, [0, 600], prefersReducedMotion ? [0, 0] : [0, -120])
@@ -222,9 +191,13 @@ export default function HomePage() {
                 transition={{ delay: 0.4 }}
               >
                 <span>We specialize in</span>
-                <span className="gradient-text font-bold min-h-[1.4em] min-w-0 sm:min-w-[220px] text-center sm:text-left typing-cursor">
-                  {typedText}
-                </span>
+                <TypedText
+                  words={['SEO Domination', 'Stunning Websites', 'Powerful Apps', 'AI-Driven GEO', 'Digital Growth']}
+                  speed={80}
+                  pause={2200}
+                  disabled={!!prefersReducedMotion}
+                  className="gradient-text font-bold min-h-[1.4em] min-w-0 sm:min-w-[220px] text-center sm:text-left typing-cursor"
+                />
               </motion.div>
 
               <motion.p
