@@ -122,20 +122,28 @@ export default function ContactClient() {
     setLoading(true)
     setError('')
     try {
+      // multipart/form-data (via the browser's native FormData, not this
+      // file's react-hook-form FormData interface of the same name — hence
+      // `window.FormData`) rather than a JSON body: it's a CORS-safelisted
+      // content type, so the browser sends it without a preflight OPTIONS
+      // request. Plain form-field submission is web3forms' primary,
+      // no-JS-required integration path, so this is a supported format,
+      // not a workaround.
+      const body = new window.FormData()
+      body.append('access_key', WEB3FORMS_ACCESS_KEY)
+      body.append('subject', `New project inquiry from ${data.name}`)
+      body.append('from_name', 'Aiventra Labs Website')
+      body.append('name', data.name)
+      body.append('email', data.email)
+      body.append('phone', data.phone)
+      body.append('service', data.service)
+      body.append('budget', data.budget)
+      body.append('message', data.message)
+
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_ACCESS_KEY,
-          subject: `New project inquiry from ${data.name}`,
-          from_name: 'Aiventra Labs Website',
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          service: data.service,
-          budget: data.budget,
-          message: data.message,
-        }),
+        headers: { Accept: 'application/json' },
+        body,
       })
       const json = await res.json()
       if (!json.success) throw new Error(json.message ?? 'Failed to send')
