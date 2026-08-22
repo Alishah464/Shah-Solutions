@@ -6,7 +6,7 @@ import { industries } from '@/lib/industriesData'
 import { buildMetadata, buildBreadcrumbSchema, buildSchemaGraph, SITE_URL as BASE } from '@/lib/seo'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Industries We Serve — E-commerce, SaaS, Real Estate & More',
+  title: 'Industries We Serve — E-commerce, SaaS & More',
   description:
     'Aiventra Labs builds SEO, web development, and AI solutions tailored to e-commerce, SaaS, real estate, healthcare, and education businesses.',
   path: '/industries',

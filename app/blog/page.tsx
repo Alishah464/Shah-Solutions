@@ -12,7 +12,7 @@ const CATEGORY_ORDER: ArticleCategory[] = ['GEO / AEO', 'SEO', 'Web Development'
 export const metadata: Metadata = buildMetadata({
   title: 'Blog — SEO, GEO & Web Development Insights',
   description:
-    'Guides on SEO, GEO/AI search optimization, AEO, and web development from Aiventra Labs — practical, 2026-dated insights for businesses navigating AI-powered search.',
+    'Guides on SEO, GEO/AI search optimization, and web development from Aiventra Labs — practical insights for businesses navigating AI-powered search.',
   path: '/blog',
   keywords: [
     'SEO blog', 'GEO guide', 'AEO answer engine optimization',

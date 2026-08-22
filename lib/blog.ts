@@ -31,6 +31,11 @@ export function categoryFromSlug(slug: string): ArticleCategory | null {
 export interface ArticleMeta {
   slug: string
   title: string
+  /** Shorter title for the <title> tag / SERP display. Article `title`s are
+   * written to be fully descriptive on-page (H1, blog listing), which often
+   * runs well past the ~60 characters Google displays before truncating.
+   * Falls back to `title` when not set. */
+  seoTitle?: string
   description: string
   date: string
   category: ArticleCategory
@@ -55,6 +60,7 @@ function fileToMeta(file: string): ArticleMeta {
   return {
     slug,
     title: data.title as string,
+    seoTitle: data.seoTitle as string | undefined,
     description: data.description as string,
     date: data.date as string,
     category: (data.category as ArticleCategory) ?? 'Business',
@@ -76,6 +82,7 @@ export function getArticleBySlug(slug: string): Article | null {
   return {
     slug,
     title: data.title as string,
+    seoTitle: data.seoTitle as string | undefined,
     description: data.description as string,
     date: data.date as string,
     category: (data.category as ArticleCategory) ?? 'Business',

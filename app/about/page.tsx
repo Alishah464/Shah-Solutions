@@ -54,7 +54,7 @@ const aboutPageSchema = {
 }
 
 export const metadata: Metadata = buildMetadata({
-  title: 'About Aiventra Labs — AI, Software & Digital Growth Company',
+  title: 'About Aiventra Labs',
   description:
     'Learn about Aiventra Labs — our mission, values, and approach to SEO, web development, and AI development for businesses in Pakistan and worldwide.',
   path: '/about',

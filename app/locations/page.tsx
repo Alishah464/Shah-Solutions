@@ -6,7 +6,7 @@ import { cities, serviceOfferings } from '@/lib/locationsData'
 import { buildMetadata, buildBreadcrumbSchema, buildSchemaGraph, SITE_URL as BASE } from '@/lib/seo'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Where We Work — SEO & Web Development in Pakistan',
+  title: 'Where We Work — Pakistan',
   description:
     'Aiventra Labs provides SEO, web development, and digital marketing services to businesses across Pakistan, remote-first.',
   path: '/locations',

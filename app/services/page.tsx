@@ -9,9 +9,9 @@ import { serviceCategories, process, serviceFaqs } from '@/lib/servicesData'
 import { buildMetadata, buildBreadcrumbSchema, buildFaqSchema, buildSchemaGraph, SITE_URL as BASE } from '@/lib/seo'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Services — SEO, GEO, Web, App & AI Development',
+  title: 'SEO, GEO, Web & AI Development Services',
   description:
-    'AI, software & digital growth services: SEO, GEO/AI search, web & mobile app development, AI agents, chatbots & digital marketing. Aiventra Labs, Pakistan.',
+    'AI, software & digital growth services: SEO, GEO, web & app development, AI agents, chatbots & digital marketing from Aiventra Labs, Pakistan.',
   path: '/services',
   keywords: [
     'SEO services Pakistan', 'GEO optimization', 'web development services',

@@ -33,13 +33,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = getArticleBySlug(slug)
   if (!article) return {}
 
+  const seoTitle = article.seoTitle ?? article.title
   const ogImage = [{ url: `${BASE}/opengraph-image`, width: 1200, height: 630, alt: article.title }]
   return {
-    title: article.title,
+    title: seoTitle,
     description: article.description,
     alternates: { canonical: `/blog/${slug}` },
     openGraph: {
-      title: article.title,
+      title: seoTitle,
       description: article.description,
       url: `/blog/${slug}`,
       type: 'article',
@@ -50,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: article.title,
+      title: seoTitle,
       description: article.description,
       images: ogImage,
     },
