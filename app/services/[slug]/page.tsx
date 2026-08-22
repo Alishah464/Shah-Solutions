@@ -22,10 +22,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!svc) return {}
 
   return buildMetadata({
-    title: `${svc.title} Services`,
-    description: `${svc.subtitle} ${svc.title} for businesses in Pakistan and worldwide.`,
+    title: svc.metaTitle ?? `${svc.title} Services`,
+    description: svc.metaDescription,
     path: `/services/${slug}`,
-    keywords: [svc.title, `${svc.title} Pakistan`, svc.serviceType],
+    keywords: svc.keywords,
   })
 }
 

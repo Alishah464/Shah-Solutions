@@ -16,6 +16,11 @@ export interface ServiceCategory {
   borderColor: string
   glowColor: string
   title: string
+  /** Overrides the default `${title} Services` pattern for pages where that
+   * reads awkwardly (e.g. "Cloud Solutions Services", "AI Chatbots Services"). */
+  metaTitle?: string
+  metaDescription: string
+  keywords: string[]
   subtitle: string
   longDesc: string
   serviceType: string
@@ -33,6 +38,8 @@ export const serviceCategories: ServiceCategory[] = [
     borderColor: 'border-purple-500/20',
     glowColor: 'rgba(124,58,237,0.3)',
     title: 'SEO Optimization',
+    metaDescription: 'Technical SEO audits, keyword research, and authority link building — data-driven SEO services to help your business rank higher and grow organic traffic.',
+    keywords: ['SEO services Pakistan', 'SEO agency', 'technical SEO audit', 'keyword research services', 'link building services', 'SEO company Pakistan'],
     subtitle: 'Rank Higher. Get Found. Grow Faster.',
     serviceType: 'Search Engine Optimization',
     longDesc:
@@ -55,6 +62,8 @@ export const serviceCategories: ServiceCategory[] = [
     borderColor: 'border-blue-500/20',
     glowColor: 'rgba(37,99,235,0.3)',
     title: 'GEO / AI Search Optimization',
+    metaDescription: 'Get cited and recommended by ChatGPT, Perplexity, and Google AI Overviews with GEO — structured data, E-E-A-T authority, and AI search monitoring.',
+    keywords: ['GEO services', 'Generative Engine Optimization', 'AI search optimization', 'ChatGPT SEO', 'Google AI Overviews optimization', 'answer engine optimization'],
     subtitle: 'Own the AI-Powered Search Landscape.',
     serviceType: 'Generative Engine Optimization',
     longDesc:
@@ -77,6 +86,8 @@ export const serviceCategories: ServiceCategory[] = [
     borderColor: 'border-cyan-500/20',
     glowColor: 'rgba(6,182,212,0.3)',
     title: 'Web Development',
+    metaDescription: 'Custom websites and web apps built with Next.js, React, and TypeScript — engineered for speed, accessibility, and conversion from day one.',
+    keywords: ['web development Pakistan', 'Next.js development', 'React development agency', 'custom website development', 'web application development'],
     subtitle: 'Websites That Perform Like Products.',
     serviceType: 'Web Development',
     longDesc:
@@ -99,6 +110,8 @@ export const serviceCategories: ServiceCategory[] = [
     borderColor: 'border-emerald-500/20',
     glowColor: 'rgba(16,185,129,0.3)',
     title: 'Mobile App Development',
+    metaDescription: 'Native iOS & Android and cross-platform Flutter/React Native app development — from concept to App Store launch.',
+    keywords: ['mobile app development Pakistan', 'Flutter app development', 'React Native development', 'iOS app development', 'Android app development'],
     subtitle: 'Apps That Users Love. Businesses Rely On.',
     serviceType: 'Mobile App Development',
     longDesc:
@@ -121,6 +134,8 @@ export const serviceCategories: ServiceCategory[] = [
     borderColor: 'border-orange-500/20',
     glowColor: 'rgba(234,88,12,0.3)',
     title: 'Digital Marketing',
+    metaDescription: 'Full-funnel digital marketing — PPC ads, social media management, and email automation backed by data and conversion tracking.',
+    keywords: ['digital marketing agency Pakistan', 'PPC management', 'Google Ads agency', 'social media marketing', 'email marketing automation'],
     subtitle: 'Marketing That Converts, Not Just Impresses.',
     serviceType: 'Digital Marketing',
     longDesc:
@@ -143,6 +158,9 @@ export const serviceCategories: ServiceCategory[] = [
     borderColor: 'border-violet-500/20',
     glowColor: 'rgba(139,92,246,0.3)',
     title: 'Cloud Solutions',
+    metaTitle: 'Cloud Solutions & DevOps',
+    metaDescription: 'AWS, Azure, and GCP infrastructure with DevOps best practices — CI/CD pipelines, monitoring, and cost-optimized cloud architecture.',
+    keywords: ['cloud consulting Pakistan', 'AWS consulting', 'DevOps services', 'cloud migration services', 'CI/CD pipeline setup'],
     subtitle: 'Infrastructure Built to Scale Infinitely.',
     serviceType: 'Cloud Computing',
     longDesc:
@@ -165,6 +183,8 @@ export const serviceCategories: ServiceCategory[] = [
     borderColor: 'border-fuchsia-500/20',
     glowColor: 'rgba(192,38,211,0.3)',
     title: 'AI Development',
+    metaDescription: 'Custom AI agents and workflow automation that plan and take action across your tools, with human-in-the-loop controls where it matters.',
+    keywords: ['AI development company Pakistan', 'AI agent development', 'AI automation services', 'custom AI agents', 'LLM integration services'],
     subtitle: 'Autonomous Software That Gets Work Done.',
     serviceType: 'AI Development',
     longDesc:
@@ -187,6 +207,9 @@ export const serviceCategories: ServiceCategory[] = [
     borderColor: 'border-pink-500/20',
     glowColor: 'rgba(219,39,119,0.3)',
     title: 'AI Chatbots',
+    metaTitle: 'AI Chatbot Development',
+    metaDescription: 'Custom AI chatbots for your website, WhatsApp, or internal tools — trained on your own content, with lead capture and human handoff.',
+    keywords: ['AI chatbot development Pakistan', 'WhatsApp chatbot development', 'custom chatbot for business', 'conversational AI development'],
     subtitle: 'Conversational AI, Trained On Your Business.',
     serviceType: 'AI Chatbot Development',
     longDesc:
@@ -209,6 +232,9 @@ export const serviceCategories: ServiceCategory[] = [
     borderColor: 'border-yellow-500/20',
     glowColor: 'rgba(234,179,8,0.3)',
     title: 'Trading Bots',
+    metaTitle: 'Algorithmic Trading Bot Development',
+    metaDescription: 'Custom algorithmic trading bots built to your strategy — backtested against historical data, with full source code ownership.',
+    keywords: ['algorithmic trading bot development', 'custom trading bot Pakistan', 'trading bot backtesting', 'exchange API integration'],
     subtitle: 'Algorithmic Trading, Built To Your Strategy.',
     serviceType: 'Algorithmic Trading Software Development',
     longDesc:
