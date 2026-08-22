@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation'
 import { ChevronRight, ArrowRight, XCircle, CheckCircle2 } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
 import MagneticButton from '@/components/MagneticButton'
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
 import { industries, getIndustryBySlug } from '@/lib/industriesData'
 import { buildMetadata, buildBreadcrumbSchema, buildFaqSchema, buildSchemaGraph, SITE_URL as BASE } from '@/lib/seo'
 
@@ -127,14 +126,21 @@ export default async function IndustryDetailPage({ params }: Props) {
               {ind.title} <span className="gradient-text">FAQ</span>
             </h2>
           </ScrollReveal>
-          <Accordion type="single" collapsible className="space-y-3">
+          <div className="space-y-3">
             {ind.faqs.map((faq, i) => (
-              <AccordionItem key={i} value={`item-${i}`}>
-                <AccordionTrigger>{faq.q}</AccordionTrigger>
-                <AccordionContent>{faq.a}</AccordionContent>
-              </AccordionItem>
+              <ScrollReveal key={faq.q} delay={i * 0.05}>
+                <details className="glass-card overflow-hidden group">
+                  <summary className="flex items-center justify-between p-5 sm:p-6 cursor-pointer list-none hover:bg-white/3 transition-colors">
+                    <span className="font-semibold text-white text-sm sm:text-base pr-4">{faq.q}</span>
+                    <span className="text-primary text-2xl flex-shrink-0 transition-transform duration-300 group-open:rotate-45">+</span>
+                  </summary>
+                  <div className="px-5 sm:px-6 pb-5 sm:pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
+                    {faq.a}
+                  </div>
+                </details>
+              </ScrollReveal>
             ))}
-          </Accordion>
+          </div>
         </div>
       </section>
 
