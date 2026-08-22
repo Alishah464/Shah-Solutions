@@ -55,13 +55,14 @@ interface MagneticButtonProps {
   strength?: number
   target?: string
   rel?: string
+  onClick?: () => void
 }
 
 /** Link version — for navigation CTAs. */
-export default function MagneticButton({ href, className, children, strength, target, rel }: MagneticButtonProps) {
+export default function MagneticButton({ href, className, children, strength, target, rel, onClick }: MagneticButtonProps) {
   return (
     <MagneticWrapper strength={strength}>
-      <Link href={href} className={className} target={target} rel={rel}>
+      <Link href={href} className={className} target={target} rel={rel} onClick={onClick}>
         {children}
       </Link>
     </MagneticWrapper>

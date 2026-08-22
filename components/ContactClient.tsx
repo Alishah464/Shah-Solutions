@@ -9,6 +9,7 @@ import {
 } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
 import { MagneticSubmitButton } from '@/components/MagneticButton'
+import { trackEvent } from '@/lib/analytics'
 
 interface FormData {
   name: string
@@ -106,8 +107,15 @@ export default function ContactClient() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [hasStartedForm, setHasStartedForm] = useState(false)
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>()
+
+  const handleFormFocus = () => {
+    if (hasStartedForm) return
+    setHasStartedForm(true)
+    trackEvent('contact_form_started')
+  }
 
   const onSubmit = async (data: FormData) => {
     if (data.botcheck) return // honeypot tripped — silently drop
@@ -132,6 +140,7 @@ export default function ContactClient() {
       const json = await res.json()
       if (!json.success) throw new Error(json.message ?? 'Failed to send')
       setSubmitted(true)
+      trackEvent('contact_form_submitted')
       reset()
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Something went wrong.'
@@ -180,9 +189,9 @@ export default function ContactClient() {
                       <Icon size={18} className="text-white" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 mb-0.5 uppercase tracking-wider">{info.label}</p>
+                      <p className="text-xs text-slate-400 mb-0.5 uppercase tracking-wider">{info.label}</p>
                       <p className="text-white font-semibold text-sm mb-0.5">{info.value}</p>
-                      <p className="text-slate-500 text-xs">{info.desc}</p>
+                      <p className="text-slate-400 text-xs">{info.desc}</p>
                     </div>
                   </div>
                 </ScrollReveal>
@@ -243,6 +252,7 @@ export default function ContactClient() {
                       <motion.form
                         key="form"
                         onSubmit={handleSubmit(onSubmit)}
+                        onFocus={handleFormFocus}
                         className="space-y-5"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -300,6 +310,7 @@ export default function ContactClient() {
                               <Briefcase size={13} className="inline mr-1.5" />Service Needed *
                             </label>
                             <select
+                              aria-label="Service Needed"
                               className={`form-input ${errors.service ? 'border-red-500/60' : ''}`}
                               {...register('service', { required: 'Please select a service' })}
                             >
@@ -389,7 +400,7 @@ export default function ContactClient() {
                           )}
                         </MagneticSubmitButton>
 
-                        <p className="text-slate-500 text-xs text-center">
+                        <p className="text-slate-400 text-xs text-center">
                           By submitting you agree to be contacted by Aiventra Labs.
                           We respect your privacy — no spam, ever.
                         </p>
@@ -429,6 +440,7 @@ export default function ContactClient() {
                   <div className="space-y-3">
                     <a
                       href="mailto:amaherwani@gmail.com"
+                      onClick={() => trackEvent('email_clicked', { location: 'contact_page' })}
                       className="flex items-center gap-3 p-3 rounded-xl bg-primary/10 border border-primary/20 hover:bg-primary/20 transition-colors text-sm text-white group"
                     >
                       <Mail size={16} className="text-primary" />
@@ -451,6 +463,7 @@ export default function ContactClient() {
                       href="https://wa.me/923032818320"
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => trackEvent('whatsapp_clicked', { location: 'contact_page' })}
                       className="flex items-center gap-3 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors text-sm text-white"
                     >
                       <MessageSquare size={16} className="text-emerald-400" />

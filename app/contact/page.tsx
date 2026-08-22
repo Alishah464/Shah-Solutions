@@ -1,18 +1,17 @@
 import type { Metadata } from 'next'
 import ContactClient from '@/components/ContactClient'
-import { SITE_URL as BASE } from '@/lib/seo'
+import { buildMetadata, SITE_URL as BASE } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: 'Contact Us — Free IT Consultation',
   description:
     'Contact Aiventra Labs for IT services. Get a free consultation for SEO, GEO, web development, or app development. We respond within 2 hours.',
-  alternates: { canonical: '/contact' },
+  path: '/contact',
   keywords: [
     'contact Aiventra Labs', 'IT consultation Pakistan', 'free SEO consultation',
     'web development quote', 'hire IT company Pakistan',
   ],
-  openGraph: { title: 'Contact Aiventra Labs — Free IT Consultation', url: '/contact' },
-}
+})
 
 const contactSchema = {
   '@context': 'https://schema.org',

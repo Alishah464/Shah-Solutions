@@ -45,7 +45,7 @@ export default function SplashIntro() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.25, duration: 0.25 }}
-            className="mt-3 text-xs tracking-[0.3em] text-slate-500 uppercase"
+            className="mt-3 text-xs tracking-[0.3em] text-slate-400 uppercase"
           >
             AI &bull; Software &bull; Digital Growth
           </motion.div>

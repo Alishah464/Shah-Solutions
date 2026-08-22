@@ -29,11 +29,25 @@ export default function HeroScene() {
     const container = containerRef.current
     if (!container) return
 
+    // WebGL isn't guaranteed — blocked by the browser, an old GPU driver, a
+    // policy, etc. The 3D core is an enhancement on top of the hero's
+    // shader background and copy, not a dependency, so on failure this just
+    // leaves the container empty rather than crashing or logging noise.
+    let renderer: THREE.WebGLRenderer
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    } catch {
+      return
+    }
+    if (!renderer.getContext()) {
+      renderer.dispose()
+      return
+    }
+
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
     camera.position.set(0, 0, 4.5)
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
     container.appendChild(renderer.domElement)
 

@@ -53,7 +53,7 @@ export default function PortfolioClient() {
                     >
                       <Icon size={26} className="text-white" />
                     </div>
-                    <h3 className="font-display font-bold text-white text-lg mb-2">{svc.title}</h3>
+                    <h2 className="font-display font-bold text-white text-lg mb-2">{svc.title}</h2>
                     <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-1">{svc.longDesc}</p>
                     <span className="inline-flex items-center gap-1.5 text-primary-light text-sm font-medium">
                       See how we approach it

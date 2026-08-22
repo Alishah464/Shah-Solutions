@@ -125,7 +125,7 @@ export default function CommandPalette() {
             aria-label="Command palette"
           >
             <div className="flex items-center gap-3 px-5 py-4 border-b border-white/10">
-              <Search size={18} className="text-slate-500 flex-shrink-0" />
+              <Search size={18} className="text-slate-400 flex-shrink-0" />
               <input
                 autoFocus
                 value={query}
@@ -133,13 +133,13 @@ export default function CommandPalette() {
                 onKeyDown={handleInputKeyDown}
                 placeholder="Search Aiventra Labs..."
                 aria-label="Search"
-                className="flex-1 bg-transparent outline-none text-white placeholder:text-slate-500 text-sm sm:text-base"
+                className="flex-1 bg-transparent outline-none text-white placeholder:text-slate-400 text-sm sm:text-base"
               />
-              <kbd className="hidden sm:inline text-[10px] px-2 py-1 rounded border border-white/10 text-slate-500">ESC</kbd>
+              <kbd className="hidden sm:inline text-[10px] px-2 py-1 rounded border border-white/10 text-slate-400">ESC</kbd>
             </div>
             <div className="max-h-80 overflow-y-auto py-2">
               {filtered.length === 0 && (
-                <p className="text-center text-slate-500 text-sm py-8">No results for &ldquo;{query}&rdquo;</p>
+                <p className="text-center text-slate-400 text-sm py-8">No results for &ldquo;{query}&rdquo;</p>
               )}
               {filtered.map((item, i) => {
                 const Icon = item.icon
@@ -154,7 +154,7 @@ export default function CommandPalette() {
                   >
                     <Icon size={16} className="flex-shrink-0 text-primary-light" />
                     <span className="flex-1">{item.label}</span>
-                    <span className="text-[10px] text-slate-500 uppercase tracking-wide">{item.group}</span>
+                    <span className="text-[10px] text-slate-400 uppercase tracking-wide">{item.group}</span>
                     <ArrowRight size={12} className="text-slate-600" />
                   </button>
                 )

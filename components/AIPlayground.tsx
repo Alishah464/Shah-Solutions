@@ -6,6 +6,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Sparkles, Send, ArrowRight, Bot } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
 import { MagneticSubmitButton } from '@/components/MagneticButton'
+import { trackEvent } from '@/lib/analytics'
 
 interface Answer {
   summary: string
@@ -129,6 +130,7 @@ export default function AIPlayground() {
     if (!trimmed) return
     setThinking(true)
     setAnswer(null)
+    trackEvent('ai_playground_used')
     const delay = prefersReducedMotion ? 150 : 700
     setTimeout(() => {
       setAnswer(matchAnswer(trimmed))
@@ -244,7 +246,7 @@ export default function AIPlayground() {
 
             <p className="text-slate-600 text-xs mt-6 pt-4 border-t border-white/5">
               This is a curated preview, not a live AI connection — real strategy takes a real conversation.{' '}
-              <Link href="/contact" className="text-slate-500 hover:text-primary-light underline underline-offset-2">
+              <Link href="/contact" className="text-slate-400 hover:text-primary-light underline underline-offset-2">
                 Book a free consultation
               </Link>{' '}
               for that.

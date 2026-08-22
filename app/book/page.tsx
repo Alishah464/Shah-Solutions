@@ -3,19 +3,19 @@ import Link from 'next/link'
 import { Calendar, Mail, Phone, MessageSquare, CheckCircle2, ArrowRight, Sparkles, Clock } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
 import MagneticButton from '@/components/MagneticButton'
-import { SITE_URL as BASE } from '@/lib/seo'
+import TrackedLink from '@/components/TrackedLink'
+import { buildMetadata, SITE_URL as BASE } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Book a Free Consultation',
+export const metadata: Metadata = buildMetadata({
+  title: 'Book a Free IT Consultation',
   description:
     'Book a free 30-minute IT consultation with Aiventra Labs. Reach us by WhatsApp, phone, or email for SEO, web development, or app development.',
-  alternates: { canonical: '/book' },
+  path: '/book',
   keywords: [
     'book IT consultation Pakistan', 'free web development consultation', 'book SEO consultation',
     'schedule meeting Aiventra Labs', 'free consultation Pakistan IT',
   ],
-  openGraph: { title: 'Book a Free IT Consultation | Aiventra Labs', url: '/book' },
-}
+})
 
 const bookFaqs = [
   {
@@ -87,6 +87,7 @@ const channels = [
     value: 'Fastest response',
     href: 'https://wa.me/923032818320',
     gradient: 'from-emerald-500 to-teal-600',
+    eventName: 'whatsapp_clicked',
   },
   {
     icon: Phone,
@@ -94,6 +95,7 @@ const channels = [
     value: 'Mon–Fri, 9 AM–8 PM PKT',
     href: 'tel:+923032818320',
     gradient: 'from-secondary to-accent',
+    eventName: 'phone_clicked',
   },
   {
     icon: Mail,
@@ -101,6 +103,7 @@ const channels = [
     value: 'Replies within 2 hours',
     href: 'mailto:amaherwani@gmail.com',
     gradient: 'from-primary to-secondary',
+    eventName: 'email_clicked',
   },
 ]
 
@@ -137,10 +140,12 @@ export default function BookPage() {
               const Icon = c.icon
               return (
                 <ScrollReveal key={c.label} delay={i * 0.08}>
-                  <a
+                  <TrackedLink
                     href={c.href}
                     target={c.href.startsWith('http') ? '_blank' : undefined}
                     rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    eventName={c.eventName}
+                    eventParams={{ location: 'book_page' }}
                     className="glass-card glass-card-hover p-6 flex flex-col items-start gap-4 h-full"
                   >
                     <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${c.gradient} flex items-center justify-center`}>
@@ -150,7 +155,7 @@ export default function BookPage() {
                       <p className="text-white font-semibold">{c.label}</p>
                       <p className="text-slate-400 text-sm">{c.value}</p>
                     </div>
-                  </a>
+                  </TrackedLink>
                 </ScrollReveal>
               )
             })}

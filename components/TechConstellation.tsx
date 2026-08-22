@@ -39,8 +39,8 @@ export default function TechConstellation() {
       <svg
         viewBox={`0 0 ${SIZE} ${SIZE}`}
         className="w-full max-w-[440px] h-auto"
-        role="img"
-        aria-label="Aiventra Labs technology stack diagram"
+        role="group"
+        aria-label="Aiventra Labs technology stack — interactive diagram, tab through nodes for details"
       >
         {NODES.map((node, i) => {
           const pos = nodePosition(i, NODES.length)
@@ -123,7 +123,7 @@ export default function TechConstellation() {
           </p>
         )}
         {active === null && (
-          <p className="text-slate-500 text-sm">Hover or tap a node to see what it&apos;s for</p>
+          <p className="text-slate-400 text-sm">Hover or tap a node to see what it&apos;s for</p>
         )}
       </div>
     </div>

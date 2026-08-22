@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = getArticleBySlug(slug)
   if (!article) return {}
 
+  const ogImage = [{ url: `${BASE}/opengraph-image`, width: 1200, height: 630, alt: article.title }]
   return {
     title: article.title,
     description: article.description,
@@ -45,6 +46,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: article.date,
       authors: ['Aiventra Labs'],
       tags: [article.category],
+      images: ogImage,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.description,
+      images: ogImage,
     },
   }
 }
@@ -107,7 +115,7 @@ export default async function ArticlePage({ params }: Props) {
 
         <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-1.5 text-sm text-slate-500 mb-8">
+            <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-1.5 text-sm text-slate-400 mb-8">
               <Link href="/" className="hover:text-primary-light transition-colors">Home</Link>
               <ChevronRight size={13} className="text-slate-600" />
               <Link href="/blog" className="hover:text-primary-light transition-colors">Blog</Link>
@@ -119,7 +127,7 @@ export default async function ArticlePage({ params }: Props) {
               {article.title}
             </h1>
 
-            <div className="flex items-center gap-2 text-slate-500 text-sm mb-10">
+            <div className="flex items-center gap-2 text-slate-400 text-sm mb-10">
               <Calendar size={14} />
               <time dateTime={article.date}>{formatDate(article.date)}</time>
               <span className="mx-1">·</span>

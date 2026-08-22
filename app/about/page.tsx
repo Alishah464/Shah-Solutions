@@ -4,7 +4,7 @@ import Link from 'next/link'
 import ScrollReveal from '@/components/ScrollReveal'
 import MagneticButton from '@/components/MagneticButton'
 import TechConstellation from '@/components/TechConstellation'
-import { SITE_URL as BASE } from '@/lib/seo'
+import { buildMetadata, SITE_URL as BASE } from '@/lib/seo'
 
 const aboutFaqs = [
   {
@@ -53,17 +53,16 @@ const aboutPageSchema = {
   ],
 }
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: 'About Aiventra Labs — AI, Software & Digital Growth Company',
   description:
     'Learn about Aiventra Labs — our mission, values, and approach to SEO, web development, and AI development for businesses in Pakistan and worldwide.',
-  alternates: { canonical: '/about' },
+  path: '/about',
   keywords: [
     'about Aiventra Labs', 'Aiventra Labs team',
     'IT agency values Pakistan', 'AI software company Pakistan',
   ],
-  openGraph: { title: 'About Aiventra Labs', url: '/about' },
-}
+})
 
 const values = [
   {

@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return buildMetadata({
     title: `${svc.title} Services`,
-    description: `${svc.longDesc} Serving clients in Pakistan and worldwide.`,
+    description: `${svc.subtitle} ${svc.title} for businesses in Pakistan and worldwide.`,
     path: `/services/${slug}`,
     keywords: [svc.title, `${svc.title} Pakistan`, svc.serviceType],
   })
@@ -67,7 +67,7 @@ export default async function ServiceDetailPage({ params }: Props) {
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-1.5 text-sm text-slate-500 mb-8">
+            <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-1.5 text-sm text-slate-400 mb-8">
               <Link href="/" className="hover:text-primary-light transition-colors">Home</Link>
               <ChevronRight size={13} className="text-slate-600" />
               <Link href="/services" className="hover:text-primary-light transition-colors">Services</Link>
@@ -112,7 +112,7 @@ export default async function ServiceDetailPage({ params }: Props) {
 
             {related && (
               <div className="mt-8 pt-6 border-t border-white/5">
-                <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-3">Related Reading</p>
+                <p className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-3">Related Reading</p>
                 <div className="flex flex-col gap-2">
                   {related.map(articleSlug => {
                     const title = articleTitles[articleSlug]
@@ -182,7 +182,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 <Link key={s.slug} href={`/services/${s.slug}`} className="glass-card glass-card-hover p-5 group">
                   <OIcon size={20} className="text-primary mb-3" />
                   <h3 className="font-semibold text-white text-sm mb-1 group-hover:text-primary-light transition-colors">{s.title}</h3>
-                  <p className="text-slate-500 text-xs">{s.subtitle}</p>
+                  <p className="text-slate-400 text-xs">{s.subtitle}</p>
                 </Link>
               )
             })}

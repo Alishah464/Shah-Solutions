@@ -72,7 +72,7 @@ function StepCard({
         </div>
         <div className="flex-1">
           <div className="flex items-center gap-3 mb-2">
-            <span className="font-display font-black text-2xl text-white/20">{step.step}</span>
+            <span className="font-display font-black text-2xl text-white/40" aria-hidden="true">{step.step}</span>
             <h3 className="font-display font-bold text-white text-lg">{step.title}</h3>
           </div>
           <p className="text-slate-400 text-sm leading-relaxed">{step.desc}</p>

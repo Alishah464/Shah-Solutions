@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import PortfolioClient from '@/components/PortfolioClient'
-import { SITE_URL as BASE } from '@/lib/seo'
+import { buildMetadata, SITE_URL as BASE } from '@/lib/seo'
 
 const portfolioSchema = {
   '@context': 'https://schema.org',
@@ -25,16 +25,16 @@ const portfolioSchema = {
   ],
 }
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: 'Portfolio — What We Build',
   description:
     'See what Aiventra Labs builds: web development, mobile app development, SEO, GEO, AI development, and digital marketing capabilities.',
-  alternates: { canonical: '/portfolio' },
+  path: '/portfolio',
   keywords: [
     'IT portfolio Pakistan', 'web development capabilities', 'app development company',
     'SEO agency Pakistan', 'digital marketing agency',
   ],
-}
+})
 
 export default function PortfolioPage() {
   return (

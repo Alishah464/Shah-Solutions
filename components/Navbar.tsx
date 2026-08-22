@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Code2, Menu, X, ChevronRight, ChevronDown, Search } from 'lucide-react'
 import MagneticButton from '@/components/MagneticButton'
+import { trackEvent } from '@/lib/analytics'
 
 const serviceLinks = [
   { href: '/services/seo', label: 'SEO' },
@@ -170,7 +171,7 @@ export default function Navbar() {
                 <Link href="/book" className="text-sm font-medium px-4 py-2.5 border border-purple-500/50 text-purple-300 hover:text-white hover:border-purple-400 rounded-lg transition-colors duration-200">
                   Book Consultation
                 </Link>
-                <MagneticButton href="/contact" className="btn-primary text-sm py-2.5 px-6" strength={0.35}>
+                <MagneticButton href="/contact" onClick={() => trackEvent('cta_clicked', { label: 'navbar_get_started' })} className="btn-primary text-sm py-2.5 px-6" strength={0.35}>
                   <span>Get Started</span>
                   <ChevronRight size={16} />
                 </MagneticButton>
@@ -266,7 +267,7 @@ export default function Navbar() {
               </motion.div>
             </nav>
 
-            <div className="absolute bottom-10 text-slate-500 text-sm">
+            <div className="absolute bottom-10 text-slate-400 text-sm">
               amaherwani@gmail.com
             </div>
           </motion.div>

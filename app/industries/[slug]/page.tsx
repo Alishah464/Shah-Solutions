@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return buildMetadata({
     title: `${ind.title} SEO & Web Development Services`,
-    description: `${ind.intro}`,
+    description: `${ind.tagline} Aiventra Labs builds ${ind.title} solutions for businesses in Pakistan and worldwide.`,
     path: `/industries/${slug}`,
     keywords: [`${ind.title} SEO`, `${ind.title} website development`, `${ind.title} digital marketing Pakistan`],
   })
@@ -56,7 +56,7 @@ export default async function IndustryDetailPage({ params }: Props) {
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-1.5 text-sm text-slate-500 mb-8">
+            <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-1.5 text-sm text-slate-400 mb-8">
               <Link href="/" className="hover:text-primary-light transition-colors">Home</Link>
               <ChevronRight size={13} className="text-slate-600" />
               <Link href="/industries" className="hover:text-primary-light transition-colors">Industries</Link>

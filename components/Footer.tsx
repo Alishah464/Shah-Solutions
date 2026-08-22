@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import { Code2, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react'
+import { trackEvent } from '@/lib/analytics'
 
 const services = [
   { label: 'SEO Optimization', href: '/services/seo' },
@@ -92,12 +95,16 @@ export default function Footer() {
             </h3>
             <ul className="space-y-4">
               <li>
-                <a href="mailto:amaherwani@gmail.com" className="flex items-start gap-3 group">
+                <a
+                  href="mailto:amaherwani@gmail.com"
+                  onClick={() => trackEvent('email_clicked', { location: 'footer' })}
+                  className="flex items-start gap-3 group"
+                >
                   <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
                     <Mail size={14} className="text-primary" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-500 mb-0.5">Email</p>
+                    <p className="text-xs text-slate-400 mb-0.5">Email</p>
                     <p className="text-slate-300 text-sm group-hover:text-white transition-colors">amaherwani@gmail.com</p>
                   </div>
                 </a>
@@ -108,7 +115,7 @@ export default function Footer() {
                     <Phone size={14} className="text-secondary" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-500 mb-0.5">Phone</p>
+                    <p className="text-xs text-slate-400 mb-0.5">Phone</p>
                     <p className="text-slate-300 text-sm group-hover:text-white transition-colors">0303 2818320</p>
                   </div>
                 </a>
@@ -118,7 +125,7 @@ export default function Footer() {
                   <MapPin size={14} className="text-accent" />
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 mb-0.5">Location</p>
+                  <p className="text-xs text-slate-400 mb-0.5">Location</p>
                   <p className="text-slate-300 text-sm">Pakistan — Serving Worldwide</p>
                 </div>
               </li>
@@ -129,12 +136,12 @@ export default function Footer() {
         <div className="footer-divider mb-8" />
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-slate-500 text-sm">
+          <p className="text-slate-400 text-sm">
             &copy; {new Date().getFullYear()} Aiventra Labs. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link href="/privacy-policy" className="text-slate-500 hover:text-white text-sm transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="text-slate-500 hover:text-white text-sm transition-colors">Terms of Service</Link>
+            <Link href="/privacy-policy" className="text-slate-400 hover:text-white text-sm transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="text-slate-400 hover:text-white text-sm transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

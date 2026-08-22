@@ -22,6 +22,7 @@ import dynamic from 'next/dynamic'
 // module to the client.
 const HeroScene = dynamic(() => import('@/components/HeroScene'), { ssr: false })
 import { SITE_URL as BASE } from '@/lib/seo'
+import { trackEvent } from '@/lib/analytics'
 
 const homeFaqs = [
   {
@@ -243,7 +244,7 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
               >
-                <MagneticButton href="/contact" className="btn-primary text-base px-8 py-4">
+                <MagneticButton href="/contact" onClick={() => trackEvent('cta_clicked', { label: 'hero_get_consultation' })} className="btn-primary text-base px-8 py-4">
                   <span>Get a Free Consultation</span>
                   <ChevronRight size={18} />
                 </MagneticButton>
@@ -378,7 +379,7 @@ export default function HomePage() {
                       <div className="w-10 h-10 rounded-xl bg-primary/15 border border-primary/25 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <Icon size={20} className="text-primary" />
                       </div>
-                      <h4 className="font-semibold text-white mb-1.5 text-sm">{item.title}</h4>
+                      <h3 className="font-semibold text-white mb-1.5 text-sm">{item.title}</h3>
                       <p className="text-slate-400 text-xs leading-relaxed">{item.desc}</p>
                     </div>
                   </ScrollReveal>
@@ -438,7 +439,7 @@ export default function HomePage() {
               Let&apos;s turn it into something real. Free consultation — no commitment required.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <MagneticButton href="/contact" className="btn-primary text-base px-10 py-4">
+              <MagneticButton href="/contact" onClick={() => trackEvent('cta_clicked', { label: 'final_cta_get_consultation' })} className="btn-primary text-base px-10 py-4">
                 <span>Get Free Consultation</span>
                 <ChevronRight size={18} />
               </MagneticButton>

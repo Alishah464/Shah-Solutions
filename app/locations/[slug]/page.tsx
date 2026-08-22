@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = `${loc.offering.label} in ${loc.city.name}`
   return buildMetadata({
     title,
-    description: `Aiventra Labs is a ${loc.offering.label.toLowerCase()} serving businesses across ${loc.city.name}. ${loc.offering.pitch}`,
+    description: `Aiventra Labs — ${loc.offering.label} serving businesses across ${loc.city.name}, remote-first with transparent pricing.`,
     path: `/locations/${slug}`,
     keywords: [
       `${loc.offering.label} ${loc.city.name}`,
@@ -92,7 +92,7 @@ export default async function LocationPage({ params }: Props) {
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-1.5 text-sm text-slate-500 mb-8">
+            <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-1.5 text-sm text-slate-400 mb-8">
               <Link href="/" className="hover:text-primary-light transition-colors">Home</Link>
               <ChevronRight size={13} className="text-slate-600" />
               <Link href="/locations" className="hover:text-primary-light transition-colors">Locations</Link>
@@ -108,7 +108,7 @@ export default async function LocationPage({ params }: Props) {
               {offering.label} in <span className="gradient-text-animate">{city.name}</span>
             </h1>
             <p className="text-slate-400 text-lg max-w-2xl leading-relaxed mb-4">{offering.pitch}</p>
-            <p className="text-slate-500 text-sm max-w-2xl leading-relaxed">{city.blurb}</p>
+            <p className="text-slate-400 text-sm max-w-2xl leading-relaxed">{city.blurb}</p>
 
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
               <MagneticButton href="/contact" className="btn-primary text-sm">

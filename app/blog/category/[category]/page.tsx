@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { BookOpen, ArrowRight, ChevronRight } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
 import { getAllArticles, categoryFromSlug, CATEGORY_SLUGS, CATEGORY_DESCRIPTIONS } from '@/lib/blog'
-import { SITE_URL as BASE } from '@/lib/seo'
+import { buildMetadata, SITE_URL as BASE } from '@/lib/seo'
 
 interface Props {
   params: Promise<{ category: string }>
@@ -19,11 +19,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const category = categoryFromSlug(categorySlug)
   if (!category) return {}
 
-  return {
+  return buildMetadata({
     title: `${category} Articles`,
     description: CATEGORY_DESCRIPTIONS[category],
-    alternates: { canonical: `/blog/category/${categorySlug}` },
-  }
+    path: `/blog/category/${categorySlug}`,
+  })
 }
 
 export default async function CategoryPage({ params }: Props) {
@@ -74,7 +74,7 @@ export default async function CategoryPage({ params }: Props) {
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-1.5 text-sm text-slate-500 mb-6">
+            <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-1.5 text-sm text-slate-400 mb-6">
               <Link href="/" className="hover:text-primary-light transition-colors">Home</Link>
               <ChevronRight size={13} className="text-slate-600" />
               <Link href="/blog" className="hover:text-primary-light transition-colors">Blog</Link>
@@ -83,7 +83,7 @@ export default async function CategoryPage({ params }: Props) {
             </nav>
 
             <h1 className="font-display font-black text-3xl sm:text-5xl text-white mb-4 leading-tight text-balance">
-              {category} <span className="text-slate-500 text-2xl sm:text-3xl font-normal">({articles.length})</span>
+              {category} <span className="text-slate-400 text-2xl sm:text-3xl font-normal">({articles.length})</span>
             </h1>
             <p className="text-slate-400 text-lg max-w-2xl leading-relaxed">
               {CATEGORY_DESCRIPTIONS[category]}

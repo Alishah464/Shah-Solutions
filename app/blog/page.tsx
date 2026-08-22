@@ -3,22 +3,22 @@ import Link from 'next/link'
 import { BookOpen, ArrowRight, Sparkles } from 'lucide-react'
 import ScrollReveal from '@/components/ScrollReveal'
 import { getAllArticles, CATEGORY_SLUGS, type ArticleCategory } from '@/lib/blog'
-import { SITE_URL as BASE } from '@/lib/seo'
+import { buildMetadata, SITE_URL as BASE } from '@/lib/seo'
 
 // Order reflects how central each topic is to Aiventra Labs' positioning —
 // GEO/AEO first since it's the differentiator, not alphabetical.
 const CATEGORY_ORDER: ArticleCategory[] = ['GEO / AEO', 'SEO', 'Web Development', 'Business']
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: 'Blog — SEO, GEO & Web Development Insights',
   description:
     'Guides on SEO, GEO/AI search optimization, AEO, and web development from Aiventra Labs — practical, 2026-dated insights for businesses navigating AI-powered search.',
-  alternates: { canonical: '/blog' },
+  path: '/blog',
   keywords: [
     'SEO blog', 'GEO guide', 'AEO answer engine optimization',
     'AI search optimization', 'generative engine optimization guide',
   ],
-}
+})
 
 export default function BlogIndexPage() {
   const articles = getAllArticles()
@@ -71,14 +71,16 @@ export default function BlogIndexPage() {
             return (
               <div key={category}>
                 <ScrollReveal>
-                  <Link
-                    href={`/blog/category/${CATEGORY_SLUGS[category]}`}
-                    className="font-display font-bold text-white text-xl mb-5 flex items-center gap-3 group w-fit hover:text-primary-light transition-colors"
-                  >
-                    {category}
-                    <span className="text-slate-500 text-sm font-normal">({inCategory.length})</span>
-                    <ArrowRight size={16} className="text-primary/60 group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  <h2 className="mb-5 w-fit">
+                    <Link
+                      href={`/blog/category/${CATEGORY_SLUGS[category]}`}
+                      className="font-display font-bold text-white text-xl flex items-center gap-3 group hover:text-primary-light transition-colors"
+                    >
+                      {category}
+                      <span className="text-slate-400 text-sm font-normal">({inCategory.length})</span>
+                      <ArrowRight size={16} className="text-primary/60 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </h2>
                 </ScrollReveal>
                 <div className="space-y-4">
                   {inCategory.map((a, i) => (

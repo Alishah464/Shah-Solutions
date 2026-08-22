@@ -11,8 +11,16 @@ interface BuildMetadataArgs {
   ogType?: 'website' | 'article'
 }
 
-/** Shared page-metadata builder — every route was hand-writing this block before. */
+/** Shared page-metadata builder — every route was hand-writing this block before.
+ *
+ * `images` is set explicitly on every call: Next.js does not deep-merge the
+ * `openGraph`/`twitter` objects between the root layout and a page's own
+ * metadata — a page that defines its own `openGraph` silently loses the
+ * layout's `images`, which left nearly every non-homepage route with no
+ * social-preview image at all (caught via an audit of the actual generated
+ * HTML, not the source). */
 export function buildMetadata({ title, description, path, keywords, ogType = 'website' }: BuildMetadataArgs): Metadata {
+  const ogImage = [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630, alt: title }]
   return {
     title,
     description,
@@ -23,11 +31,13 @@ export function buildMetadata({ title, description, path, keywords, ogType = 'we
       title,
       description,
       url: path,
+      images: ogImage,
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      images: ogImage,
     },
   }
 }
